@@ -11,5 +11,5 @@ import { HeaderComponent } from '../Components/header/header.component';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'Grad-Project';
+  title = 'Grad-Project'; 
 }
