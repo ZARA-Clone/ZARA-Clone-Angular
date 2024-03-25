@@ -1,7 +1,52 @@
 <div class="container">
-    <h3 class="title">Add Product</h3>
-    <form (ngSubmit)="onSubmit()">
-        <input type="file" (change)="onFileSelected($event)" accept="image/*">
-        <button type="submit">Upload</button>
+    <h3 class="title text-center mt-3">Add Product</h3>
+    <form #productForm="ngForm" (ngSubmit)="onSubmit(productForm)">
+        <div class="row">
+            <label>Name:</label>
+            <input [(ngModel)]="product.Name" name="productFormName" required [maxlength]="20" />
+        </div>
+        <div class="row">
+            <label>Description:</label>
+            <input [(ngModel)]="product.Description" name="Description" required type="text" />
+        </div>
+        <div class="row">
+            <label>Discount:</label>
+            <input [(ngModel)]="product.Discount" name="Discount" type="number" required [min]="0" [max]="100" />
+        </div>
+        <div class="row">
+            <label>Price:</label>
+            <input [(ngModel)]="product.Price" name="price" type="number" required min="1" />
+        </div>
+        <div class="row">
+            <label>Quantity:</label>
+            <input [(ngModel)]="product.Quantity" name="Quantity" type="number" required min="1" />
+        </div>
+        <div class="row">
+            <label>Category:</label>
+            <select [(ngModel)]="selectedBrand" name="brand" required>
+                <option value="0">Select Category</option>
+                <option value="1">Lenovoo</option>
+                <option value="2">DEll</option>
+                <option value="3">HP</option>
+            </select>
+        </div>
+        <div class="row">
+            <div class="mb-6">
+                <label class="form-label">Upload product Images</label>
+                <div>
+                    <input type="file" name="file" id="file" multiple accept="image/*" max="5"
+                        (change)="onFileSelected($event)" />
+                    <label for="file">
+                        <div>
+                            <span class="formbold-browse"> Browse </span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="mt-3">
+            <button class="btn btn-secondary" type="reset">Cancel</button>
+            <button class="btn btn-primary mx-2" type="submit">Create</button>
+        </div>
     </form>
 </div>
