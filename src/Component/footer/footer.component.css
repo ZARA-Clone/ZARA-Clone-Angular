@@ -1,0 +1,46 @@
+.custom-input {
+    border: none; /* Remove border */
+    border-radius: 0; /* Remove border-radius */
+    border-bottom: 1px solid black; /* Add bottom border */
+    outline: none !important; /* Remove outline */
+    box-shadow: none !important;
+    
+  }.custom-label {
+    color: grey; /* Change the color to your desired color */
+  } .custom-link {
+    color: inherit; /* Inherit color from parent */
+    text-decoration: none; /* Remove underline */
+    cursor: pointer; /* Change cursor on hover */
+  }
+
+  .custom-link:hover {
+    text-decoration: none; /* Remove underline on hover */
+    
+  }.list-unstyled li a {
+    text-decoration: none;
+}
+
+.list-unstyled li a:hover {
+    text-decoration: underline;
+}
+.man{
+    position: fixed;
+    right: 2rem;
+    bottom: 5rem;
+}.malek {
+  width: 100%;
+  cursor: pointer;
+  background: white;
+  display: none;
+  
+}.malektwo{
+  display: block;
+}.malek:hover{
+  color: gray;
+}
+
+
+
+
+
+  
