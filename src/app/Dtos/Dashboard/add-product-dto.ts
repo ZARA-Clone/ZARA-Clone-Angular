@@ -3,7 +3,7 @@ export class AddProductDto {
     Price: number = 0;
     Quantity: number = 0;
     Discount = 0;
-    CategoryID = 0;
+    BrandID = 0;
     Description: string = '';
     ImageUrls: string[] = [];
 }
