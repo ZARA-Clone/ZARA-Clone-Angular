@@ -1,0 +1,6 @@
+@for(item of productswishlist ;track item.id ){
+<div class="card">
+    <p>{{item.title}} </p>
+    <button (click)="removeproduct(item)" >remove</button >
+ </div>
+}
