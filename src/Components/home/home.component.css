@@ -1,0 +1,13 @@
+.imgsize{
+    width: 100vw;
+    height: 100vh;
+}
+carousel {
+    position: relative;
+    
+  }
+
+
+  slide {
+    animation: slideAnimation 0.5s infinite;
+  }
