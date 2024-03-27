@@ -8,6 +8,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatOption } from '@angular/material/core';
 import { NgIf } from '@angular/common';
+import { BrandsService } from '../../../../Services/Dashboard/brands.service';
 @Component({
   selector: 'app-add-product',
   standalone: true,
@@ -15,12 +16,21 @@ import { NgIf } from '@angular/common';
   templateUrl: './add-product.component.html',
   styleUrl: './add-product.component.css'
 })
-export class AddProductComponent {
+export class AddProductComponent implements OnInit {
   product: AddProductDto = new AddProductDto();
-  ImageUrls: string[] = [];
+  imageUrls: string[] = [];
   selectedBrand: number = 0;
   selectedImages: File[] = [];
-  constructor(private _productsService: ProductOperationsService, private router: Router) { }
+  brands: any[] = []
+  private _brands: any = [];
+  constructor(
+    private _productsService: ProductOperationsService,
+    private router: Router,
+    private _brandsService: BrandsService
+  ) { }
+  ngOnInit(): void {
+    this.getAllBrands()
+  }
 
   onFileSelected(event: any) {
     const input = event.target as HTMLInputElement;
@@ -32,17 +42,18 @@ export class AddProductComponent {
     this._productsService.upload(this.selectedImages).subscribe({
       next: (responses: any) => {
         console.log("res: " + responses);
-        this.ImageUrls = responses;
-        this.product.Name = this.product.Name.trim();
-        this.product.Price = this.product.Price;
-        this.product.Description = this.product.Description;
-        this.product.ImageUrls = this.ImageUrls;
-        this.product.Discount = this.product.Discount;
-        this.product.Quantity = this.product.Quantity;
-        this.product.BrandID = this.selectedBrand;
+        this.imageUrls = responses;
+        this.product.name = this.product.name.trim();
+        this.product.price = this.product.price;
+        this.product.description = this.product.description;
+        this.product.imageUrls = this.imageUrls;
+        this.product.discount = this.product.discount;
+        this.product.quantity = this.product.quantity;
+        this.product.brandId = this.selectedBrand;
+        console.log(this.imageUrls)
         this._productsService.add(this.product).subscribe(
           {
-            next: (data) => { console.log("data: " + data); this.router.navigate(["dashboard"]) },
+            next: (data) => { console.log("data: " + data); this.router.navigate(["/"]) },
             error: (err) => { console.log("err: " + err) },
             complete: () => {
               console.log("Product has been added successfully")
@@ -53,6 +64,16 @@ export class AddProductComponent {
       error: (err: any) => {
         console.log("error uploading photos:", err);
       }
+    })
+  }
+  getAllBrands(): void {
+    this._brandsService.getAll().subscribe({
+      next: (data) => {
+        this._brands = data
+        this.brands = this._brands
+      },
+      error: (error) => { console.log(error) },
+      complete: () => { console.log("Get all brands successfully") }
     })
   }
 }

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { AddProductDto } from '../../Dtos/Dashboard/add-product-dto';
 import { environment } from '../../../environments/environment';
 import { Observable, catchError, throwError } from 'rxjs';
+import { EditProductDto } from '../../Dtos/Dashboard/edit-product-dto.class';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +22,8 @@ export class ProductOperationsService {
     );
   }
 
-  edit(id: number, product: AddProductDto) {
-    return this._httpClient.put<AddProductDto>(`${environment.BASEURL}/api/Dashboard/${id}`, product)
+  edit(id: number, product: EditProductDto) {
+    return this._httpClient.put<EditProductDto>(`${environment.BASEURL}/api/Dashboard/${id}`, product)
   }
 
   delete(id: number) {
@@ -44,5 +45,13 @@ export class ProductOperationsService {
       form.append("files", file, file.name);
     })
     return this._httpClient.post(`${environment.BASEURL}/api/Dashboard/upload`, form);
+  }
+
+  getAll() {
+    return this._httpClient.get(`${environment.BASEURL}/api/Dashboard`);
+  }
+
+  getById(id: number): Observable<EditProductDto> {
+    return this._httpClient.get<EditProductDto>(`${environment.BASEURL}/api/Dashboard/${id}`);
   }
 }

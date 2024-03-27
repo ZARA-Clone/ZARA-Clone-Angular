@@ -3,31 +3,36 @@
     <form #productForm="ngForm" (ngSubmit)="onSubmit(productForm)">
         <div class="row">
             <label>Name:</label>
-            <input [(ngModel)]="product.Name" name="productFormName" required [maxlength]="20" />
+            <input [(ngModel)]="product.name" name="name" id="name" class="form-control" #name="ngModel" required
+                [maxlength]="20" />
         </div>
         <div class="row">
             <label>Description:</label>
-            <input [(ngModel)]="product.Description" name="Description" required type="text" />
+            <input [(ngModel)]="product.description" id="description" class="form-control" name="description" required
+                type="text" />
         </div>
         <div class="row">
             <label>Discount:</label>
-            <input [(ngModel)]="product.Discount" name="Discount" type="number" required [min]="0" [max]="100" />
+            <input [(ngModel)]="product.discount" name="discount" id="discount" class="form-control" type="number"
+                required [min]="0" [max]="100" />
         </div>
         <div class="row">
             <label>Price:</label>
-            <input [(ngModel)]="product.Price" name="price" type="number" required min="1" />
+            <input [(ngModel)]="product.price" name="price" id="price" class="form-control" type="number" required
+                min="1" />
         </div>
         <div class="row">
             <label>Quantity:</label>
-            <input [(ngModel)]="product.Quantity" name="Quantity" type="number" required min="1" />
+            <input [(ngModel)]="product.quantity" name="quantity" id="quantity" class="form-control" type="number"
+                required min="1" />
         </div>
         <div class="row">
-            <label>Category:</label>
-            <select [(ngModel)]="selectedBrand" name="brand" required>
-                <option value="0">Select Category</option>
-                <option value="1">Lenovoo</option>
-                <option value="2">DEll</option>
-                <option value="3">HP</option>
+            <label>Brand:</label>
+            <select [(ngModel)]="selectedBrand" name="brand" id="brand" class="form-select" required>
+                <option value="0">Select Brand</option>
+                @for (brand of brands; track $index) {
+                <option value="{{brand.id}}">{{brand.name}}</option>
+                }
             </select>
         </div>
         <div class="row">
@@ -38,7 +43,7 @@
                         (change)="onFileSelected($event)" />
                     <label for="file">
                         <div>
-                            <span class="formbold-browse"> Browse </span>
+                            <span class="text-info"> Browse </span>
                         </div>
                     </label>
                 </div>
