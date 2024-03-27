@@ -1,0 +1,61 @@
+<img src="assets/ff.jpeg">
+<body style="background-image: url('assets/Hairstyles & Beauty.jpeg'); background-size: cover; background-position: center;">
+<div class="container">
+
+
+<form (ngSubmit)="onSubmit(signupform)" #signupform="ngForm"  > 
+  <h4>PERSONAL DETAILS</h4>
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="Name" [(ngModel)]="Name"  name="name" placeholder="enter your name" required #username="ngModel"  pattern="{{ namePattern }}"  >
+      </div>
+      @if(username.invalid&&username.dirty&&username.touched){
+        <span class="invalid-msg"> username is required</span>
+      }
+      
+      <div class="form-group">
+       <label for="password">Password</label>
+       <input type="password" class="form-control" id="Password" [(ngModel)]="Password"  name="password" placeholder="enter password" required #password="ngModel"   pattern="{{ passwordPattern }}">
+      </div>
+
+@if(password.invalid&&password.dirty&&password.touched){ <span class="invalid-msg"> Password is required</span>}
+     
+
+
+      <div class="form-group">
+        <label for="Email">Email</label>  
+        <input type="Email" class="form-control" id="Email" [(ngModel)]="Email" name="Email" placeholder="Enter email"   #email="ngModel"  required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+    </div>
+@if(email.invalid&& email.dirty&& email.touched){<span class="invalid-msg">Please Enter  a valid Email</span>}
+
+
+    
+       <div class="form-group">
+        <label for="Coutntry">Country</label>
+        <select class="form-control" id="country" [(ngModel)]="SelectedCountry" name="country"  (change)="onCountryChange()" required   [formControl]="countryControl" >
+          <option value="" disabled selected>Select a country</option>
+          <option value="Egypt">Egypt</option>
+            <option value="England">England</option>
+            <option value="Denmark">Denmark</option>
+            <option value="Canada">Canada</option>
+          </select>
+       </div>
+      
+    
+       <div class="form-group">
+        <label for="telephone">Telephone Number:</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" style="min-width: 100px; min-height: 50px;" >{{SelectedCountryCode}}</span >
+
+          </div>
+          <input type="text" class="form-control" id="telephone" [(ngModel)]="phone"  name="telephone" placeholder="Enter your telephone number"   #telephone="ngModel" [pattern]="getTelephonePattern()">
+        </div>
+       </div>
+       @if(telephone.invalid&&telephone.dirty &&telephone.touched){ <span class="invalid-msg"> Please Enter a valid Telephone Number</span>}
+      
+       <button type="submit" class="btncolor" [disabled]="!signupform.valid || !isCountrySelected()" >Submit</button>
+</form>
+</div>
+</body>
+<!--[disabled]="country.invalid !== null && country.invalid"-->
