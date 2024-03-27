@@ -1,0 +1,17 @@
+<input class="form-control mb-4" placeholder="Search" [(ngModel)]="term" />
+<div class="container">
+    @if(products.length==0){
+    <h3>No products matches you search critria</h3>
+    }
+    
+@for (product of products ;track product.id){
+<div class="card text-center m-3" style="width: 23rem;">
+    <img src="{{product.image}}" class="card-img-top" alt="..." style="width: 200px; height: 200px;margin: auto;">
+       <div class="card-body">
+         <h5 class="card-title" [innerHTML]="product.title"></h5>
+         <p >Price {{product.price}}</p>
+         <p >Discount <u class="text-danger">{{product.discount}}%</u></p>
+         <p>{{product.title}}</p>
+       </div>
+     </div>
+}
