@@ -1,4 +1,4 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpProductService } from '../../Services/http-product.service';
 import { IproductBrowse } from '../../Models/IproductBrowse';
@@ -12,7 +12,9 @@ import { ClickOutsideDirective } from '../../Directives/click-outside.directive'
   templateUrl: './products-browse.component.html',
   styleUrl: './products-browse.component.css'
 })
-export class ProductsBrowseComponent {
+export class ProductsBrowseComponent implements OnInit{
+
+  products2!:IproductBrowse[]|any
   product!:IproductBrowse|any
 value:boolean=true;
 firstlayout(){
@@ -42,81 +44,18 @@ toggle(p:any) {
 hideDiv(p:any){
   this.toggle(p);
 }
+newlife:any=[]
 
-
-
-products=[
-  {
-    id:1,
-    img:'https://static.zara.net/photos///2023/I/0/2/p/0706/540/800/2/w/750/0706540800_2_3_1.jpg?ts=1699871674095',
-    name:'COMFORT SUIT TROUSERS',
-    price:'2,090 EGP'
-  },
-  {
-    id:2,
-    img:'https://static.zara.net/photos///2023/I/0/2/p/0706/540/800/2/w/750/0706540800_2_3_1.jpg?ts=1699871674095',
-    name:'COMFORT SUIT TROUSERS',
-    price:'2,090 EGP'
-  },
-  {
-    id:3,
-    img:'https://static.zara.net/photos///2023/I/0/2/p/0706/540/800/2/w/750/0706540800_2_3_1.jpg?ts=1699871674095',
-    name:'COMFORT SUIT TROUSERS',
-    price:'2,090 EGP'
-  },
-  {
-    id:4,
-    img:'https://static.zara.net/photos///2023/I/0/2/p/0706/540/800/2/w/750/0706540800_2_3_1.jpg?ts=1699871674095',
-    name:'COMFORT SUIT TROUSERS',
-    price:'2,090 EGP'
-  },
-  {
-    id:5,
-    img:'https://static.zara.net/photos///2023/I/0/2/p/0706/540/800/2/w/750/0706540800_2_3_1.jpg?ts=1699871674095',
-    name:'COMFORT SUIT TROUSERS',
-    price:'2,090 EGP'
-  },
-  {
-    id:6,
-    img:'https://static.zara.net/photos///2023/I/0/2/p/0706/540/800/2/w/750/0706540800_2_3_1.jpg?ts=1699871674095',
-    name:'COMFORT SUIT TROUSERS',
-    price:'2,090 EGP'
-  },
-  {
-    id:7,
-    img:'https://static.zara.net/photos///2023/I/0/2/p/0706/540/800/2/w/750/0706540800_2_3_1.jpg?ts=1699871674095',
-    name:'COMFORT SUIT TROUSERS',
-    price:'2,090 EGP'
-  },{
-    id:80,
-    img:'https://static.zara.net/photos///2023/I/0/2/p/0706/540/800/2/w/750/0706540800_2_3_1.jpg?ts=1699871674095',
-    name:'COMFORT SUIT TROUSERS',
-    price:'2,090 EGP'
-  },{
-    id:80,
-    img:'https://static.zara.net/photos///2023/I/0/2/p/0706/540/800/2/w/750/0706540800_2_3_1.jpg?ts=1699871674095',
-    name:'COMFORT SUIT TROUSERS',
-    price:'2,090 EGP'
-  }
-  ,{
-    id:11,
-    img:'https://static.zara.net/photos///2023/I/0/2/p/0706/540/800/2/w/750/0706540800_2_3_1.jpg?ts=1699871674095',
-    name:'COMFORT SUIT TROUSERS',
-    price:'2,090 EGP'
-  }
-  
-
-]
-newlife:any=[];
 constructor(private httpproduct:HttpProductService, private activatedroute:ActivatedRoute, private elementRef : ElementRef){}
   ngOnInit(): void {
-    this.activatedroute.paramMap.subscribe((p)=>{
-      const snapid = p.get('id');
-      const id = snapid ? +snapid : undefined;
-      this.product = this.httpproduct.GetProductById(id);
+    
+    this.httpproduct.GetProductByBrandId(1).subscribe((p)=>{
+      console.log(p);
+      this.products2=p;
+      console.log(this.products2);
+      this.newlife= this.products2.map((p: any)=> ({ ...p, showDetails: false ,wishlist:false}));
     })
-    this.newlife= this.products.map(p=> ({ ...p, showDetails: false ,wishlist:false}));
+   
     
   }
-
 }

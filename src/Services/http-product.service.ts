@@ -10,8 +10,8 @@ import { IproductBrowse } from '../Models/IproductBrowse';
 export class HttpProductService {
 
   constructor(private http: HttpClient) { }
-  GetProductByCatId(catid:number){
-    return this.http.get<IproductBrowse>(`/products?CategoryId=${catid}`);
+  GetProductByBrandId(brandid:number):Observable<IproductBrowse[]>{
+    return this.http.get<IproductBrowse[]>(`https://localhost:7248/api/Products/brand/${brandid}`);
   }
   GetProductById(id:number|undefined): Observable<IproductDetails>{
     return this.http.get<IproductDetails>(`/products/${id}`);

@@ -19,7 +19,7 @@
     <li  [ngClass]="{'secondlayoutli':!value}">
     <div class="imgandadd">
       <div class="image-container" [ngClass]="{'showundeline':!value}">
-        <img src="{{p.img}}">
+        <img src="{{p.imgUrl}}">
         <div class="sizing-container" id="sizing-container" appClickOutside (clickOutside)="hideDiv(p)" [ngClass]="{'sizing-container2':p.showDetails}">
           <div class="row">
             <div class="col-sm-6">
