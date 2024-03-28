@@ -1,4 +1,4 @@
-export interface EditProductDto {
+export interface IEditProductDto {
     id: number,
     name: string,
     description: string,

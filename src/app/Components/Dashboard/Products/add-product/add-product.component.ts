@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductOperationsService } from '../../../../Services/Dashboard/product-operations.service';
 import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
-import { AddProductDto } from '../../../../Dtos/Dashboard/add-product-dto';
+import { AddProductDto } from '../../../../Dtos/Dashboard/IAddProductDto.interface';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';

@@ -3,7 +3,7 @@ import { ProductOperationsService } from '../../../../Services/Dashboard/product
 import { ActivatedRoute, Router } from '@angular/router';
 import { BrandsService } from '../../../../Services/Dashboard/brands.service';
 import { FormBuilder, FormGroup, FormsModule, NgModel, ReactiveFormsModule, Validators } from '@angular/forms';
-import { EditProductDto } from '../../../../Dtos/Dashboard/edit-product-dto.class';
+import { IEditProductDto } from '../../../../Dtos/Dashboard/IEditProductDto.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -16,8 +16,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class EditProductComponent implements OnInit {
   private _brands: any = [];
   productForm!: FormGroup;
-  product!: EditProductDto
-  newProduct!: EditProductDto
+  product!: IEditProductDto
+  newProduct!: IEditProductDto
   brands: any[] = [];
   selectedBrand = 0;
   constructor(private _productsService: ProductOperationsService

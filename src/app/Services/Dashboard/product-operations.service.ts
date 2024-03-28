@@ -1,9 +1,10 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AddProductDto } from '../../Dtos/Dashboard/add-product-dto';
+import { AddProductDto } from '../../Dtos/Dashboard/IAddProductDto.interface';
 import { environment } from '../../../environments/environment';
 import { Observable, catchError, throwError } from 'rxjs';
-import { EditProductDto } from '../../Dtos/Dashboard/edit-product-dto.class';
+import { IEditProductDto } from '../../Dtos/Dashboard/IEditProductDto.interface';
+import { IProductsListDto } from '../../Dtos/Dashboard/IProductsList.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +23,8 @@ export class ProductOperationsService {
     );
   }
 
-  edit(id: number, product: EditProductDto) {
-    return this._httpClient.put<EditProductDto>(`${environment.BASEURL}/api/Dashboard/${id}`, product)
+  edit(id: number, product: IEditProductDto) {
+    return this._httpClient.put<IEditProductDto>(`${environment.BASEURL}/api/Dashboard/${id}`, product)
   }
 
   delete(id: number) {
@@ -51,7 +52,12 @@ export class ProductOperationsService {
     return this._httpClient.get(`${environment.BASEURL}/api/Dashboard`);
   }
 
-  getById(id: number): Observable<EditProductDto> {
-    return this._httpClient.get<EditProductDto>(`${environment.BASEURL}/api/Dashboard/${id}`);
+  getById(id: number): Observable<IEditProductDto> {
+    return this._httpClient.get<IEditProductDto>(`${environment.BASEURL}/api/Dashboard/${id}`);
   }
+
+  getAllInPagination(pageIndex: number, pageSize: number): Observable<IProductsListDto> {
+    return this._httpClient.get<IProductsListDto>(`${environment.BASEURL}/api/Dashboard?pageIndex=${pageIndex}&pageSize=${pageSize}`)
+  }
+
 }
