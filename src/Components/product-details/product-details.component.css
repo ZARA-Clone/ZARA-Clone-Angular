@@ -70,9 +70,19 @@ ul{
   margin-bottom: 10px;
   cursor: pointer;
 }
+
 .size-box:hover{
   background-color: lightgrey;
 }
+.coming-soon {
+    font-size: 12px;
+    color: gray;
+}
+.disabled {
+    opacity: 0.3; /* Lower opacity */
+    pointer-events: none; /* Disable click events */
+}
+
 .selected {
   background-color: black;
   color: white;
@@ -108,16 +118,6 @@ ul{
 
 
 
-
-/* .hidden {
-  display: none;
-}
-.visible {
-  position: absolute;
-  right: 1px;
-  bottom: 15rem;
-  display: block;
-} */
 .modal-content{
   background-color: white;
 }
@@ -126,100 +126,6 @@ ul{
   background-color: black;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* .product-list {
-  display: grid;
-  grid-template-columns: repeat(6,1fr);
-  list-style-type: none;
-  padding: 0;
-}
-
-.product-list li {
-  display: inline-block;
-}
-.imgandadd img{
-  width: 310px;
-  height: 465px;
-  border: 1px solid black;
-  border-bottom: none;
-  border-left: none;
-  position: relative;
-}
-.image-container {
-  position: relative;
-  display: inline-block;
-}
-.sizing-container{
-  background-color: white;
-  border: 1px solid black;
-  position: absolute;
-  width: 100%;
-  bottom: 0px;
-  display: none;
-  z-index: 1;
-}
-.sizing-container2{
-  display: block;
-}
-.plus-icon {
-  position: absolute;
-  font-size: 17px;
-  right: 50%;
-  bottom: 20px;
-  background-color:white;
-  border-radius: 50%;
-  cursor: pointer;
-}
-.plus-icon2{
-  display: none;
-}
-.size-box2 {
-  background-color: white;
-  border: 1px solid black;
-  text-align: center;
-  padding: 2px;
-  margin-bottom: 2px;
-  cursor: pointer;
-}
-.size-box2:hover{
-  background-color: lightgrey;
-}
-.nameandprice{
-  position: relative;
-  border-top: none;
-  width: 310px;
-  border: 1px solid black;
-  border-left: none;
-}
-.bookmarkalso{
-  display: inline-block;
-  position: absolute;
-  right: 10px;
-  cursor: pointer;
-} */
 
 
 
@@ -291,7 +197,14 @@ ul{
   width: 100%;
   border: 1px solid black;
 }
-
+.nameandprice div{
+    font-size: 10px ;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .productname:hover{
+    cursor: pointer;
+    text-decoration: underline;
+  }
 .bookmarkalso {
   display: inline-block;
   position: absolute;
@@ -346,13 +259,6 @@ ul{
     display: none;
   }
 }
-
-
-
-
-
-
-
 
 
 

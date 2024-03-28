@@ -1,6 +1,7 @@
 <head>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
+
 <!-- Product Details -->
 <div class="product-details d-flex justify-content-around">
       <div id="custom-scrollbar" class="extra-info p-3" [ngStyle]="{
@@ -21,36 +22,25 @@
       </div>
       <div class="combineddiv">
                 <div class="product-img2">
-        <img id="product-img" [src]="selectedimg">
+                  <img id="product-img" [src]="selectedimg">
+                </div>
+          <div class="prosmulimgs2">
+            <ul>
+              @for(i of product.images ; track i){
+                <li>
+              <button (click)="Displayimg(i)">
+                <div>
+                  <img class="proimgs" [src]="i" [ngStyle]="{ 'opacity': selectedimg === i ? '1' : '0.4' }">
+                </div>
+              </button>
+            </li>
+            }
+              </ul>
+            </div>
         </div>
 
 
-        <div class="prosmulimgs2">
-          <ul>
-            <li>
-              <button (click)="Displayimg('https://static.zara.net/photos///2023/I/0/2/p/0706/540/800/2/w/750/0706540800_1_1_1.jpg?ts=1699871674788')">
-                <div>
-                  <img class="proimgs2" src="https://static.zara.net/photos///2023/I/0/2/p/0706/540/800/2/w/750/0706540800_1_1_1.jpg?ts=1699871674788" [ngStyle]="{ 'opacity': selectedimg === 'https://static.zara.net/photos///2023/I/0/2/p/0706/540/800/2/w/750/0706540800_1_1_1.jpg?ts=1699871674788' ? '1' : '0.4' }">
-                </div>
-              </button>
-            </li>
-            <li>
-              <button (click)="Displayimg('https://static.zara.net/photos///2023/I/0/2/p/0706/540/800/2/w/750/0706540800_2_1_1.jpg?ts=1699871674090')">
-                <div>
-                  <img class="proimgs2" src="https://static.zara.net/photos///2023/I/0/2/p/0706/540/800/2/w/750/0706540800_2_1_1.jpg?ts=1699871674090" [ngStyle]="{ 'opacity': selectedimg === 'https://static.zara.net/photos///2023/I/0/2/p/0706/540/800/2/w/750/0706540800_2_1_1.jpg?ts=1699871674090' ? '1' : '0.4' }">
-                </div>
-              </button>
-            </li>
-            <li>
-              <button (click)="Displayimg('https://static.zara.net/photos///2023/I/0/2/p/0706/540/800/2/w/750/0706540800_2_3_1.jpg?ts=1699871674095')">
-                <div>
-                  <img class="proimgs2" src="https://static.zara.net/photos///2023/I/0/2/p/0706/540/800/2/w/750/0706540800_2_3_1.jpg?ts=1699871674095" [ngStyle]="{ 'opacity': selectedimg === 'https://static.zara.net/photos///2023/I/0/2/p/0706/540/800/2/w/750/0706540800_2_3_1.jpg?ts=1699871674095' ? '1' : '0.4' }">
-                </div>
-              </button>
-            </li>
-          </ul>
-        </div>
-      </div>
+
         <div class="product-img">
         <img id="product-img" [src]="selectedimg">
         </div>
@@ -58,27 +48,15 @@
 
         <div class="prosmulimgs">
           <ul>
-            <li>
-              <button (click)="Displayimg('https://static.zara.net/photos///2023/I/0/2/p/0706/540/800/2/w/750/0706540800_1_1_1.jpg?ts=1699871674788')">
+            @for(i of product.images ; track $index){
+                <li>
+              <button (click)="Displayimg(i)">
                 <div>
-                  <img class="proimgs" src="https://static.zara.net/photos///2023/I/0/2/p/0706/540/800/2/w/750/0706540800_1_1_1.jpg?ts=1699871674788" [ngStyle]="{ 'opacity': selectedimg === 'https://static.zara.net/photos///2023/I/0/2/p/0706/540/800/2/w/750/0706540800_1_1_1.jpg?ts=1699871674788' ? '1' : '0.4' }">
+                  <img class="proimgs" [src]="i" [ngStyle]="{ 'opacity': selectedimg === i ? '1' : '0.4' }">
                 </div>
               </button>
             </li>
-            <li>
-              <button (click)="Displayimg('https://static.zara.net/photos///2023/I/0/2/p/0706/540/800/2/w/750/0706540800_2_1_1.jpg?ts=1699871674090')">
-                <div>
-                  <img class="proimgs" src="https://static.zara.net/photos///2023/I/0/2/p/0706/540/800/2/w/750/0706540800_2_1_1.jpg?ts=1699871674090" [ngStyle]="{ 'opacity': selectedimg === 'https://static.zara.net/photos///2023/I/0/2/p/0706/540/800/2/w/750/0706540800_2_1_1.jpg?ts=1699871674090' ? '1' : '0.4' }">
-                </div>
-              </button>
-            </li>
-            <li>
-              <button (click)="Displayimg('https://static.zara.net/photos///2023/I/0/2/p/0706/540/800/2/w/750/0706540800_2_3_1.jpg?ts=1699871674095')">
-                <div>
-                  <img class="proimgs" src="https://static.zara.net/photos///2023/I/0/2/p/0706/540/800/2/w/750/0706540800_2_3_1.jpg?ts=1699871674095" [ngStyle]="{ 'opacity': selectedimg === 'https://static.zara.net/photos///2023/I/0/2/p/0706/540/800/2/w/750/0706540800_2_3_1.jpg?ts=1699871674095' ? '1' : '0.4' }">
-                </div>
-              </button>
-            </li>
+            }
           </ul>
         </div>
       <div class="product-action">
@@ -91,31 +69,37 @@
               <i class="fa-regular fa-bookmark"></i>
             }
             </div>
-                      EASY CARE JOGGER WAIST TROUSERS
-                      2,790 EGP
-                      -39%
-                      1,690 EGP
-                      Trousers featuring an adjustable elasticated waistband with drawstrings. Side pockets and rear welt pockets. Turn-up hems.
+                      <p>{{product.name}}</p>
+                      <p>{{product.price | egp}}</p>
+                      <p>{{product.description}}</p>
                       CHECK IN-STORE AVAILABILITY
                       SHIPPING, EXCHANGES AND RETURNS</div>
-              <div class="color-size p-3">
-                <div class="row">
-                <div class="col-sm-6">
-                <div class="size-box" (click)="selectSize('S')" [ngClass]="{'selected':selectedSize === 'S'}">S</div>
-                </div>
-                <div class="col-sm-6">
-                <div class="size-box" (click)="selectSize('M')" [ngClass]="{'selected':selectedSize === 'M'}">M</div>
-                </div>
-              </div>
-  <div class="row">
-    <div class="col-sm-6">
-      <div class="size-box" (click)="selectSize('L')" [ngClass]="{'selected':selectedSize === 'L'}">L</div>
+
+                      
+                      
+<div class="p-3" style="border: 1px solid black;">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="size-box" [ngClass]="{'selected': selectedSize === 'S', 'disabled': !isSizeAvailable(0)}" (click)="isSizeAvailable(0) ? selectSize('S') : null">S</div>
+        </div>
+        <div class="col-sm-6">
+            <div class="size-box" [ngClass]="{'selected': selectedSize === 'M', 'disabled': !isSizeAvailable(1)}" (click)="isSizeAvailable(1) ? selectSize('M') : null">M</div>
+        </div>
     </div>
-    <div class="col-sm-6">
-      <div class="size-box" (click)="selectSize('XL')" [ngClass]="{'selected':selectedSize === 'XL'}">XL</div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="size-box" [ngClass]="{'selected': selectedSize === 'L', 'disabled': !isSizeAvailable(2)}" (click)="isSizeAvailable(2) ? selectSize('L') : null">L</div>
+        </div>
+        <div class="col-sm-6">
+            <div class="size-box" [ngClass]="{'selected': selectedSize === 'XL', 'disabled': !isSizeAvailable(3)}" (click)="isSizeAvailable(3) ? selectSize('XL') : null">XL</div>
+        </div>
     </div>
-  </div>
 </div>
+
+
+
+
+     
 
     <div class="addbutton" [ngClass]="{'addbutton2' : selectedSize!=''}" (click)="AddToCart()">ADD</div>
   </div>
@@ -164,30 +148,34 @@
     <li>
     <div class="imgandadd">
       <div class="image-container">
-        <img src="{{p.img}}">
+        <img style="cursor: pointer;" src="{{p.imgUrl}}">
         <div class="sizing-container" id="sizing-container" appClickOutside (clickOutside)="hideDiv(p)" [ngClass]="{'sizing-container2':p.showDetails}">
-          <div class="row">
-            <div class="col-sm-6">
-              <div class="size-box2">S</div>
-            </div>
-            <div class="col-sm-6">
-              <div class="size-box2">M</div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <div class="size-box2">L</div>
-            </div>
-            <div class="col-sm-6">
-              <div class="size-box2">XL</div>
-            </div>
-          </div>
+          
+      <div class="row">
+    <div class="col-sm-6">
+        <div class="size-box2" (click)="AddToCartDirect(p);" [ngClass]="{'selected': selectedSize === 'S', 'disabled': !isAvailable(p, 0)}" (click)="isAvailable(p, 0) ? selectSize('S') : null">S</div>
+    </div>
+    <div class="col-sm-6">
+        <div class="size-box2" (click)="AddToCartDirect(p);" [ngClass]="{'selected': selectedSize === 'M', 'disabled': !isAvailable(p, 1)}" (click)="isAvailable(p, 1) ? selectSize('M') : null">M</div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="size-box2" (click)="AddToCartDirect(p);" [ngClass]="{'selected': selectedSize === 'L', 'disabled': !isAvailable(p, 2)}" (click)="isAvailable(p, 2) ? selectSize('L') : null">L</div>
+    </div>
+    <div class="col-sm-6">
+        <div class="size-box2" (click)="AddToCartDirect(p);" [ngClass]="{'selected': selectedSize === 'XL', 'disabled': !isAvailable(p, 3)}" (click)="isAvailable(p, 3) ? selectSize('XL') : null">XL</div>
+    </div>
+</div>
+
+
+
         </div>
         <div class="plus-icon" (click)="toggleSizes($event,p)"><i class="fa-solid fa-plus"></i></div>
       </div>
     </div>
     <div class="nameandprice p-3">
-      <div style="display: inline-block;"><a>{{p.name}}</a></div>
+      <div class="productname" style="display: inline-block;"><a>{{p.name}}</a></div>
       <div class="bookmarkalso" (click)="ToggleWishList(p)">
         @if(p.wishlist){
           <i class="fa-solid fa-bookmark"></i>
@@ -196,7 +184,7 @@
           <i class="fa-regular fa-bookmark"></i>
         }
         </div>
-      <div>{{p.price}}</div>
+      <div>{{p.price | egp}}</div>
     </div>
   </li>
 

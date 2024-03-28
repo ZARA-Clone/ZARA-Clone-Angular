@@ -1,6 +1,11 @@
+import { SizeQuantity } from "./SizeQuaintity";
+
 export interface IproductBrowse{
     id:number,
     name:string,
-    img:string,
-    price:number
+    price:number,
+    imgUrl:string,
+    discount?:number,
+    sizes:SizeQuantity[],
+    brandId:number
 }
