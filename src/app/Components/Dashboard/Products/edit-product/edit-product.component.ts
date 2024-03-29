@@ -3,7 +3,7 @@ import { ProductOperationsService } from '../../../../Services/Dashboard/product
 import { ActivatedRoute, Router } from '@angular/router';
 import { BrandsService } from '../../../../Services/Dashboard/brands.service';
 import { FormBuilder, FormGroup, FormsModule, NgModel, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IEditProductDto } from '../../../../Dtos/Dashboard/IEditProductDto.interface';
+import { IEditProductDto } from '../../../../Dtos/Dashboard/Products/IEditProductDto.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
