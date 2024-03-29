@@ -10,9 +10,9 @@ export class ErrorInterceptor implements HttpInterceptor {
           // Handle problem+json response here
           console.error('API error:', error.error);
           // You can parse the error and display it to the user in a meaningful way
-          return throwError('An error occurred. Please try again later.');
+          return throwError(() => new Error('An error occurred. Please try again later.'));
         } else {
-          return throwError(error);
+          return throwError(() => new Error(error.error));
         }
       })
     );
