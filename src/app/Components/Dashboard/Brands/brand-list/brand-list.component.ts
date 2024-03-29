@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { BrandsService } from '../../../../../Services/Dashboard/brands.service';
+import { BrandsService } from '../../../../Services/Dashboard/brands.service';
 
 @Component({
   selector: 'app-brand-list',
