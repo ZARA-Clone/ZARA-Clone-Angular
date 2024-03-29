@@ -29,7 +29,7 @@
                         <td>{{product.price}}</td>
                         <td>
                             <button class="btn btn-info" routerLink="/details/{{product.id}}">Details</button>
-                            <button class="btn btn-warning mx-2" routerLink="/edit/{{product.id}}">Edit</button>
+                            <button class="btn btn-warning mx-2" routerLink="edit/{{product.id}}">Edit</button>
                             <button class="btn btn-danger" (click)="delete(product.id)">Delete</button>
                         </td>
                     </tr>

@@ -1,6 +1,5 @@
-export interface IBrandDto {
+export interface IBrandEditDto {
     id: number,
     name: string
     categoryId: number
-    categoryName: string
 }

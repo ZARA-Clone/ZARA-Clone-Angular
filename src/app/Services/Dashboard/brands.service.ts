@@ -4,6 +4,7 @@ import { environment } from '../../../environments/environment';
 import { Observable, catchError, throwError } from 'rxjs';
 import { IBrandDto } from '../../Dtos/Dashboard/Brands/IBrandDto.interface';
 import { IBrandListDto } from '../../Dtos/Dashboard/Brands/ibrand-list-dto';
+import { IBrandEditDto } from '../../Dtos/Dashboard/Brands/Ibrand-edit-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class BrandsService {
   constructor(private _httpClient: HttpClient) { }
 
   getAll() {
-    return this._httpClient.get(`${environment.BASEURL}/api/Brands`);
+    return this._httpClient.get(`${environment.BASEURL}/api/Brands/getAll`);
   }
 
   getById(id: number): Observable<IBrandDto> {
@@ -28,8 +29,8 @@ export class BrandsService {
     );
   }
 
-  edit(id: number, brand: IBrandDto) {
-    return this._httpClient.put<IBrandDto>(`${environment.BASEURL}/api/brands/${id}`, brand)
+  edit(id: number, brand: IBrandEditDto) {
+    return this._httpClient.put<IBrandEditDto>(`${environment.BASEURL}/api/brands/${id}`, brand)
   }
 
   delete(id: number) {

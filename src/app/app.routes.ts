@@ -4,15 +4,17 @@ import { EditProductComponent } from './Components/Dashboard/Products/edit-produ
 import { ProductListComponent } from './Components/Dashboard/Products/product-list/product-list.component';
 import { AddBrandComponent } from './Components/Dashboard/Brands/add-brand/add-brand.component';
 import { BrandListComponent } from './Components/Dashboard/Brands/brand-list/brand-list.component';
+import { EditBrandComponent } from './Components/Dashboard/Brands/edit-brand/edit-brand.component';
 
 export const routes: Routes = [
     {
         path: "dashboard", children: [
             { path: 'products', component: ProductListComponent, title: 'Products' },
             { path: 'addProduct', component: AddProductComponent, title: 'Add Product' },
-            { path: 'edit/:id', component: EditProductComponent, title: 'Edit Product' },
+            { path: 'products/edit/:id', component: EditProductComponent, title: 'Edit Product' },
             { path: 'brands', component: BrandListComponent, title: 'Brands' },
             { path: 'addbrand', component: AddBrandComponent, title: 'Add Brand' },
+            { path: 'brands/edit/:id', component: EditBrandComponent, title: 'Edit Brand' },
         ]
     },
 ]

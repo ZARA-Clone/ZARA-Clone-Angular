@@ -36,6 +36,7 @@ export class BrandListComponent {
         error: (error) => { console.log(error) }
       })
   }
+
   onPageChange(event: any) {
     this.pageIndex = event;
     this.getData(this.pageIndex - 1, this.pageSize)
