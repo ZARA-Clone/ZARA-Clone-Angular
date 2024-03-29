@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Observable, catchError, throwError } from 'rxjs';
 import { IBrandDto } from '../../Dtos/Dashboard/Brands/IBrandDto.interface';
+import { IBrandListDto } from '../../Dtos/Dashboard/Brands/ibrand-list-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -46,5 +47,10 @@ export class BrandsService {
       console.error(
         `Backend returned code ${error.status}, body was: `, error.error);
     return throwError(() => new Error('Something bad happened; please try again later.'));
+  }
+
+  getWithPagination(name: string, categoryId: number, pageIndex: number = 0
+    , pageSize: number = 10): Observable<IBrandListDto> {
+    return this._httpClient.get<IBrandListDto>(`${environment.BASEURL}/api/brands?name=${name}&categoryId=${categoryId}&pageIndex=${pageIndex}&pageSize=${pageSize}`)
   }
 }
