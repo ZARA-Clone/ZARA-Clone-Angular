@@ -28,7 +28,6 @@
                         <td>{{product.description}}</td>
                         <td>{{product.price}}</td>
                         <td>
-                            <button class="btn btn-info" routerLink="/details/{{product.id}}">Details</button>
                             <button class="btn btn-warning mx-2" routerLink="edit/{{product.id}}">Edit</button>
                             <button class="btn btn-danger" (click)="delete(product.id)">Delete</button>
                         </td>
@@ -41,5 +40,5 @@
 </div>
 
 <pagination-controls [responsive]=" true" boundary-links="true" [autoHide]="true" (pageChange)="onPageChange($event)"
-    id="products-pagination" class="text-center" [maxSize]="3">
+    id="products-pagination" class="text-center" [maxSize]="9">
 </pagination-controls>

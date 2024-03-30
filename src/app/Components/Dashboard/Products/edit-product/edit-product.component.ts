@@ -5,6 +5,8 @@ import { BrandsService } from '../../../../Services/Dashboard/brands.service';
 import { FormBuilder, FormGroup, FormsModule, NgModel, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IEditProductDto } from '../../../../Dtos/Dashboard/Products/IEditProductDto.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { EditImageComponent } from '../edit-image/edit-image.component';
 
 @Component({
   selector: 'app-edit-product',
@@ -20,12 +22,15 @@ export class EditProductComponent implements OnInit {
   newProduct!: IEditProductDto
   brands: any[] = [];
   selectedBrand = 0;
+  imageUrls: string[] = [];
+  newUrls: string[] = [];
   constructor(private _productsService: ProductOperationsService
     , private _brandsService: BrandsService
     , private _router: Router
     , private _snackBar: MatSnackBar
     , private _activatedRoute: ActivatedRoute
     , private _formBuilder: FormBuilder
+    , private _dialog: MatDialog
   ) { }
   ngOnInit(): void {
     this.productForm = this._formBuilder.group({
@@ -81,13 +86,41 @@ export class EditProductComponent implements OnInit {
   }
 
   onSubmit() {
-    this.newProduct = { id: this.product.id, ...this.productForm.value }
+    this.newProduct = {
+      id: this.product.id,
+      name: this.product.name.trim(),
+      description: this.product.description.trim(),
+      price: this.product.price,
+      discount: this.product.discount,
+      quantity: this.product.quantity,
+      imageUrls: this.newUrls.concat(this.product.imageUrls),
+      brandId: this.selectedBrand,
+    }
+
     this._productsService.edit(this.product.id, this.newProduct).subscribe({
       next: () => {
         this._snackBar.open('Data has been updated Successfully', 'Okay')
-        this._router.navigate(['/'])
+        this._router.navigate(['/dashboard/products'])
+      },
+      error: () => {
+        this._snackBar.open('Error occurred when update data', 'Okay')
       }
     })
 
+  }
+
+  viewImages() {
+    const dialogRef = this._dialog.open(EditImageComponent,
+      {
+        data: { newUrls: this.newUrls, imageUrls: this.product.imageUrls },
+        maxHeight: '70vh', height: '70%', width: '50%'
+      });
+
+    dialogRef.afterClosed().subscribe((result: { newUrls: string[], imageUrls: string[] }) => {
+      if (result) {
+        this.newUrls = result.newUrls;
+        this.product.imageUrls = result.imageUrls;
+      }
+    });
   }
 }

@@ -53,7 +53,7 @@ export class AddProductComponent implements OnInit {
         console.log(this.imageUrls)
         this._productsService.add(this.product).subscribe(
           {
-            next: (data) => { console.log("data: " + data); this.router.navigate(["/"]) },
+            next: (data) => { console.log("data: " + data); this.router.navigate(["/dashboard/products"]) },
             error: (err) => { console.log("err: " + err) },
             complete: () => {
               console.log("Product has been added successfully")
