@@ -17,6 +17,7 @@ import { Size } from '../../../../Dtos/Dashboard/Products/IAddProductDto.interfa
   templateUrl: './edit-product.component.html',
   styleUrl: './edit-product.component.css'
 })
+
 export class EditProductComponent implements OnInit {
   private _brands: any = [];
   productForm!: FormGroup;
@@ -27,6 +28,7 @@ export class EditProductComponent implements OnInit {
   imageUrls: string[] = [];
   newUrls: string[] = [];
   selectedSizes: any[] = []
+  selectedSize: string = ''
   sizeArray: { key: string, value: number }[];
 
   constructor(private _productsService: ProductOperationsService
@@ -41,6 +43,7 @@ export class EditProductComponent implements OnInit {
       .filter(([key, value]) => !isNaN(Number(Size[value as number])))
       .map(([key, value]) => ({ key, value: value as number }));
   }
+
   ngOnInit(): void {
     this.productForm = this._formBuilder.group({
       name: ["", [Validators.required]],
@@ -51,7 +54,6 @@ export class EditProductComponent implements OnInit {
       imageUrls: [[]],
       sizes: this._formBuilder.array([], Validators.required)
     })
-    this.getAllBrands();
 
     this._activatedRoute.paramMap.subscribe((param) => {
       let idAsString = param.get('id');
@@ -61,18 +63,23 @@ export class EditProductComponent implements OnInit {
           this.getProduct(product.id)
         })
     })
-    this.showSize()
+    this.getAllBrands();
+
   }
 
   get sizes() {
     return this.productForm.get('sizes') as FormArray;
   }
 
-  showSize() {
-    this.sizes.push(this._formBuilder.group({
-      size: ['', Validators.required],
-      quantity: ['', [Validators.required, Validators.min(1)]]
-    }));
+  showSizes() {
+    for (let index = 0; index < this.product.sizes.length; index++) {
+      let s = this.product.sizes[index].key;
+      let q = this.product.sizes[index].value;
+      this.sizes.push(this._formBuilder.group({
+        size: [s, Validators.required],
+        quantity: [q, [Validators.required, Validators.min(1)]]
+      }));
+    }
   }
 
   getAllBrands(): void {
@@ -95,12 +102,10 @@ export class EditProductComponent implements OnInit {
         this.selectedBrand = selectedBrand.id
       }
       this.productForm.patchValue({
-        id: product.id,
         name: product.name,
         description: product.description,
         discount: product.discount,
         price: product.price,
-        quantity: product.quantity,
         brandID: product.brandId,
         imageUrls: product.imageUrls,
         sizes: product.sizes
@@ -109,22 +114,26 @@ export class EditProductComponent implements OnInit {
             value: size.quantity
           })),
       })
+      this.showSizes()
     })
   }
 
   onSubmit() {
     this.newProduct = {
       id: this.product.id,
-      name: this.product.name.trim(),
-      description: this.product.description.trim(),
-      price: this.product.price,
-      discount: this.product.discount,
-      quantity: this.product.quantity,
+      name: this.productForm.value.name.trim(),
+      description: this.productForm.value.description.trim(),
+      price: this.productForm.value.price,
+      discount: this.productForm.value.discount,
       imageUrls: this.newUrls.concat(this.product.imageUrls),
       brandId: this.selectedBrand,
-      sizes: this.selectedSizes
+      sizes: this.productForm.value.sizes
+        .map((size: any) => ({
+          key: size.size,
+          value: size.quantity
+        })),
     }
-
+    console.log(this.newProduct)
     this._productsService.edit(this.product.id, this.newProduct).subscribe({
       next: () => {
         this._snackBar.open('Data has been updated Successfully', 'Okay')
