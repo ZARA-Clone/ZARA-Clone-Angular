@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { WishlistComponent } from '../Components/wishlist/wishlist.component';
 
 
 @Component({
