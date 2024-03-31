@@ -1,40 +1,56 @@
 <div class="container">
     <h3 class="title text-center mt-3">Add Product</h3>
-    <form #productForm="ngForm" (ngSubmit)="onSubmit(productForm)">
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
         <div class="row">
-            <label>Name:</label>
-            <input [(ngModel)]="product.name" name="name" id="name" class="form-control" #name="ngModel" required
-                [maxlength]="20" />
+            <label for="name">Name:</label>
+            <input formControlName="name" name="name" id="name" class="form-control" />
         </div>
         <div class="row">
-            <label>Description:</label>
-            <input [(ngModel)]="product.description" id="description" class="form-control" name="description" required
-                type="text" />
+            <label for="description">Description:</label>
+            <input type="text" name="description" id="description" class="form-control" formControlName="description"
+                required />
         </div>
         <div class="row">
-            <label>Discount:</label>
-            <input [(ngModel)]="product.discount" name="discount" id="discount" class="form-control" type="number"
-                required [min]="0" [max]="100" />
+            <label for="discount">Discount:</label>
+            <input type="number" name="discount" id="discount" class="form-control" formControlName="discount" />
         </div>
         <div class="row">
-            <label>Price:</label>
-            <input [(ngModel)]="product.price" name="price" id="price" class="form-control" type="number" required
-                min="1" />
+            <label for="price">Price:</label>
+            <input type="number" name="price" id="price" class="form-control" formControlName="price" />
         </div>
         <div class="row">
-            <label>Quantity:</label>
-            <input [(ngModel)]="product.quantity" name="quantity" id="quantity" class="form-control" type="number"
-                required min="1" />
-        </div>
-        <div class="row">
-            <label>Brand:</label>
-            <select [(ngModel)]="selectedBrand" name="brand" id="brand" class="form-select" required>
+            <label for="brand">Brand:</label>
+            <select formControlName="brandId" name="brand" id="brand" class="form-select">
                 <option value="0">Select Brand</option>
                 @for (brand of brands; track $index) {
                 <option value="{{brand.id}}">{{brand.name}}</option>
                 }
             </select>
         </div>
+        <div formArrayName="sizes">
+            <div *ngFor="let size of sizes.controls; let i = index">
+                <div [formGroupName]="i">
+                    <div class="row">
+                        <div class="col-6">
+                            <label>Size:</label>
+                            <select formControlName="size" name="size" id="size" class="form-select">
+                                <option value="0">Select size</option>
+                                @for (size of sizeArray; track $index) {
+                                <option value="{{size.value}}">{{size.value}}</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <label>Quantity:</label>
+                            <input formControlName="quantity" name="quantity" id="quantity" class="form-control"
+                                type="number" />
+                        </div>
+                    </div>
+                    <button type="button" (click)="removeSize(i)">Remove</button>
+                </div>
+            </div>
+        </div>
+        <button type="button" (click)="addSize()">Add Size</button>
         <div class="row">
             <div class="mb-6">
                 <label class="form-label">Upload product Images</label>
@@ -49,8 +65,8 @@
                 </div>
             </div>
         </div>
-        <div class="mt-3">
-            <button class="btn btn-secondary" type="reset">Cancel</button>
+        <div class="text-end mt-3">
+            <a class="btn btn-secondary" href="/dashboard/products">Cancel</a>
             <button class="btn btn-primary mx-2" type="submit">Create</button>
         </div>
     </form>

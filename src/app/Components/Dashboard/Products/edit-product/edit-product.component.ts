@@ -2,16 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { ProductOperationsService } from '../../../../Services/Dashboard/product-operations.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BrandsService } from '../../../../Services/Dashboard/brands.service';
-import { FormBuilder, FormGroup, FormsModule, NgModel, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, FormsModule, NgModel, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IEditProductDto } from '../../../../Dtos/Dashboard/Products/IEditProductDto.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { EditImageComponent } from '../edit-image/edit-image.component';
+import { NgFor } from '@angular/common';
+import { Size } from '../../../../Dtos/Dashboard/Products/IAddProductDto.interface';
 
 @Component({
   selector: 'app-edit-product',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule],
+  imports: [ReactiveFormsModule, FormsModule, NgFor],
   templateUrl: './edit-product.component.html',
   styleUrl: './edit-product.component.css'
 })
@@ -24,6 +26,9 @@ export class EditProductComponent implements OnInit {
   selectedBrand = 0;
   imageUrls: string[] = [];
   newUrls: string[] = [];
+  selectedSizes: any[] = []
+  sizeArray: { key: string, value: number }[];
+
   constructor(private _productsService: ProductOperationsService
     , private _brandsService: BrandsService
     , private _router: Router
@@ -31,16 +36,20 @@ export class EditProductComponent implements OnInit {
     , private _activatedRoute: ActivatedRoute
     , private _formBuilder: FormBuilder
     , private _dialog: MatDialog
-  ) { }
+  ) {
+    this.sizeArray = Object.entries(Size)
+      .filter(([key, value]) => !isNaN(Number(Size[value as number])))
+      .map(([key, value]) => ({ key, value: value as number }));
+  }
   ngOnInit(): void {
     this.productForm = this._formBuilder.group({
       name: ["", [Validators.required]],
       description: ["", Validators.maxLength(500)],
       price: [0, [Validators.required]],
-      quantity: [0, [Validators.required]],
       discount: [0, [Validators.required]],
       brandId: [this.selectedBrand, [Validators.required]],
       imageUrls: [[]],
+      sizes: this._formBuilder.array([], Validators.required)
     })
     this.getAllBrands();
 
@@ -52,6 +61,18 @@ export class EditProductComponent implements OnInit {
           this.getProduct(product.id)
         })
     })
+    this.showSize()
+  }
+
+  get sizes() {
+    return this.productForm.get('sizes') as FormArray;
+  }
+
+  showSize() {
+    this.sizes.push(this._formBuilder.group({
+      size: ['', Validators.required],
+      quantity: ['', [Validators.required, Validators.min(1)]]
+    }));
   }
 
   getAllBrands(): void {
@@ -68,6 +89,7 @@ export class EditProductComponent implements OnInit {
   getProduct(id: number) {
     this._productsService.getById(id).subscribe((product) => {
       this.product = product
+      console.log(product)
       let selectedBrand = this.brands.find((b) => b.id == this.product.brandId)
       if (selectedBrand) {
         this.selectedBrand = selectedBrand.id
@@ -81,6 +103,11 @@ export class EditProductComponent implements OnInit {
         quantity: product.quantity,
         brandID: product.brandId,
         imageUrls: product.imageUrls,
+        sizes: product.sizes
+          .map((size: any) => ({
+            key: size.size,
+            value: size.quantity
+          })),
       })
     })
   }
@@ -95,6 +122,7 @@ export class EditProductComponent implements OnInit {
       quantity: this.product.quantity,
       imageUrls: this.newUrls.concat(this.product.imageUrls),
       brandId: this.selectedBrand,
+      sizes: this.selectedSizes
     }
 
     this._productsService.edit(this.product.id, this.newProduct).subscribe({

@@ -1,3 +1,5 @@
+import { ProductSize } from "./IAddProductDto.interface";
+
 export interface IEditProductDto {
     id: number,
     name: string,
@@ -6,5 +8,6 @@ export interface IEditProductDto {
     quantity: number,
     discount: number,
     brandId: number,
-    imageUrls: string[]
+    imageUrls: string[],
+    sizes: ProductSize[]
 }
