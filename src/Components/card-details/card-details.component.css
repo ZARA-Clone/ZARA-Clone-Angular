@@ -1,0 +1,73 @@
+.roweone{
+    display: grid;
+    width: 40%;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 10px;
+}
+.rowtwo{
+    display: grid;
+    width: 40%;
+    grid-template-columns: 1fr 1fr;
+    gap:10px;
+}
+.textbox{
+    border: none;
+    width: 100%;
+    border-radius: 0; 
+    border-bottom: 1px solid black; 
+    outline: none !important; 
+    box-shadow: none !important;
+}
+.MENU{
+   border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  width: 100%;
+}
+.total-price {
+    padding: 10px; 
+    align-self: center;
+  }
+.footer{
+    background-color: white;
+    border-top: 1px solid black;
+    display: grid;
+    grid-template-columns: 1fr 1fr 0.5fr 0.5fr;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 3;
+    display: flex;
+  justify-content:end;
+
+}.main-content {
+    padding-bottom: 28px; 
+  }
+.button-container{
+    min-height: 76px;
+}
+button{
+    width: 100%;
+    height: 100%;
+    color: white;
+    background-color: black;
+    border: none;
+    cursor: pointer;
+}
+.mainwrrapper{
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+    gap: 10px;
+    border: 1px solid black;
+}
+.shippingimg{
+    height: 250px;
+    width: 160px;
+    border: 1px solid black;
+}
+.orderimgs{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1px;
+}

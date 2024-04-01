@@ -1,0 +1,36 @@
+<div class="payment-method-container">
+  <div>
+    <h5>Choose Payment Method</h5>
+  </div>
+  <div class="ChoosePaymentMethods">
+    <div class="Method p-3" (click)="selectPayment('VISA')" [class.selected]="selectedMethod === 'VISA'">
+      <input type="radio" name="paymentMethod" #visaRadio>
+      <label>
+          <img class="PaymentIconImg" src="https://static.zara.net/static/images/payment/NewIcon/Icons_Payment_Methods/Payments/SVG/icon-payment-visa_new.svg">
+          <span class="IconName">VISA</span>
+      </label>
+    </div>
+    <div class="Method p-3" (click)="selectPayment('MASTERCARD')" [class.selected]="selectedMethod === 'MASTERCARD'">
+      <input type="radio" name="paymentMethod" #mastercardRadio>
+      <label>
+      <img class="PaymentIconImg" src="https://static.zara.net/static/images/payment/NewIcon/Icons_Payment_Methods/Payments/SVG/icon-payment-mastercard.svg">
+      <span class="IconName">MASTERCARD</span>
+      </label>
+    </div>
+    <div class="Method p-3" (click)="selectPayment('PAY_ON_DELIVERY')" [class.selected]="selectedMethod === 'PAY_ON_DELIVERY'">
+      <input type="radio" name="paymentMethod" #podRadio>
+      <label>
+      <img class="PaymentIconImg" src="https://static.zara.net/static/images/payment/NewIcon/Icons_Payment_Methods/Payments/SVG/icon-payment-pod.svg">
+      <span class="IconName">PAY ON DELIVERY</span>
+      </label>
+    </div>
+  </div>
+</div>
+<div class="footer">
+    <div></div>
+    <div></div>
+    <div class="p-4"><b>Total Price : 2900 EGP</b></div>
+    <div class="button-container" (click)="RedirectTo();">
+        <button type="button">CONTINUE</button>
+    </div>
+</div>
