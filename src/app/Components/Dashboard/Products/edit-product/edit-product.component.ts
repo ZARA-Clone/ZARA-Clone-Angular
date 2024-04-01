@@ -64,7 +64,8 @@ export class EditProductComponent implements OnInit {
         })
     })
     this.getAllBrands();
-
+    this.sizes;
+    this.showSizes()
   }
 
   get sizes() {

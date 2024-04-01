@@ -30,15 +30,19 @@
         <div formArrayName="sizes">
             <div *ngFor="let size of sizes.controls; let i = index">
                 <div [formGroupName]="i">
+                    <!-- @for (size of sizeArray; track $index) { -->
                     <div class="row">
                         <div class="col-6">
                             <label>Size:</label>
-                            <select formControlName="size" name="size" id="size" class="form-select">
+                            <!-- <select formControlName="size" name="size" id="size" class="form-select">
                                 <option value="0">Select size</option>
                                 @for (size of sizeArray; track $index) {
                                 <option value="{{size.value}}">{{size.value}}</option>
                                 }
-                            </select>
+                            </select> -->
+                            <!-- <option value="{{size.value}}">{{size.value}}</option> -->
+                            <input type="text" value="size" id="size" name="size" class="form-control" readonly
+                                formControlName="size">
                         </div>
                         <div class="col-6">
                             <label>Quantity:</label>
@@ -46,11 +50,12 @@
                                 type="number" />
                         </div>
                     </div>
-                    <button type="button" (click)="removeSize(i)">Remove</button>
+                    <!-- <button type="button" (click)="removeSize(i)">Remove</button> -->
+                    <!-- } -->
                 </div>
             </div>
         </div>
-        <button type="button" (click)="addSize()">Add Size</button>
+        <!-- <button type="button" (click)="addSize()" [disabled]="isDone">Add Size</button> -->
         <div class="row">
             <div class="mb-6">
                 <label class="form-label">Upload product Images</label>

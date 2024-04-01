@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductOperationsService } from '../../../../Services/Dashboard/product-operations.service';
-import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AddProductDto, Size, ProductSize } from '../../../../Dtos/Dashboard/Products/IAddProductDto.interface';
 import { Router } from '@angular/router';
 import { BrandsService } from '../../../../Services/Dashboard/brands.service';
@@ -46,20 +46,24 @@ export class AddProductComponent implements OnInit {
       imageUrls: [[]],
       sizes: this._formBuilder.array([], Validators.required)
     })
+    this.sizes;
+    this.showSizes()
   }
+
   get sizes() {
     return this.productForm.get('sizes') as FormArray;
   }
 
-  addSize() {
-    this.sizes.push(this._formBuilder.group({
-      size: ['', Validators.required],
-      quantity: ['', [Validators.required, Validators.min(1)]]
-    }));
-  }
-
-  removeSize(index: number) {
-    this.sizes.removeAt(index);
+  showSizes() {
+    for (let index = 0; index < this.sizeArray.length; index++) {
+      let s = this.sizeArray[index].key;
+      let q = this.sizeArray[index].value;
+      console.log(s)
+      this.sizes.push(this._formBuilder.group({
+        size: [q, Validators.required],
+        quantity: [0, [Validators.required, Validators.min(1)]]
+      }));
+    }
   }
 
   onFileSelected(event: any) {
@@ -70,6 +74,7 @@ export class AddProductComponent implements OnInit {
   onSubmit() {
     console.log(this.sizes.value)
     if (this.productForm.invalid) {
+      console.log("product form is invalid")
       return;
     }
     this._productsService.upload(this.selectedImages).subscribe({

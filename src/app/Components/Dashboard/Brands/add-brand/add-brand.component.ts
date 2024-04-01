@@ -33,7 +33,7 @@ export class AddBrandComponent implements OnInit {
     this._brandsService.add(this.brandForm.value).subscribe({
       next: () => {
         this._snackBar.open("Brand has been added successfully", "Okay")
-        this._router.navigate(['/'])
+        this._router.navigate(['/dashboard/brands'])
       }
     })
   }

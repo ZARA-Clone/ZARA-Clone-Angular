@@ -50,7 +50,7 @@ export class EditBrandComponent {
     this._brandsService.edit(this.brand.id, this.newBrand).subscribe({
       next: () => {
         this._snackBar.open("Brand has been updated successfully", "Okay")
-        this._router.navigate(['/'])
+        this._router.navigate(['/dashboard/brands'])
       }
     })
   }
