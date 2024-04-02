@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="form">
+  <div id="logo">
+      <img src="../../../assets/zara2.png">
+  </div>
+  <p class="Login">LOG IN TO YOUR ACCOUNT</p>
+  <form [formGroup]="loginForm">
+      <div class="row g-3" >
+          <div class="col-md-6 ">
+              <input formControlName="email" type="email" id="email" name="email" class="form-control" placeholder="EMAIL" [class.error-border]="loginForm.get('email')?.errors && loginForm.get('email')?.touched">
+              <div *ngIf="loginForm.get('email')?.errors && loginForm.get('email')?.touched" class="p-1 small">
+                  <div class="error-container">
+                    
+                  <span class="error" *ngIf="loginForm.get('email')?.getError('required')">Required field</span>
+                  <span class="error" *ngIf="loginForm.get('email')?.getError('email')">Enter a valid email address</span>
+                  </div>
+              </div>
+
+              <input formControlName="password" type="password" id="password" name="password" class="form-control" placeholder="PASSWORD" [class.error-border]="loginForm.get('password')?.errors && loginForm.get('password')?.touched">
+              <div *ngIf="loginForm.get('password')?.errors && loginForm.get('password')?.touched" class="p-1 small">
+                  <div class="error-container">
+                    
+                  <span class="error" *ngIf="loginForm.get('password')?.getError('required')">Required field</span>
+                  <span class="error" *ngIf="loginForm.get('password')?.getError('pattern')">Enter a valid password</span>
+                  </div>
+                 
+              </div>
+      <button  type="button" class="logbtn" (click)="handleForm()">Log in</button><br>
+      <button style="border: 0px; text-align: left; margin-right: 90px;" [routerLink]="['/forgetpass']">Have you forgotten your password?</button>
+    </div>
+          <div class="col-md-6 register" >
+              <p class="need-account">Need an Account? </p>
+              <button type="button" >Register</button><br>
+          </div>
+      </div>
+  </form>
+  </div>
+</div>
