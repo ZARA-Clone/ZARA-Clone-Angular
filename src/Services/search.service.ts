@@ -12,12 +12,13 @@ export class SearchService {
   getallproduct():Observable<IProduct[]>{
     return this.http.get<IProduct[]>('https://fakestoreapi.com/products')
   }
-  searchProduct(products:IProduct[],term:string):Observable <IProduct[]>{
+  searchProduct(term:string):Observable <IProduct[]>{
     return this.http
     .get<IProduct[]>(`https://fakestoreapi.com/products`)
     .pipe(
       map((products) => {
         if (!term) {
+          console.log("gggggggggggggggggggg");
           return products;
         } else {
           return products.filter((product)=>{

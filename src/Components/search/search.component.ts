@@ -19,11 +19,21 @@ constructor(private search:SearchService){}
 
 ngOnInit(): void {
  
-    this.search. getallproduct().subscribe((responseData) => {
+    this.search. getallproduct().subscribe( {
     next:(Response:any)=>{
-      console.log('products',Response.data);
-      this.products=Response.data;
+      console.log('products',Response);
+      this.products=Response;
     }
   })
+}
+ngOnChanges(): void {
+ console.log("cccccc");
+ 
+  this.search.searchProduct(this.term).subscribe((data)=>{
+console.log(data)
+this.products=data;
+
+  })
+  
 }
 }
