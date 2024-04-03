@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { IProduct } from '../../models/iproduct';
+import { IProduct } from '../../Models/iproduct';
 import { SearchService } from '../../Services/search.service';
 
 @Component({
