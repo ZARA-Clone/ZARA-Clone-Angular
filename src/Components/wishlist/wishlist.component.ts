@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { IProduct } from '../../models/iproduct';
+import { IProduct } from '../../Models/iproduct';
 import { WishlistService } from '../../Services/wishlist.service';
 
 @Component({
