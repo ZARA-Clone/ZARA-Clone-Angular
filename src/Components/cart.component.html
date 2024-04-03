@@ -1,0 +1,146 @@
+
+<!-- @for(item of cartItems ;track item.id ){
+        <div  class="card cart-card w-50 my-4" style="margin: auto;">
+          <img class="card-img w-25 h-25" [src]="item.image" style="margin: auto;">
+          <div class="card-header">
+              <h5 class="card-title">{{ item.title }}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Price: ${{ item.price }}</h6>
+            </div>
+            <div class="card-body">
+              <p class="card-text">Quantity: {{ item.rating.count }}</p>
+              <p class="card-text">Total: ${{ item.rating.count * item.price }}</p>
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-info m-2" (click)="increaseQuantity(item)">+</button>
+              <button class="btn btn-info m-2" (click)="decreaseQuantity(item)">-</button>
+              <button class="btn btn-danger m-3" (click)="removeItem(item)">x</button>
+            </div>
+          </div>
+      }}-->
+    <!--  <div class="card">
+        <div class="row">
+            <div class="col-md-8 cart">
+                <div class="title">
+                    <div class="row">
+                        <div class="col"><h4><b>Shopping Cart</b></h4></div>
+                        <div class="col align-self-center text-right text-muted">{{ cartItems.length }} items</div>
+                    </div>
+                </div>    
+                <div class="row border-top border-bottom" >
+                  @for(item of cartItems ;track item.id ){ <div class="row main align-items-center">
+                    <div class="col-2"><img class="img-fluid" [src]="item.image"></div>
+                    <div class="col">
+                        <div class="row text-muted">{{ item.title }}</div>
+                        <div class="row">{{ item.description }}</div>
+                    </div>
+                    <div class="col">
+                      <button (click)="decreaseQuantity(item)">-</button>
+                      <span class="border">{{ item.quantity }}</span>
+                      <button (click)="increaseQuantity(item)">+</button>
+                      <div>Size: {{ sizes[item.size] }}</div>
+                  </div>
+                    <div class="col">{{ item.price * item.quantity }} <button class="close" (click)="removeItem(item)">x</button></div>
+                </div>}
+
+                  
+                   
+                </div>
+              
+                <div class="back-to-shop"><a href="#">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
+            </div>
+            <div class="col-md-4 summary">
+                <div><h5><b>Summary</b></h5></div>
+                <hr>
+                <div class="row">
+                    <div class="col" style="padding-left:0;">ITEMS {{ cartItems.length }}</div>
+                    <div class="col text-right">{{ getTotalPrice()  }}</div>
+                </div>
+                <form>
+                    <p>SHIPPING</p>
+                    <select><option class="text-muted">Standard-Delivery- &euro;5.00</option></select>
+                    <p>GIVE CODE</p>
+                    <input id="code" placeholder="Enter your code">
+                </form>
+                <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                    <div class="col">TOTAL PRICE</div>
+                    <div class="col text-right">{{ getTotalPrice()  }}</div>
+                </div>
+                <button class="btn">CHECKOUT</button>
+            </div>
+        </div>
+    </div> -->  
+
+    <div class="containner" >
+      <div class="title col-12" >
+        <div class="row">
+            <div class="col"><h4><b>Shopping Cart <span style="color: rgb(138, 137, 137); font-size: 19px;">( {{ cartItems.length }} items )</span></b></h4></div>
+        </div>
+        <hr>
+      </div> 
+      <div class="cart col-8">
+          <!-- cards in cart -->
+          <div class="cardsProduct" >
+                          @for(item of cartItems ;track item.id ) { 
+                            <div class="cardProduct col-12">
+                            <button class="btn close text-danger" (click)="removeItem(item)">x</button>
+                            <button class="mark" (click)="addToWishList(item)">
+                              <i class="fas fa-bookmark"></i> 
+                            </button>
+                          <!-- <button (click)="addToWishList(item)" class="btn close text-danger">fav</button>--> 
+                            
+                         <div class="w-100 d-flex justify-content-between gap-5" >
+                          <div class="col-4 d-flex gap-3">
+                           <div class="col-9"> <img class="img-fluid" style="width:100%; height: 230px;" [src]="item.image"></div>
+                            <div class="col-1 pt-3">
+                              <div class="text-muted prodtitle fs-4">{{ item.title }}</div>
+                              <div  class="text-secondary fs-5 ">{{ item.description }}</div>          
+                          </div>
+                          </div>
+                            
+                          <div class="d-flex flex-column align-items-center justify-content-center text-center gap-4" style="padding:0px 60px;">
+                            <div class="sizes">
+                              <div class="d-flex align-items-center justify-content-center">
+                                <button (click)="decreaseQuantity(item)" class="btn addButoon" [disabled]="item.outofstockk">-</button>
+                                <span>{{ item.quantity }}</span>
+                                <button (click)="increaseQuantity(item)" class="btn addButoon"  [disabled]="item.outofstock">+</button>
+                              </div>
+                              <div>Size: {{ sizes[item.size] }}</div>
+                          </div>
+                            <div class="totalPrice text-light" style="font-weight: 500; font-size: 18px;">${{ item.price * item.quantity }}</div>
+                          </div>
+                         
+                          </div>
+                         </div>
+                          }
+         </div>
+          <!-- end of cart -->
+         <div class="back-to-shop "> <hr> <a href="#">&leftarrow;</a><span class="text-muted ps-2">Back to shop</span></div>
+      </div>
+      <div class="summary col-4">
+        <div class="summaryTitle fs-3">Summary</div>
+        <hr>
+        <div class='d-flex' >
+            <div class="col" style="padding-left:0;">ITEMS {{ cartItems.length }}</div>
+            <div class="col text-right">${{ getTotalPrice()  }}</div>
+        </div>
+        <form >
+            <label>SHIPPING</label>
+            <select><option class="text-muted">Standard-Delivery- &euro;5.00</option></select>
+       <!--  <p>GIVE CODE</p>
+            <input id="code" placeholder="Enter your code"> -->    
+        </form>
+        <div class='w-100' style="border-top: 1px solid rgba(0,0,0,.1);">
+            <div class="col">TOTAL PRICE</div>
+            <div class="col text-right">${{ getTotalPrice() }}</div>
+        </div>
+        <button class="btn text-light bg-secondary w-100">CHECKOUT</button>
+      </div>
+    </div>
+
+
+
+
+
+
+
+    
