@@ -1,0 +1,47 @@
+<section class="about-us">
+    <div class="container">
+      <h2>COMPANY</h2>
+      <p>
+        Zara is one of the largest international fashion companies. It belongs to Inditex, one of the world's largest distribution groups.
+        The customer is at the heart of our unique business model, which includes design, production, distribution and sales through our extensive retail network.
+      </p>
+      <p>
+        For more information, please visit the Inditex Group website: <a href="www.inditex.com">www.inditex.com</a>
+      </p>
+    </div>
+  </section>
+  
+  <br><br>
+  
+  <section class="join-life">
+    <div class="container">
+      <div class="form">
+        <p class="reset">JOIN OUR NEWSLETTER</p>
+        
+         
+              <input type="email" [(ngModel)]="email" (ngModelChange)="checkEmailValidity()">
+              <div *ngIf="isValidEmail">
+                <label>
+                  <input type ="checkbox" >'I have read and understand the Privacy and Cookies Policy and agree to receive personalised commercial communications from Zara by email'
+                </label>
+                <p>Section</p>
+                <div *ngFor="let item of filteredItems">
+                  
+                  <label>
+                    
+                    <input type="checkbox" [value]="item" [(ngModel)]="selectedItem" (change)="selectItem(item)">
+                    {{ item }}
+
+                  </label>
+
+                </div>
+                <button (click)="printSelectedItem()">Print Selected Item</button>
+              </div>
+          
+          
+         
+      </div>
+    </div>
+  </section> 
+  
+  
