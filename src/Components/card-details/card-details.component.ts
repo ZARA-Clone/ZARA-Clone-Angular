@@ -2,6 +2,9 @@ import { DatePipe, NgIf, formatNumber } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Stripe, StripeCardElement, StripeCardNumberElement, loadStripe } from '@stripe/stripe-js';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { CheckoutWarningComponent } from '../checkout-warning/checkout-warning.component';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-card-details',
   standalone: true,
@@ -22,7 +25,7 @@ stripePromise = loadStripe('pk_test_51OzU9vP6V1Tz8l55LKIXs6RPxoFVcstmUR4SKiWV1p1
   stripe!: Stripe;
   card!: StripeCardElement | StripeCardNumberElement;
   currentDate: Date = new Date();
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,private matdia:MatDialog, private http:HttpClient) {
     this.currentDate = new Date();
     this.cardinfo = this.fb.group({
       cardnumber: ['', [Validators.required, Validators.pattern(this.cardNumberPattern)]],
@@ -37,45 +40,8 @@ stripePromise = loadStripe('pk_test_51OzU9vP6V1Tz8l55LKIXs6RPxoFVcstmUR4SKiWV1p1
     const control = this.cardinfo.get(controlName);
     return control && control.hasError(errorType);
   }
-  async ConfirmPayment() {
-  try {
-    // Ensure that stripe is initialized
-    if (!this.stripe) {
-      const stripe = await this.stripePromise;
-      if(stripe){
-        this.stripe = stripe;
-      }
-      
-    }
-    
-    // Create token
-    const { token, error } = await this.stripe.createToken(this.card);
-    if (error) {
-      console.error('Error:', error);
-    } else {
-      const additionalData = {
-        userid: 1, // Example additional data
-        orderdate: new Date(), // Use new Date() to create a Date object
-      };
-      // Send the token and additional data to your backend for processing
-      console.log('Token:', token);
-      console.log('Additional Data:', additionalData);
-    }
-  } catch (error) {
-    console.error('Error:', error);
-  }
-}
 
-
-  formatCardNumber(event: any): void {
-    let input = event.target.value.replace(/\s/g, '');
-    if (input.length > 0) {
-        input = input.match(new RegExp('.{1,4}', 'g')).join(' ');
-    }
-    event.target.value = input;
-}
-
-  async ngOnInit() {
+    async ngOnInit() {
     const stripe = await this.stripePromise;
     const elements = stripe?.elements();
     if(elements){
@@ -83,5 +49,33 @@ stripePromise = loadStripe('pk_test_51OzU9vP6V1Tz8l55LKIXs6RPxoFVcstmUR4SKiWV1p1
     }
     this.card?.mount(this.cardElement.nativeElement);
   }
+
+async ConfirmPayment() {
+  try {
+    if (!this.stripe) {
+      const stripe = await this.stripePromise;
+      if (stripe) {
+        this.stripe = stripe;
+      }
+    }
+
+    const { token, error } = await this.stripe.createToken(this.card);
+    if (error) {
+      this.matdia.open(CheckoutWarningComponent);
+    } else {
+      const additionalData = {
+        orderdate: new Date(), // Use new Date() to create a Date object
+      };
+
+      // Send the token and additional data to your backend for processing
+      this.http.post('https://localhost:7248/api/Checkout/process-payment', { token, additionalData })
+      .subscribe(response => {
+
+      });
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
 
 }
