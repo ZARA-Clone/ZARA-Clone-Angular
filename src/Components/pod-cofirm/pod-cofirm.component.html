@@ -6,9 +6,9 @@
         <div class="p-1">ITEMS</div>
     </div>
     <div class="orderimgs">
-        <img class="shippingimg" src="https://static.zara.net/assets/public/b249/9b02/233d4e78bb1f/a0316855c395/02320187800-p/02320187800-p.jpg?ts=1706803193364&w=224">
-        <img class="shippingimg" src="https://static.zara.net/assets/public/b249/9b02/233d4e78bb1f/a0316855c395/02320187800-p/02320187800-p.jpg?ts=1706803193364&w=224">
-        <img class="shippingimg" src="https://static.zara.net/assets/public/b249/9b02/233d4e78bb1f/a0316855c395/02320187800-p/02320187800-p.jpg?ts=1706803193364&w=224">
+        @for(product of products ; track product){
+            <img class="shippingimg" src="product">
+        }
     </div>
 </div>
 <div class="footer">

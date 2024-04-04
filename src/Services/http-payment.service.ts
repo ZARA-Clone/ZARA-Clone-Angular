@@ -9,6 +9,6 @@ export class HttpPaymentService {
 
   constructor(private http:HttpClient) { }
   GetOrderDetails():Observable<any>{
-    return this.http.get<any>('');
+    return this.http.get<any>('https://localhost:7248/api/Checkout/cartcontent');
   }
 }

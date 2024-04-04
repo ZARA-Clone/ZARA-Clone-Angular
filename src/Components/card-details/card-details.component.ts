@@ -5,6 +5,7 @@ import { Stripe, StripeCardElement, StripeCardNumberElement, loadStripe } from '
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { CheckoutWarningComponent } from '../checkout-warning/checkout-warning.component';
 import { HttpClient } from '@angular/common/http';
+import { HttpPaymentService } from '../../Services/http-payment.service';
 @Component({
   selector: 'app-card-details',
   standalone: true,
@@ -25,7 +26,11 @@ stripePromise = loadStripe('pk_test_51OzU9vP6V1Tz8l55LKIXs6RPxoFVcstmUR4SKiWV1p1
   stripe!: Stripe;
   card!: StripeCardElement | StripeCardNumberElement;
   currentDate: Date = new Date();
-  constructor(private fb: FormBuilder,private matdia:MatDialog, private http:HttpClient) {
+  products:any[]=[];
+  constructor(private fb: FormBuilder,private matdia:MatDialog, private http:HttpClient,private httppayment:HttpPaymentService) {
+     this.httppayment.GetOrderDetails().subscribe((p)=>{
+      this.products=p;
+     })
     this.currentDate = new Date();
     this.cardinfo = this.fb.group({
       cardnumber: ['', [Validators.required, Validators.pattern(this.cardNumberPattern)]],
@@ -35,6 +40,8 @@ stripePromise = loadStripe('pk_test_51OzU9vP6V1Tz8l55LKIXs6RPxoFVcstmUR4SKiWV1p1
       years: ['', Validators.required]
     });
   }
+
+  
 
   getIsError(controlName: string, errorType: string) {
     const control = this.cardinfo.get(controlName);

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HttpPaymentService } from '../../Services/http-payment.service';
 
 @Component({
   selector: 'app-pod-cofirm',
@@ -7,6 +8,16 @@ import { Component } from '@angular/core';
   templateUrl: './pod-cofirm.component.html',
   styleUrl: './pod-cofirm.component.css'
 })
-export class PODCOFIRMComponent {
-ConfirmPayment(){}
+export class PODCOFIRMComponent implements OnInit {
+  constructor(private httppayment:HttpPaymentService){}
+  ngOnInit(): void {
+    this.httppayment.GetOrderDetails().subscribe((p)=>{
+      this.products=p;
+    })
+  }
+  products:any[]=[];
+  
+ConfirmPayment(){
+  
+}
 }
