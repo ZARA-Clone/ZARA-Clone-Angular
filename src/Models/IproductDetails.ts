@@ -6,5 +6,6 @@ export interface IproductDetails{
     description:string,
     discount?:number,
     sizes:SizeQuantity[],
-    images:string[]
+    images:string[],
+    brandId:number
 }

@@ -10,10 +10,22 @@ import { IproductBrowse } from '../Models/IproductBrowse';
 export class HttpProductService {
 
   constructor(private http: HttpClient) { }
-  GetProductByBrandId(brandid:number):Observable<IproductBrowse[]>{
-    return this.http.get<IproductBrowse[]>(`https://localhost:7248/api/Products/brand/${brandid}`);
+  
+  GetProductByBrandId(brandId: number): Observable<IproductBrowse[]> {
+    return this.http.get<IproductBrowse[]>(`https://localhost:7248/api/Products/brand/${brandId}`);
   }
-  GetProductById(id:number|undefined): Observable<IproductDetails>{
+  
+  GetProductById(id: number | undefined): Observable<IproductDetails> {
     return this.http.get<IproductDetails>(`https://localhost:7248/api/Products/${id}`);
+  }
+  
+  AddToCart(productId: number, size: number): Observable<any> {
+    return this.http.post<any>(`https://localhost:7248/api/Cart/AddToCart`,{productId:productId,size:size});
+  }
+  AddToWishList(productId: number):Observable<any> {
+    return this.http.post<any>('https://localhost:7248/api/WishList/add',productId);
+  }
+  removeFromWishList(productId: number):Observable<any>{
+    return this.http.post<any>('https://localhost:7248/api/WishList/delete',productId);
   }
 }

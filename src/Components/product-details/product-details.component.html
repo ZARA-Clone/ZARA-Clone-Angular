@@ -1,5 +1,6 @@
 <head>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
 
 <!-- Product Details -->
@@ -18,7 +19,6 @@
         We work with monitoring programmes to ensure compliance with our social, environmental and health and safety standards for our products. To assess compliance, we have developed a programme of audits and continuous improvement 
         We work with monitoring programmes to ensure compliance with our social, environmental and health and safety standards for our products. To assess compliance, we have developed a programme of audits and continuous improvement 
         We work with monitoring programmes to ensure compliance with our social, environmental and health and safety standards for our products. To assess compliance, we have developed a programme of audits and continuous improvement 
-
       </div>
       <div class="combineddiv">
                 <div class="product-img2">
@@ -61,7 +61,7 @@
         </div>
       <div class="product-action">
         <div class="info p-3">
-          <div class="bookmark" (click)="AddToWishList()" (click)="ToggleWishList2()">
+          <div class="bookmark" (click)="AddToWishList(product.id)" (click)="ToggleWishList2()">
             @if(addedtoWishlist2){
               <i class="fa-solid fa-bookmark"></i>
             }
@@ -96,45 +96,14 @@
     </div>
 </div>
 
-
-
-
-     
-
     <div class="addbutton" [ngClass]="{'addbutton2' : selectedSize!=''}" (click)="AddToCart()">ADD</div>
   </div>
-  <div class="contact-us p-2" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-comment m-2"></i>Chat</div>
+  <!--CONTACT-->
+  <div class="contact-us p-2"><i class="fa-solid fa-comment m-2"></i>Contact</div>
   <div class="contact-us2 p-2"><i class="fa-solid fa-comment m-2"></i></div>
-
-
-  <!--Pop up-->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Email</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="mb-3">
-            <label for="message-text" class="col-form-label" aria-placeholder="Message">Message</label>
-            <textarea class="form-control" id="message-text"></textarea>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="msgbtn">Send message</button>
-      </div>
-    </div>
   </div>
-</div>
-<!--Pop up-->
+  <!--CONTACT-->
 
-</div>
 
 <!--product-details-->
 
@@ -148,23 +117,23 @@
     <li>
     <div class="imgandadd">
       <div class="image-container">
-        <img style="cursor: pointer;" src="{{p.imgUrl}}">
+        <img (click)="RedirectToProductDetails(p.id)" style="cursor: pointer;" src="{{p.imgUrl}}">
         <div class="sizing-container" id="sizing-container" appClickOutside (clickOutside)="hideDiv(p)" [ngClass]="{'sizing-container2':p.showDetails}">
           
       <div class="row">
     <div class="col-sm-6">
-        <div class="size-box2" (click)="AddToCartDirect(p);" [ngClass]="{'selected': selectedSize === 'S', 'disabled': !isAvailable(p, 0)}" (click)="isAvailable(p, 0) ? selectSize('S') : null">S</div>
+        <div class="size-box2" (click)="AddToCartDirect(0);" [ngClass]="{'selected': selectedSize === 'S', 'disabled': !isAvailable(p, 0)}" (click)="isAvailable(p, 0) ? selectSize('S') : null">S</div>
     </div>
     <div class="col-sm-6">
-        <div class="size-box2" (click)="AddToCartDirect(p);" [ngClass]="{'selected': selectedSize === 'M', 'disabled': !isAvailable(p, 1)}" (click)="isAvailable(p, 1) ? selectSize('M') : null">M</div>
+        <div class="size-box2" (click)="AddToCartDirect(1);" [ngClass]="{'selected': selectedSize === 'M', 'disabled': !isAvailable(p, 1)}" (click)="isAvailable(p, 1) ? selectSize('M') : null">M</div>
     </div>
 </div>
 <div class="row">
     <div class="col-sm-6">
-        <div class="size-box2" (click)="AddToCartDirect(p);" [ngClass]="{'selected': selectedSize === 'L', 'disabled': !isAvailable(p, 2)}" (click)="isAvailable(p, 2) ? selectSize('L') : null">L</div>
+        <div class="size-box2" (click)="AddToCartDirect(2);" [ngClass]="{'selected': selectedSize === 'L', 'disabled': !isAvailable(p, 2)}" (click)="isAvailable(p, 2) ? selectSize('L') : null">L</div>
     </div>
     <div class="col-sm-6">
-        <div class="size-box2" (click)="AddToCartDirect(p);" [ngClass]="{'selected': selectedSize === 'XL', 'disabled': !isAvailable(p, 3)}" (click)="isAvailable(p, 3) ? selectSize('XL') : null">XL</div>
+        <div class="size-box2" (click)="AddToCartDirect(3);" [ngClass]="{'selected': selectedSize === 'XL', 'disabled': !isAvailable(p, 3)}" (click)="isAvailable(p, 3) ? selectSize('XL') : null">XL</div>
     </div>
 </div>
 
@@ -178,10 +147,10 @@
       <div class="productname" style="display: inline-block;"><a>{{p.name}}</a></div>
       <div class="bookmarkalso" (click)="ToggleWishList(p)">
         @if(p.wishlist){
-          <i class="fa-solid fa-bookmark"></i>
+          <div (click)="RemoveFromWishList(p.id)"><i class="fa-solid fa-bookmark"></i></div>
         }
         @else {
-          <i class="fa-regular fa-bookmark"></i>
+          <div (click)="AddToWishList(p.id);"><i class="fa-regular fa-bookmark"></i></div>
         }
         </div>
       <div>{{p.price | egp}}</div>
