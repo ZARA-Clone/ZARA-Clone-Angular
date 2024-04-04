@@ -18,24 +18,27 @@
       <div class="form">
         <p class="reset">JOIN OUR NEWSLETTER</p>
         
-         
-              <input type="email" [(ngModel)]="email" (ngModelChange)="checkEmailValidity()">
+           
+              <input type="email" [(ngModel)]="email"  [(ngModel)]="inputData" (ngModelChange)="checkEmailValidity()">
               <div *ngIf="isValidEmail">
                 <label>
-                  <input type ="checkbox" >'I have read and understand the Privacy and Cookies Policy and agree to receive personalised commercial communications from Zara by email'
+                  <input type ="checkbox" required >'I have read and understand the Privacy and Cookies Policy and agree to receive personalised commercial communications from Zara by email'
                 </label>
-                <p>Section</p>
+                <p>SECTIONS</p>
                 <div *ngFor="let item of filteredItems">
                   
                   <label>
                     
-                    <input type="checkbox" [value]="item" [(ngModel)]="selectedItem" (change)="selectItem(item)">
+                    <input type="radio" required [value]="item" [(ngModel)]="selectedItem" (change)="selectItem(item)">
+                    
                     {{ item }}
 
                   </label>
 
                 </div>
-                <button (click)="printSelectedItem()">Print Selected Item</button>
+                <!-- <button (click)="printSelectedItem()">SUBSCRIBE</button> -->
+               
+                <button (click)="printInputData()">Print Data</button>
               </div>
           
           

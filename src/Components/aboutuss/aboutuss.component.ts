@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-aboutuss',
@@ -19,6 +20,9 @@ export class AboutussComponent {
   printClicked: boolean = false;
   selectedItem: string = '';
   isButtonClicked: boolean = false;
+  inputData:string='';
+
+  constructor(private router:Router){}
 
   checkEmailValidity() {
     this.isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email);
@@ -35,7 +39,7 @@ export class AboutussComponent {
 
   getFilteredItems(email: string): string[] {
 
-    return ['Item 1', 'Item 2', 'Item 3'];
+    return ['Woman', 'Man', 'Kids' , 'Beauty'];
   }
 
   selectItem(item: string): void {
@@ -49,5 +53,9 @@ export class AboutussComponent {
   printSelectedItems(): void {
     this.selectedItemList = Object.keys(this.selectedItems).filter(key => this.selectedItems[key]);
     this.printClicked = true;
+  }
+
+  printInputData() {
+    this.router.navigate(['/confirmfemail'], { queryParams: { data: this.inputData } });
   }
 }
