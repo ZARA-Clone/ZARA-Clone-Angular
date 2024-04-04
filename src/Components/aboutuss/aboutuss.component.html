@@ -1,11 +1,12 @@
 <section class="about-us">
     <div class="container">
-      <h2>COMPANY</h2>
-      <p>
-        Zara is one of the largest international fashion companies. It belongs to Inditex, one of the world's largest distribution groups.
-        The customer is at the heart of our unique business model, which includes design, production, distribution and sales through our extensive retail network.
+      <h5>Company</h5>
+      <p class="headerparg">
+        Zara is one of the largest international fashion companies. It belongs to Inditex, one of the world's largest distribution groups.<br><br>
+        The customer is at the heart of our unique business model, which includes design, production, distribution and sales through<br>
+         our extensive retail network.
       </p>
-      <p>
+      <p class="headerparg">
         For more information, please visit the Inditex Group website: <a href="www.inditex.com">www.inditex.com</a>
       </p>
     </div>
@@ -16,10 +17,10 @@
   <section class="join-life">
     <div class="container">
       <div class="form">
-        <p class="reset">JOIN OUR NEWSLETTER</p>
+        <p class="email">JOIN OUR NEWSLETTER</p>
         
            
-              <input type="email" [(ngModel)]="email"  [(ngModel)]="inputData" (ngModelChange)="checkEmailValidity()">
+              <input type="email" [(ngModel)]="email"  [(ngModel)]="inputData" (ngModelChange)="checkEmailValidity()" placeholder="ENTER YOUR EMAIL ADDRESS HERE">
               <div *ngIf="isValidEmail">
                 <label>
                   <input type ="checkbox" required >'I have read and understand the Privacy and Cookies Policy and agree to receive personalised commercial communications from Zara by email'
@@ -29,7 +30,7 @@
                   
                   <label>
                     
-                    <input type="radio" required [value]="item" [(ngModel)]="selectedItem" (change)="selectItem(item)">
+                    <input class="items" type="radio" [value]="item" [(ngModel)]="selectedItem" (change)="selectItem(item)" required >
                     
                     {{ item }}
 
@@ -38,7 +39,7 @@
                 </div>
                 <!-- <button (click)="printSelectedItem()">SUBSCRIBE</button> -->
                
-                <button (click)="printInputData()">Print Data</button>
+                <button class="subbtn" (click)="printInputData()">SUBSCRIBE</button>
               </div>
           
           
