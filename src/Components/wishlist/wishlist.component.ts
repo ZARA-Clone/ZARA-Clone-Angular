@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { IProduct } from '../../Models/iproduct';
+
 import { WishlistService } from '../../Services/wishlist.service';
+import { IProduct } from '../../Models/iproduct';
 
 @Component({
   selector: 'app-wishlist',
