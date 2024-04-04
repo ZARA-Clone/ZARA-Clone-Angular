@@ -18,12 +18,12 @@ export class SearchService {
     .pipe(
       map((products) => {
         if (!term) {
-          console.log("gggggggggggggggggggg");
           return products;
         } else {
           return products.filter((product)=>{
             let titlematch= product.title&& product.title.toLowerCase().includes(term.toLowerCase());
             let categorymatch= product.category&&product.category.toLowerCase().includes(term.toLowerCase());
+            return titlematch || categorymatch;
           })
         
         }

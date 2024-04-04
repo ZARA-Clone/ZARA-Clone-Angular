@@ -15,25 +15,28 @@ export class SearchComponent {
  products:IProduct[]=[]
   term:string=''
   data: IProduct[] = [];
-constructor(private search:SearchService){}
+constructor(private _search:SearchService){}
 
 ngOnInit(): void {
  
-    this.search. getallproduct().subscribe( {
+    this._search. getallproduct().subscribe( {
     next:(Response:any)=>{
       console.log('products',Response);
       this.products=Response;
     }
   })
 }
-ngOnChanges(): void {
- console.log("cccccc");
- 
-  this.search.searchProduct(this.term).subscribe((data)=>{
-console.log(data)
-this.products=data;
 
-  })
-  
+search():void{
+
+this._search.searchProduct(this.term).subscribe((response)=>{
+
+console.log('product',response)
+
+this.products=response;
+
+})
 }
+  
+
 }

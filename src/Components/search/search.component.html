@@ -1,8 +1,8 @@
-<input class="form-control mb-4" placeholder="Search" [(ngModel)]="term" />
+<input class="form-control mb-4" placeholder="Search" [(ngModel)]="term"(ngModelChange)="search()"/>
 <div class="container">
-    <!-- @if(products.length==0){
+    @if(products.length==0){
     <h3>No products matches you search critria</h3>
-    } -->
+    }
     
 @for (product of products ;track product.id){
 <div class="card text-center m-3" style="width: 23rem;">
