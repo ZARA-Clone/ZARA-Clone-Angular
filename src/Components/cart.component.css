@@ -1,0 +1,155 @@
+
+  body{
+    background: #ddd;
+    min-height: 100vh;
+    vertical-align: middle;
+    display: flex;
+    font-family: sans-serif;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.card{
+    margin: auto;
+    max-width: 950px;
+    width: 97%;
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 1rem;
+    border: transparent;
+}
+
+.cart{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.summary{
+    background-color: #0e0808;
+    border-radius: 15px;
+    padding: 40px;
+    color: rgb(195, 191, 191);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+}
+.back-to-shop  {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.main{
+    margin: 0;
+    padding: 2vh 0;
+    width: 100%;
+}
+
+.close{
+    margin-left: auto;
+    font-size: 20px;
+    line-height: 10px;
+    font-weight: 500;
+    border: 0px;
+}
+.close:focus {
+    border: 0px !important;
+}
+label {
+    margin-bottom: 10px;
+}
+img{
+    width: 3.5rem;
+}
+.sizes{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+select{
+    border: 1px solid rgba(0, 0, 0, 0.137);
+    padding: 10px;
+    outline: none;
+    width: 100%;
+    background-color: rgb(247, 247, 247);
+}
+input{
+    border: 1px solid rgba(0, 0, 0, 0.137);
+    padding: 1vh;
+    margin-bottom: 4vh;
+    outline: none;
+    width: 100%;
+    background-color: rgb(247, 247, 247);
+}
+input:focus::-webkit-input-placeholder
+{
+      color:transparent;
+}
+
+
+ #code{
+    background-image: linear-gradient(to left, rgba(255, 255, 255, 0.253) , rgba(255, 255, 255, 0.185)), url("https://img.icons8.com/small/16/000000/long-arrow-right.png");
+    background-repeat: no-repeat;
+    background-position-x: 95%;
+    background-position-y: center;
+}
+
+
+
+.containner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: start;
+    padding: 50px 100px;
+}
+.cardsProduct {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    padding-right: 35px;
+}
+.cardProduct {
+    box-shadow: 1px 1px 8px 1px rgba(190, 190, 190, 0.691);
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.addButoon {
+    background-color: #dddddd7e;
+    border-radius: 30%;
+    margin: 0px 10px;
+    width: 20px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.totalPrice {
+    background-color: black;
+    padding: 10px 25px;
+    border-radius: 12px;
+}
+.prodtitle , .summaryTitle{
+    font-weight: 500;
+}
+.summaryTitle {
+  text-shadow: 2px 2px 6px rgba(142, 142, 142, 0.679);
+}
+.mark {
+    background-color: white; 
+    color: black; 
+    padding: 5px 10px; 
+    cursor: pointer; 
+    border: none; 
+}
+
+.mark{
+    align-self: flex-end;
+}

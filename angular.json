@@ -20,6 +20,8 @@
             "tsConfig": "tsconfig.app.json",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
+              "node_modules/@fortawesome/fontawesome-free/css/all.css",
+              "@angular/material/prebuilt-themes/indigo-pink.css",
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "@angular/material/prebuilt-themes/pink-bluegrey.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
@@ -91,5 +93,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "1126a973-02ca-47c3-afd3-76434284c78b"
   }
 }

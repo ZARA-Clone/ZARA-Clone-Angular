@@ -1,0 +1,73 @@
+
+<div class="containerr">
+  <div class="registerText col-sm-12 col-md">
+   <div class="title"> Register To our  Fashion Store </div>
+   <div class="subtitle">We Have Been Working to create the new version of our fashion store. it comes with alot of features check it out now</div>
+    <button class="btn btn-secondary col-5 shopbutton">Go To Shop</button>
+  
+  </div>
+  <form class="col-sm-12 col-md" (ngSubmit)="onSubmit(signupform)" #signupform="ngForm"  >
+    <h4 class="formtitle">PERSONAL DETAILS</h4>
+      <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" class="form-control" id="Name" [(ngModel)]="Name"  name="name" placeholder="enter your name" required #username="ngModel"  pattern="{{ namePattern }}"  >
+        </div>
+
+        @if(username.invalid&&username.dirty&&username.touched){
+          <span class="invalid-msg"> username is required</span>
+        }
+        
+        <div class="form-group">
+         <label for="password">Password:</label>
+         <input type="password" class="form-control" id="Password" [(ngModel)]="Password"  name="password" placeholder="enter password" required #password="ngModel"   pattern="{{ passwordPattern }}">
+        </div>
+  
+  @if(password.invalid&&password.dirty&&password.touched){ <span class="invalid-msg"> Password is required</span>}
+       
+  
+  
+        <div class="form-group">
+          <label for="Email">Email:</label>  
+          <input type="Email" class="form-control" id="Email" [(ngModel)]="Email" name="Email" placeholder="Enter email"   #email="ngModel"  required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+      </div>
+  @if(email.invalid&& email.dirty&& email.touched){<span class="invalid-msg">Please Enter  a valid Email</span>}
+  
+  
+      
+         <div class="form-group">
+          <label for="Coutntry">Country</label>
+          <select class="form-control" id="country" [(ngModel)]="SelectedCountry" name="country"  (change)="onCountryChange()" required   [formControl]="countryControl" >
+            <option value="" disabled selected>Select a country</option>
+            <option value="Egypt">Egypt</option>
+              <option value="England">England</option>
+              <option value="Denmark">Denmark</option>
+              <option value="Canada">Canada</option>
+            </select>
+         </div>
+        
+      
+
+         <div class="form-group">
+          <label for="name">Address:</label>
+          <input type="text" class="form-control" id="Address" [(ngModel)]="Address"  name="Address" placeholder="enter your full address " required  pattern="{{ namePattern }}"  >
+        </div>
+
+
+
+         <div class="form-group">
+          <label for="telephone">Telephone Number:</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" style="min-width: 80px; min-height: 50px; border-radius: 8px 0px 0px 8px;" >{{SelectedCountryCode}}</span >
+  
+            </div>
+            <input type="text" class="form-control" id="telephone" [(ngModel)]="phone"  name="telephone" placeholder="Enter your telephone number"   #telephone="ngModel" [pattern]="getTelephonePattern()">
+          </div>
+         </div>
+         @if(telephone.invalid&&telephone.dirty &&telephone.touched){ <span class="invalid-msg"> Please Enter a valid Telephone Number</span>}
+        
+         <button type="submit" class="btn shopbutton" [disabled]="!signupform.valid || !isCountrySelected()" >Submit</button>
+  </form>
+</div>
+
+
