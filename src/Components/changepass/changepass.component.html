@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="form">
+    <p class="change">CHANGE PASSWORD</p>
+
+    <form >
+        <div class="row g-3" >
+            <div class="col-md-6 ">
+                <input formControlName="password" type="password" id="password" name="password" class="form-control" placeholder=" New Password">
+                <div *ngIf="loginForm.get('password')?.errors && loginForm.get('password')?.touched" class="p-1 small">
+                    <div class="error-container">
+                        <img src="../../../assets/erroricon2.png" alt="Error Icon" class="error-icon">
+                    <p class="error" *ngIf="loginForm.get('password')?.getError('required')">Required field</p>
+                    </div>
+                    <p class="error" *ngIf="loginForm.get('password')?.getError('pattern')"></p>
+                </div>
+     
+            </div>
+        </div>
+    </form>
+    </div>
+</div>
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">SUCCESS BASHIRAA</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus odit deserunt corporis fugit numquam
+          vitae ut eligendi eius consequatur? Commodi corporis perspiciatis eos explicabo, laudantium labore amet quam
+          quisquam dignissimos!</p>
+          <div style="text-align: center;margin: 5px;">      
+            <button class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Open Modal</button>
