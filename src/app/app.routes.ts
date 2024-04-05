@@ -1,4 +1,4 @@
-import { CartComponent } from './../Components/cart.component';
+import { CartComponent } from '../Components/cart/cart.component';
 import { Routes } from '@angular/router';
 import { WishlistComponent } from '../Components/wishlist/wishlist.component';
 import { ConfirmemailComponent } from '../Components/confirmemail/confirmemail.component';
@@ -11,19 +11,25 @@ import { PODCOFIRMComponent } from '../Components/pod-cofirm/pod-cofirm.componen
 import { RegistrationFormComponent } from '../Components/registration/registration.component';
 import { VerificationComponent } from '../Components/verification/verification.component';
 import { ConntactUsComponent } from '../Components/conntact-us/conntact-us.component';
+import { EditUserInfoComponent } from '../Components/edit-user-info/edit-user-info.component';
+import { ProductsBrowseComponent } from '../Components/products-browse/products-browse.component';
+import { LoginComponent } from '../Components/login/login.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    {path: '', redirectTo: 'home', pathMatch: 'full' },
     {path:'home' , component:HomeComponent},
     {path:'confirmfemail',component:ConfirmemailComponent },
     {path:'aboutus',component:AboutussComponent},
     {path:'wishlist',component:WishlistComponent},
-    { path: 'product/:id', component: ProductDetailsComponent, title: 'Product' },
+    {path: 'product/:id', component: ProductDetailsComponent, title: 'Product' },
     {path:'choosepayment' , component:ChoosePaymentMethodComponent},
     {path:'carddetails' , component:CardDetailsComponent},
     {path:'podconfirm' , component:PODCOFIRMComponent},
-      { path: 'registration', component:RegistrationFormComponent},
-      { path: 'verification', component:VerificationComponent },
-      {path:'Cart',component:CartComponent},
-      { path: 'contactus', component: ConntactUsComponent }
+    {path:'userinfo' , component:EditUserInfoComponent},
+    {path:'productbrowse' , component:ProductsBrowseComponent} ,
+    {path:'signin' , component:LoginComponent},
+    {path: 'registration', component:RegistrationFormComponent},
+    {path: 'verification', component:VerificationComponent },
+    {path:'cart',component:CartComponent},
+    {path: 'contactus', component: ConntactUsComponent }
     ];

@@ -1,5 +1,5 @@
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ContactUsService } from './../../services/contact-us.service';
+import { ContactUsService } from './../../Services/contact-us.service';
 import { Component } from '@angular/core';
 import { Iemail } from '../../Models/iemail';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';

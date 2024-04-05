@@ -1,4 +1,4 @@
-import { DecodingService } from './../../services/decoding.service';
+import { DecodingService } from './../../Services/decoding.service';
 import { Component, NgModule } from '@angular/core';
 import { FormControl, FormControlName, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { UserService } from '../../services/user-service.service';
 import { Iuserdata } from '../../Models/iuserdata';
+import { UserService } from '../../Services/user-service.service';
 
 
 @Component({

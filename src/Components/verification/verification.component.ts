@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { BrowserModule } from '@angular/platform-browser';
 import {MatSnackBar }from '@angular/material/snack-bar'
-import { UserService } from '../../services/user-service.service';
+import { UserService } from '../../Services/user-service.service';
 
 
 @Component({

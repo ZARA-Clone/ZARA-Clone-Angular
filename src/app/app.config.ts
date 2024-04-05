@@ -12,7 +12,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     importProvidersFrom(HttpClientModule),
     BrowserAnimationsModule, // Add BrowserAnimationsModule directly if needed
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
