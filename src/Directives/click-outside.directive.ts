@@ -7,20 +7,17 @@ import { Directive,ElementRef,EventEmitter,HostListener, Output } from '@angular
 export class ClickOutsideDirective {
   flag:boolean=true;
   @Output() clickOutside = new EventEmitter<Event>();
-  constructor(public elementRef: ElementRef) {
-  }
+  constructor(public elementRef: ElementRef) {}
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent): void {
     const targetElement = event.target as HTMLElement;
-    console.log(targetElement);
-
+    
     // Check if the click is outside the element
     if (targetElement && !this.elementRef.nativeElement.contains(targetElement)) {
-      this.clickOutside.emit(event);
+      this.clickOutside.emit(event);      
     }
   }
 
-}
 
 

@@ -8,12 +8,13 @@ import { ProductsBrowseComponent } from '../Components/products-browse/products-
 import { SearchComponent } from '../Components/search/search.component';
 import { AboutussComponent } from '../Components/aboutuss/aboutuss.component';
 import { WishlistComponent } from '../Components/wishlist/wishlist.component';
-
+import { ProductDetailsComponent } from '../Components/product-details/product-details.component';
+import { WarningComponent } from '../Components/warning/warning.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
- imports: [RouterOutlet,HeaderComponent,FooterComponent,HomeComponent,LoginComponent,ProductsBrowseComponent,SearchComponent,AboutussComponent],
+ imports: [RouterOutlet,HeaderComponent,FooterComponent,HomeComponent,LoginComponent,ProductsBrowseComponent,SearchComponent,AboutussComponent,ProductDetailsComponent,WarningComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
