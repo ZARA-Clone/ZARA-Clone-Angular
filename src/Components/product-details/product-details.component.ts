@@ -10,7 +10,6 @@ import { IproductBrowse } from '../../Models/IproductBrowse';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { WarningComponent } from '../warning/warning.component';
 import Swal from 'sweetalert2';
-import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
