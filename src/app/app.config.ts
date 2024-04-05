@@ -1,12 +1,11 @@
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { routes } from './app.routes';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'; // Update import
-import { TokenInterceptor } from '../Interceptor/token.interceptor'; // Correct import statement
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Correct import statement
 import { provideToastr } from 'ngx-toastr';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { TokenInterceptor } from '../Interceptor/token.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [

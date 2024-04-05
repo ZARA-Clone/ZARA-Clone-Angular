@@ -26,7 +26,6 @@
               "@angular/material/prebuilt-themes/pink-bluegrey.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
@@ -106,5 +105,4 @@
   "cli": {
     "analytics": "1126a973-02ca-47c3-afd3-76434284c78b" 
   }
-  // may be false
 }

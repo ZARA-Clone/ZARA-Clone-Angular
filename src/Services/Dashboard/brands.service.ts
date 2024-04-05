@@ -1,10 +1,10 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../environments/environment';
 import { Observable, catchError, throwError } from 'rxjs';
-import { IBrandDto } from '../../Dtos/Dashboard/Brands/IBrandDto.interface';
-import { IBrandListDto } from '../../Dtos/Dashboard/Brands/ibrand-list-dto';
-import { IBrandEditDto } from '../../Dtos/Dashboard/Brands/Ibrand-edit-dto';
+import { IBrandDto } from '../../Models/Dashboard/Brands/IBrandDto.interface';
+import { IBrandListDto } from '../../Models/Dashboard/Brands/ibrand-list-dto';
+import { IBrandEditDto } from '../../Models/Dashboard/Brands/Ibrand-edit-dto';
 
 @Injectable({
   providedIn: 'root'

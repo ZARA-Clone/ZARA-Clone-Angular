@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
-import { ProductOperationsService } from '../../../../Services/Dashboard/product-operations.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ProductOperationsService } from '../../../../Services/Dashboard/product-operations.service';
 
 @Component({
   selector: 'app-edit-image',

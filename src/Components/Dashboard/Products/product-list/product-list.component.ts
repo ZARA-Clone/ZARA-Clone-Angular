@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { ProductOperationsService } from '../../../../Services/Dashboard/product-operations.service';
 import { RouterLink } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ProductOperationsService } from '../../../../Services/Dashboard/product-operations.service';
 @Component({
   selector: 'app-product-list',
   standalone: true,

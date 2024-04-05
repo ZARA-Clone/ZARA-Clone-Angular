@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { UsersService } from '../../../../Services/Dashboard/users.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { RouterLink } from '@angular/router';
 import { PaginationInstance } from 'ngx-pagination/lib/ngx-pagination.module';
+import { UsersService } from '../../../../Services/Dashboard/users.service';
 
 @Component({
   selector: 'app-user-list',

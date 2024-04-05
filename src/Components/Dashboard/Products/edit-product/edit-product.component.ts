@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductOperationsService } from '../../../../Services/Dashboard/product-operations.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BrandsService } from '../../../../Services/Dashboard/brands.service';
-import { FormArray, FormBuilder, FormGroup, FormsModule, NgModel, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IEditProductDto } from '../../../../Dtos/Dashboard/Products/IEditProductDto.interface';
+import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { EditImageComponent } from '../edit-image/edit-image.component';
 import { NgFor } from '@angular/common';
-import { Size } from '../../../../Dtos/Dashboard/Products/IAddProductDto.interface';
+import { IEditProductDto } from '../../../../Models/Dashboard/Products/IEditProductDto.interface';
+import { ProductOperationsService } from '../../../../Services/Dashboard/product-operations.service';
+import { BrandsService } from '../../../../Services/Dashboard/brands.service';
+import { Size } from '../../../../Enums/Size';
 
 @Component({
   selector: 'app-edit-product',

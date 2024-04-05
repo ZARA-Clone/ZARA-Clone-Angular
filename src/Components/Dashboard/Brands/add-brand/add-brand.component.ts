@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BrandsService } from '../../../../Services/Dashboard/brands.service';
-import { IBrandDto } from '../../../../Dtos/Dashboard/Brands/IBrandDto.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { BrandsService } from '../../../../Services/Dashboard/brands.service';
+import { IBrandDto } from '../../../../Models/Dashboard/Brands/IBrandDto.interface';
 
 @Component({
   selector: 'app-add-brand',

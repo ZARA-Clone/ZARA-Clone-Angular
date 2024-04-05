@@ -1,10 +1,10 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AddProductDto } from '../../Dtos/Dashboard/Products/IAddProductDto.interface';
-import { environment } from '../../../environments/environment';
+import { AddProductDto } from '../../Models/Dashboard/Products/IAddProductDto.interface';
+import { environment } from '../../environments/environment';
 import { Observable, catchError, throwError } from 'rxjs';
-import { IEditProductDto } from '../../Dtos/Dashboard/Products/IEditProductDto.interface';
-import { IProductsListDto } from '../../Dtos/Dashboard/Products/IProductsList.interface';
+import { IEditProductDto } from '../../Models/Dashboard/Products/IEditProductDto.interface';
+import { IProductsListDto } from '../../Models/Dashboard/Products/IProductsList.interface';
 
 @Injectable({
   providedIn: 'root'

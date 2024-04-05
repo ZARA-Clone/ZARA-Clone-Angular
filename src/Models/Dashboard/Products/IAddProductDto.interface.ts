@@ -14,8 +14,8 @@ export class ProductSize {
 }
 
 export enum Size {
-    small = 1,
-    medium = 2,
-    large = 3,
-    xLarge = 4
+    small = 0,
+    medium = 1,
+    large = 2,
+    xLarge = 3
 }

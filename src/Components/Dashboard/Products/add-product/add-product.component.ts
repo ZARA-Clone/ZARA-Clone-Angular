@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductOperationsService } from '../../../../Services/Dashboard/product-operations.service';
 import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AddProductDto, Size, ProductSize } from '../../../../Dtos/Dashboard/Products/IAddProductDto.interface';
 import { Router } from '@angular/router';
-import { BrandsService } from '../../../../Services/Dashboard/brands.service';
 import { NgFor } from '@angular/common';
+import { AddProductDto, ProductSize, Size } from '../../../../Models/Dashboard/Products/IAddProductDto.interface';
+import { ProductOperationsService } from '../../../../Services/Dashboard/product-operations.service';
+import { BrandsService } from '../../../../Services/Dashboard/brands.service';
 
 @Component({
   selector: 'app-add-product',

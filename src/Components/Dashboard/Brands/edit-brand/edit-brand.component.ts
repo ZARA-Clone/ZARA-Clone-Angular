@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BrandsService } from '../../../../Services/Dashboard/brands.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { IBrandEditDto } from '../../../../Dtos/Dashboard/Brands/Ibrand-edit-dto';
+import { IBrandEditDto } from '../../../../Models/Dashboard/Brands/Ibrand-edit-dto';
+import { BrandsService } from '../../../../Services/Dashboard/brands.service';
 
 @Component({
   selector: 'app-edit-brand',
