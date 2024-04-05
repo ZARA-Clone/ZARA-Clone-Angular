@@ -47,22 +47,13 @@ export const routes: Routes = [
     { path: 'registration', component: RegistrationFormComponent },
     { path: 'verification', component: VerificationComponent },
     { path: 'Cart', component: CartComponent },
+    { path: 'contactus', component: ConntactUsComponent },
+    { path: 'userinfo', component: EditUserInfoComponent },
+    { path: 'productbrowse', component: ProductsBrowseComponent },
+    { path: 'signin', component: LoginComponent },
+    { path: 'registration', component: RegistrationFormComponent },
+    { path: 'verification', component: VerificationComponent },
+    { path: 'cart', component: CartComponent },
     { path: 'contactus', component: ConntactUsComponent }
 ];
-    {path: '', redirectTo: 'home', pathMatch: 'full' },
-    {path:'home' , component:HomeComponent},
-    {path:'confirmfemail',component:ConfirmemailComponent },
-    {path:'aboutus',component:AboutussComponent},
-    {path:'wishlist',component:WishlistComponent},
-    {path: 'product/:id', component: ProductDetailsComponent, title: 'Product' },
-    {path:'choosepayment' , component:ChoosePaymentMethodComponent},
-    {path:'carddetails' , component:CardDetailsComponent},
-    {path:'podconfirm' , component:PODCOFIRMComponent},
-    {path:'userinfo' , component:EditUserInfoComponent},
-    {path:'productbrowse' , component:ProductsBrowseComponent} ,
-    {path:'signin' , component:LoginComponent},
-    {path: 'registration', component:RegistrationFormComponent},
-    {path: 'verification', component:VerificationComponent },
-    {path:'cart',component:CartComponent},
-    {path: 'contactus', component: ConntactUsComponent }
-    ];
+
