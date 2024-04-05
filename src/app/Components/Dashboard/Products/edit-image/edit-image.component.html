@@ -1,0 +1,41 @@
+<div class="container-fluid">
+    <div class="mt-5">
+        <input type="file" name="file" id="file" multiple accept="image/*" max="5" (change)="onFileSelected($event)" />
+        <div>
+            <h2 class="text-center">New Images</h2>
+            <hr>
+            <div class="image-grid">
+                @for (item of _data.newUrls; track $index) {
+                <div class="image-card">
+                    <div class="image-wrapper">
+                        <img [src]="item" alt="product Image" />
+                        <button class="btn btn-danger" (click)="removeNewImage(item)">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+        <div>
+            <h2 class="text-center">Old Images</h2>
+            <hr>
+            <div class="image-grid">
+                @for (item of _data.imageUrls; track $index) {
+                <div class="image-wrapper">
+                    <div class="image-card">
+                        <img [src]="item" alt="Product Image" />
+                        <button class="btn btn-danger" (click)="removeOldImage(item)">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+        <div class="text-end mt-3 mb-3">
+            <button class="btn btn-secondary" (click)="_dialogRef.close()">Cancel</button>
+            <button class="btn btn-primary mx-2" (click)="saveChanges()">Save</button>
+        </div>
+    </div>
+</div>

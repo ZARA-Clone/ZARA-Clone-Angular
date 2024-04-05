@@ -1,0 +1,22 @@
+<div class="container">
+    <h3 class="title text-center mt-3">Edit Product</h3>
+    <form [formGroup]="brandForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" class="form-control" formControlName="name" />
+        </div>
+        <div class="row">
+            <label>Category:</label>
+            <select name="category" id="category" class="form-select" formControlName="categoryId" required>
+                <option value="0">Select category</option>
+                <option value="1">Man</option>
+                <option value="2">Women</option>
+                <option value="3">Kids</option>
+            </select>
+        </div>
+        <div class="mt-3">
+            <button class="btn btn-secondary" type="reset">Cancel</button>
+            <button class="btn btn-primary mx-2" type="submit">Create</button>
+        </div>
+    </form>
+</div>

@@ -10,6 +10,7 @@ import { HeaderComponent } from '../Components/header/header.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
+
 export class AppComponent {
   title = 'Grad-Project'; 
 }

@@ -1,0 +1,44 @@
+<div class="container-fluid my-3">
+    <div class="grid grid-cols-12 gap-6 mt-5 ">
+        <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
+            <button class="btn btn-primary shadow-md mr-2 lightcolor" routerLink="/dashboard/addProduct">Add New
+                Product</button>
+        </div>
+        <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+            <table class="table table-report -mt-2">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Product Name</th>
+                        <th>description</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (product of products | paginate: {
+                    id: "products-pagination",
+                    itemsPerPage: pageSize,
+                    currentPage: pageIndex,
+                    totalItems: totalCount
+                    }; track product.id; let i = $index) {
+                    <tr>
+                        <td>{{product.id}}</td>
+                        <td>{{product.name}}</td>
+                        <td>{{product.description}}</td>
+                        <td>{{product.price}}</td>
+                        <td>
+                            <button class="btn btn-warning mx-2" routerLink="edit/{{product.id}}">Edit</button>
+                            <button class="btn btn-danger" (click)="delete(product.id)">Delete</button>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<pagination-controls [responsive]=" true" boundary-links="true" [autoHide]="true" (pageChange)="onPageChange($event)"
+    id="products-pagination" class="text-center" [maxSize]="9">
+</pagination-controls>
