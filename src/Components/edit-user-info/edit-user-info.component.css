@@ -1,0 +1,63 @@
+.categories_btn{
+  margin-left: 180px;
+  margin-top: 10px;
+}.btn-css{
+  background-color:white;
+color: black;
+border: 1px solid black;
+text-decoration: none;
+cursor: pointer;
+}.usernamestyle{
+  margin-left: 180px;
+  margin-bottom: 20px;
+}.linkstyling{
+  margin-left: 180px;
+  margin-top: 50px;
+color: #000;
+  cursor: pointer;  
+}.invalid-msg{
+  color: red;
+  font-size: 12px;
+}.linkstyling:hover{
+color: gray;
+}.containerstyle{
+  margin-left: 180px;
+  margin-right: 180px;
+  margin-bottom: 20px;
+}
+.data{
+    display: block;
+    width: 100%;
+    margin-top: 23px;
+    margin-left: -49px;
+}.PHONEDATA{
+    display: block;
+    width: 100%;
+    margin-top: 23px;
+    margin-left: -56px;
+}.PASSWORDDATA{
+    display: block;
+    width: 100%;
+    margin-top: 23px;
+    margin-left: -85px;
+}.custom-input {
+    border: none; /* Remove border */
+    border-radius: 0; /* Remove border-radius */
+    border-bottom: 1px solid black; /* Add bottom border */
+    outline: none !important; /* Remove outline */
+    box-shadow: none !important;
+    width: 80%;
+    
+  }.custom-label {
+    color: grey; /* Change the color to your desired color */
+  }.malek{
+    width: 80%;
+    cursor: pointer;
+    background: white;
+    padding: 5px;
+  }.malek:enabled:hover{
+    color: gray;
+  }.malek:enabled:active{
+    color: white;
+    background: #000;
+  }
