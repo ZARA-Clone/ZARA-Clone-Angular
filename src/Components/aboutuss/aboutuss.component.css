@@ -15,6 +15,10 @@ color: #666;
 font-size: 14px;
 }
 
+.section{
+
+margin-top: 20px;    
+}
 a{
     color:rgb(50, 46, 46) ;
     text-decoration: underline;
@@ -60,6 +64,7 @@ button:hover {
 
    margin: 20px;
    color: #332f2f;
+   margin-left: 4px;
 }
 .subbtn{
 

@@ -1,51 +1,61 @@
 <section class="about-us">
-    <div class="container">
-      <h5>Company</h5>
-      <p class="headerparg">
-        Zara is one of the largest international fashion companies. It belongs to Inditex, one of the world's largest distribution groups.<br><br>
-        The customer is at the heart of our unique business model, which includes design, production, distribution and sales through<br>
-         our extensive retail network.
-      </p>
-      <p class="headerparg">
-        For more information, please visit the Inditex Group website: <a href="www.inditex.com">www.inditex.com</a>
-      </p>
-    </div>
-  </section>
-  
-  <br><br>
-  
-  <section class="join-life">
-    <div class="container">
-      <div class="form">
-        <p class="email">JOIN OUR NEWSLETTER</p>
-        
-           
-              <input type="email" [(ngModel)]="email"  [(ngModel)]="inputData" (ngModelChange)="checkEmailValidity()" placeholder="ENTER YOUR EMAIL ADDRESS HERE">
-              <div *ngIf="isValidEmail">
-                <label>
-                  <input type ="checkbox" required >'I have read and understand the Privacy and Cookies Policy and agree to receive personalised commercial communications from Zara by email'
-                </label>
-                <p>SECTIONS</p>
-                <div *ngFor="let item of filteredItems">
-                  
-                  <label>
-                    
-                    <input class="items" type="radio" [value]="item" [(ngModel)]="selectedItem" (change)="selectItem(item)" required >
-                    
-                    {{ item }}
+  <div class="container">
+    <h5>Company</h5>
+    <p class="headerparg">
+      Zara is one of the largest international fashion companies. It belongs to Inditex, one of the world's largest distribution groups.<br><br>
+      The customer is at the heart of our unique business model, which includes design, production, distribution and sales through<br>
+       our extensive retail network.
+    </p>
+    <p class="headerparg">
+      For more information, please visit the Inditex Group website: <a href="www.inditex.com">www.inditex.com</a>
+    </p>
+  </div>
+</section>
 
-                  </label>
+<br><br>
 
-                </div>
-                <!-- <button (click)="printSelectedItem()">SUBSCRIBE</button> -->
-               
-                <button class="subbtn" (click)="printInputData()">SUBSCRIBE</button>
-              </div>
-          
-          
+<section class="join-life">
+  <div class="container">
+    <div class="form">
+      <p class="email">JOIN OUR NEWSLETTER</p>
+      
          
-      </div>
+            <input type="email" [(ngModel)]="email"  [(ngModel)]="inputData" (ngModelChange)="checkEmailValidity()" placeholder="ENTER YOUR EMAIL ADDRESS HERE">
+            <div *ngIf="isValidEmail">
+              <label>
+                <input type ="checkbox" required (change)="ToogleTerms()" >'I have read and understand the Privacy and Cookies Policy and agree to receive personalised commercial communications from Zara by email'
+              </label>
+              <p class="section">SECTIONS</p>
+              <div *ngFor="let item of filteredItems">
+                
+                <label>
+                  
+                  <input class="items" type="radio" [value]="item" [(ngModel)]="selectedItem" (change)="[selectItem(item),SetSelected()]"  required >
+                  
+                  {{ item }}
+                </label>
+
+              </div>              
+              <button class="subbtn" (click)="checkInputs()">SUBSCRIBE</button>
+              <!-- <button class="subbtn" (click)="printInputData()">SUBSCRIBE</button> -->
+            </div>
+        
+        
+       
     </div>
-  </section> 
+  </div>
+</section>
+
+<p-dialog header="Error" [(visible)]="showErrorDialog" [modal]="true" [style]="{ width: '50vw' }">
+  <p>
+    Please fill in all required fields.
+  </p>
+</p-dialog>
+
+<p-dialog header="Terms and Conditions" [(visible)]="showTermsDialog" [modal]="true" [style]="{ width: '50vw' }">
+  <p>
+    You must accept the terms and conditions to proceed.
+  </p>
+</p-dialog>
   
   
