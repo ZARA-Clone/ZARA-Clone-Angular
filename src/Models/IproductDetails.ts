@@ -1,4 +1,5 @@
 import { SizeQuantity } from "./SizeQuaintity"
+
 export interface IproductDetails{
     id:number
     name:string,
