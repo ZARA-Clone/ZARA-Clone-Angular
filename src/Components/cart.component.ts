@@ -82,6 +82,7 @@ increaseQuantity(item: Icart): void {
     } else {
       this.mat.open("out of stock", 'close', { duration: 2000 });
       item.outofstock = true;
+      
     }
   });
 }
@@ -98,7 +99,7 @@ decreaseQuantity(item: Icart): void {
       }
       // Product is available, decrease quantity
       item.quantity--;
-
+      item.outofstock = false;
       // Check authentication status before updating quantity in the database
       // if (this.decodin.isUserAuthenticated()) {
       //   // User is authenticated, get the user ID
