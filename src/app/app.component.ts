@@ -7,6 +7,7 @@ import { LoginComponent } from '../Components/login/login.component';
 import { ProductsBrowseComponent } from '../Components/products-browse/products-browse.component';
 import { SearchComponent } from '../Components/search/search.component';
 import { AboutussComponent } from '../Components/aboutuss/aboutuss.component';
+import { WishlistComponent } from '../Components/wishlist/wishlist.component';
 
 
 @Component({
