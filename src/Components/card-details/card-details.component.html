@@ -1,0 +1,34 @@
+<div class="main-content">
+    <h5 class="m-5">ENTER YOUR CARD DETAILS</h5>
+<form [formGroup]="cardinfo">
+    <div class="roweone m-5">
+        <div #cardElement class="one">
+            <input formControlName="cardnumber" class="textbox" type="tel" inputmode="numeric"
+        autocomplete="cc-number" maxlength="19"
+        placeholder="XXXX XXXX XXXX XXXX" name="cardnumber">
+        </div>
+    </div>
+</form>
+<div style="height: 50px;"></div>
+<h5 class="m-5">SHIPPING DETAILS</h5>
+<div class="mainwrrapper m-5">
+    <div class="p-3">
+        <div>{{currentDate | date:'mediumDate'}}</div>
+        <div class="p-1">{{products.length}} ITEMS</div>
+    </div>
+    <div class="orderimgs">
+        @for(product of products ; track product){
+        <img class="shippingimg" src="product">
+        }
+    </div>
+</div>
+</div>
+
+<div class="footer">
+    <div></div>
+    <div></div>
+    <div class="total-price"><b>Total Price : 2900 EGP</b></div>
+    <div class="button-container" (click)="ConfirmPayment();">
+        <button type="button">CONFIRM PAYMENT</button>
+    </div>
+</div>

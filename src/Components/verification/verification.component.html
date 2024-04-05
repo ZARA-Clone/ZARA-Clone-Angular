@@ -1,0 +1,13 @@
+<div class="containerr">
+  
+<form (ngSubmit)="verifyCode()" class="col-sm-12 col-lg-6">
+  <div class="form-group">
+    <label for="name" class="title">Enter validation code</label>
+    <input type="text" class="form-control" id="enteredcode" [(ngModel)]="enteredcode" placeholder="Enter the code" name="enteredcode">
+  </div>
+  <button type="submit" class="btncolor">Submit</button>
+  
+  <button (click)="resendcodee()" class="linkk">resend the code again?</button>
+</form>
+</div>
+  

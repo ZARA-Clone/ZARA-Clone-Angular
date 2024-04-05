@@ -1,0 +1,64 @@
+
+<head>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<section class="d-flex justify-content-between mb-4">
+    <div class="categories_btn mt-3">
+        <div><a href="#" class="btn-css p-1 m-1 ">dresses</a> <a href="#" class="btn-css p-1 m-1">blouses</a></div>
+    </div>
+    <div class="layout_container mt-3">
+        <div class="layoutdesign ">
+            <i (click)="firstlayout()"  class="bi bi-layout-split iconstyle m-2"></i>
+             <i (click)="secondlayout()"  class="bi bi-grid iconstyle m-1"></i>
+        </div>
+    </div>
+</section>
+<ul class="product-list" [ngClass]="{'secondlayoutul':!value}">
+  @for(p of newlife; track p.id){
+    <li  [ngClass]="{'secondlayoutli':!value}">
+    <div class="imgandadd">
+      <div class="image-container" [ngClass]="{'showundeline':!value}">
+        <img src="{{p.imgUrl}}">
+        <div class="sizing-container" id="sizing-container" appClickOutside (clickOutside)="hideDiv(p)" [ngClass]="{'sizing-container2':p.showDetails}">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="size-box2">S</div>
+            </div>
+            <div class="col-sm-6">
+              <div class="size-box2">M</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="size-box2">L</div>
+            </div>
+            <div class="col-sm-6">
+              <div class="size-box2">XL</div>
+            </div>
+          </div>
+        </div>
+        <div class="plus-icon" (click)="toggleSizes($event,p)" [ngClass]="{'secondlayout':!value}"><i class="fa-solid fa-plus"></i></div>
+      </div>
+    </div>
+    <div class="nameandprice  p-2" [ngClass]="{'secondlayout':!value}">
+      <div class="productname" style="display: inline-block;"><a>{{p.name}}</a></div>
+      <div class="bookmarkalso" (click)="ToggleWishList(p)">
+        @if(p.wishlist){
+          <i class="fa-solid fa-bookmark"></i>
+        }
+        @else {
+          <i class="fa-regular fa-bookmark"></i>
+        }
+        </div>
+      <div class="productprice">{{p.price}}</div>
+    </div>
+  </li>
+
+  }
+
+</ul>
+
+  
+
+
