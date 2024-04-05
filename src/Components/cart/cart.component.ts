@@ -1,11 +1,11 @@
 
-import { ConfirmationDialogComponentComponent } from './confirmation-dialog-component/confirmation-dialog-component.component';
+import { ConfirmationDialogComponentComponent } from '../confirmation-dialog-component/confirmation-dialog-component.component';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Component, OnInit } from '@angular/core';
-import { Icart } from '../Models/icart';
-import { CartServiceService } from '../services/cart-service.service';
-import { DecodingService } from '../services/decoding.service';
+import { Icart } from '../../Models/icart';
+import { CartServiceService } from '../../Services/cart-service.service';
+import { DecodingService } from '../../Services/decoding.service';
 import { MatDialog } from '@angular/material/dialog';
 
 
