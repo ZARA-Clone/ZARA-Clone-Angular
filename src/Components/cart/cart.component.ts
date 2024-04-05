@@ -29,10 +29,10 @@ export class CartComponent implements OnInit{
      outofstock:boolean=false
   
   sizes: Sizes = {
-    1: 'Small',
-    2: 'Medium',
-    3: 'Large',
-    4: 'Extra Large'
+    0: 'Small',
+    1: 'Medium',
+    2: 'Large',
+    3: 'Extra Large'
   };
 
 
