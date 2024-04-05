@@ -1,0 +1,85 @@
+
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+
+.container {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    position: relative;
+}
+
+.reset{
+    margin: 25px 2px;
+    color: #666;  
+    margin-bottom: 10px;
+}
+h4{
+    font-size: 12px;
+    color: #666;  
+    margin-left: 3px;
+    margin-bottom: 30px;
+    margin-top: 0px;
+}
+
+.conbtn{
+    display: block;
+    margin:60px 3px;
+}
+
+input[type="email"] {
+    width: 70%;
+    padding: 10px;
+   margin-left: 5px;
+   padding-left: 5px;
+    margin-bottom: 15px;
+   border: none;
+   border-bottom: 1px solid #666;
+   display: block;
+   text-transform: uppercase;
+   
+}
+button {
+    background-color: white;
+    color:rgb(122, 122, 122);
+    width: 70%;
+    padding: 5px 20px;
+    border: 1px solid rgb(122, 122, 122) ;
+    border-radius: 3px;
+    cursor: pointer;
+    margin: 5px;
+    text-transform: uppercase;
+}
+button:hover {
+    color:lightgray;
+}
+input::placeholder{
+    transition: all 0.6s;
+    color: rgb(201, 195, 195);
+}
+input:focus::placeholder{
+    opacity: 0;
+
+}
+@media(max-width:767px){
+    .register{
+        position: static;
+    }
+}
+.error-border {
+    border-color: red !important;
+}
+.error{
+    color: red;
+    margin: -9px 0px;
+    font-size:10px;
+  
+}
+.error-container {
+    display: flex;
+    align-items: center;
+}
