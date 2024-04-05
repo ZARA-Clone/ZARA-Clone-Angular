@@ -1,0 +1,66 @@
+form{
+    display: flex;
+   
+ 
+    border-radius: 4px;
+   padding: 50px;
+width: 30%;
+
+background-color: rgba(0, 0, 0, 0.52);
+
+
+flex-direction: column;
+box-shadow: 1px 1px 2px 2px;
+color: white;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+
+   
+}
+.form-group{
+    margin:6px;
+
+   
+}
+.btncolor{
+    background-color: white;
+margin-top: 11px;
+    padding: 5px;
+    width: 98%;
+
+margin-left: 5px;
+    border: 1px solid;
+    border-radius: 3px;
+}
+.btncolor:hover{
+   color: rgba(48, 44, 44, 0.343);
+  
+}
+
+
+.container {
+    
+    background-image:url("/src/assets/Hairstyles\ &\ Beauty.jpeg");
+  
+   
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+  }
+
+
+.invalid-msg{
+    color: rgb(163, 70, 70);
+    font-size: 12px;
+}
+img{
+width: 100%;
+height:100%;
+
+}
+
+::ng-deep body{overflow: hidden;
+
+}

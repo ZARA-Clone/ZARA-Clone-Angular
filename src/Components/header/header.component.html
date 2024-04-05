@@ -1,0 +1,82 @@
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  </head>
+  
+  
+  <!-- HEADDER -->
+  <header class=" p-3 text-dark " [ngClass]="{'stylingforHome': stylingforHOME }" >
+  
+    <div class="d-flex flex-wrap align-items-start justify-content-between">
+      <div class="bar" (click)="toggleDropdown()">
+        @if(!showDropdown){
+          <i class="fa-solid fa-bars"></i>
+        }
+        @else {<i class="fa-solid fa-xmark"></i>}
+      </div>
+      <div (click)="HomePage()">
+          <img
+            class="logo"
+            src="https://www.logo.wine/a/logo/Zara_(retailer)/Zara_(retailer)-Logo.wine.svg"
+            [ngStyle]="{ 'border': showDropdown ? '1px solid black' : 'none', 'background-color': showDropdown ? 'white' : 'transparent' }"
+            />
+            @if(showDropdown){
+                <div class="dropdown-content">
+  
+                  <div class="headers p-3"><span class="m-3" routerLinkActive="active-route">WOMAN</span><span routerLinkActive="active-route">MAN</span><span class="m-3" routerLinkActive="active-route">KIDS</span></div>
+                  <div>
+                    <ul class="bg-white">
+                      <li>BESTSELLER</li>
+                      <li>TROUSERS</li>
+                      <li>JEANS</li>
+                      <li>SHIRTS</li>
+                      <li>LINEN</li>
+                      <li>T-SHIRTS</li>
+                      <li>HOODIES</li>
+                      <li>CARGO</li>
+                      <li>POLO SHIRTS</li>
+                      <li>SHORTS</li>
+                      <li>JACKETS</li>
+                    </ul>
+                  </div>
+                </div>
+              }
+      </div>
+  <div></div>
+  
+      <div class="col-sm-3">
+        <form class="d-flex">
+          <input
+            type="search"
+            class="form-control form-control-dark me-2"
+            placeholder="Search"
+            id="searching"
+          />
+        </form>
+      </div>
+      <div class="burger" data-bs-toggle="dropdown"><i class="fa-solid fa-bars"></i></div>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">LOGIN</a>
+          <a class="dropdown-item" href="#">HELP</a>
+          <a class="dropdown-item" href="#">SHOPPING BAG(0)</a>
+      </div>
+      <div class="tags">
+        <ul
+          class="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-row"
+          style="list-style: none; margin-top: 0"
+        >
+          <li class="nav-item mx-2">
+            <a class="nav-link active" aria-current="page" href="#">LOGIN</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link active" aria-current="page" href="#">HELP</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link active" aria-current="page" href="#"
+              >SHOPPING BAG(0)</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+  <!-- HEADERRRRR -->

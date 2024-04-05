@@ -1,0 +1,182 @@
+<head><link
+    href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+  />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"> </head>
+  <!-- Footer -->
+  <footer class="bg-body-tertiary text-center">
+      <!-- grid container -->
+      <div class="container p-5">
+  <!-- Section: Form -->
+  <section class="">
+      <form action="">
+        <!--Grid row for JOIN OUR NEWSLETTER label-->
+        <div class="row">
+          <!--Grid column for label-->
+          <div class="col-auto">
+            <!-- Text above input with larger font size -->
+            <label for="form5Example24" class="pt-5 pb-4" style="font-size: 1.5rem;">JOIN OUR NEWSLETTER </label>
+          </div>
+          <!--Grid column for label-->
+        </div>
+        <!--Grid row for JOIN OUR NEWSLETTER label-->
+    
+        <!--Grid row for email input-->
+        <div class="row align-items-center">
+          <!--Grid column for input-->
+          <div class="col-md-5 col-12">
+            <!-- Custom styled email input -->
+            <div data-mdb-input-init class="mb-4">
+              <!-- Add custom CSS classes to style the input -->
+              <div class="form-floating">
+                <input type="email"(keyup)="viewButton()" id="form5Example24" class="form-control custom-input" placeholder=" " />
+                <label for="form5Example24" class="custom-label">ENTER YOUR EMAIL ADDRESS HERE</label>
+              </div>
+            </div>
+          </div>
+          <!--Grid column for input-->
+        </div>
+        <!--Grid row for email input-->
+    
+        <!--Grid row for submit button-->
+        <div class="row ">
+          <!--Grid column for button-->
+          <div class="col-5">
+            <!-- Submit button -->
+            <button id="submitButton" (click)="sendMail()" data-mdb-ripple-init type="button" class="malek p-2 mb-4" [ngClass]="{'malektwo': value}">
+              SUBSCRIBE                   
+            </button>
+          </div>
+          <!--Grid column for button-->
+        </div>
+        <!--Grid row for submit button-->
+      </form>
+    </section>
+    <!-- Section: Form -->
+    
+    
+  
+        <!-- Section: Social media -->
+        <section class="mb-5 mt-5">
+          <div class=" text-start">
+              <!-- Social media links aligned to the left -->
+              <a data-mdb-ripple-init class="custom-link " href="https://www.tiktok.com/@zara" target="_blank">TIKTOK</a>
+              <a data-mdb-ripple-init class="custom-link m-1 d-inline" href="https://www.instagram.com/zara" target="_blank">INSTAGRAM</a>
+              <a data-mdb-ripple-init class="custom-link m-1 d-inline" href="https://www.facebook.com/zara" target="_blank">FACEBOOK</a>
+              <a data-mdb-ripple-init class="custom-link m-1 d-inline" href="https://twitter.com/ZARA?_sp=fcf21b73-d3b1-4cab-aae8-dd8a64b8d52f.1711136845100" target="_blank">X</a>
+              <a data-mdb-ripple-init class="custom-link m-1 d-inline" href="https://www.pinterest.com/zara" target="_blank">PINTEREST</a>
+              <a data-mdb-ripple-init class="custom-link m-1 d-inline" href="https://www.youtube.com/user/zaraofficialchannel" target="_blank">YOUTUBE</a>
+          </div>
+          
+        </section>
+        <!-- Section: Social media -->
+    
+        
+    
+        <!-- Section: Links -->
+        <section class="">
+          <!--Grid row-->
+          <div class="row">
+            <!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+              <h5 class="text-uppercase">HELP</h5>
+    
+              <ul class="list-unstyled mb-0">
+                <li>
+                  <a class="text-body" href="#!">CONTACT US</a>
+                </li>
+                
+                <li>
+                  <a class="text-body" href="#!">SHIPPING</a>
+                </li>
+              </ul>
+            </div>
+            <!--Grid column-->
+    
+            <!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+              <h5 class="text-uppercase">FOLLOW US</h5>
+    
+              <ul class="list-unstyled mb-0">
+              <li><a class="text-body" href="https://www.tiktok.com/@zara" target="_blank">TIKTOK</a></li>
+              <li><a class="text-body" href="https://www.instagram.com/zara" target="_blank">INSTAGRAM</a></li>
+              <li><a class="text-body" href="https://www.facebook.com/zara" target="_blank">FACEBOOK</a></li>
+              <li><a class="text-body" href="https://twitter.com/ZARA?_sp=fcf21b73-d3b1-4cab-aae8-dd8a64b8d52f.1711136845100" target="_blank">X</a></li>
+              <li><a class="text-body" href="https://www.pinterest.com/zara" target="_blank">PINTEREST</a></li>
+              <li><a class="text-body" href="https://www.youtube.com/user/zaraofficialchannel" target="_blank">YOUTUBE</a></li>
+              <li><a class="text-body" href="https://open.spotify.com/user/zara" target="_blank">SPOTIFY</a></li>
+              </ul>
+            </div>
+            <!--Grid column-->
+    
+            <!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+              <h5 class="text-uppercase">COMPANY</h5>
+    
+              <ul class="list-unstyled mb-0">
+                <li>
+                  <a class="text-body" href="#!">ABOUT US
+                      
+                      
+                      </a>
+                </li>
+                
+              </ul>
+            </div>
+            <!--Grid column-->
+    
+            <!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+              <h5 class="text-uppercase">POLICIES</h5>
+    
+              <ul class="list-unstyled mb-0">
+                <li>
+                  <a class="text-body" href="https://static.zara.net/static//pdfs/EG/privacy-policy/privacy-policy-en_EG-20240117.pdf" target="_blank">PRIVACY POLICY
+                      </a>
+                </li>
+                <li>
+                  <a class="text-body" href="https://static.zara.net/static//pdfs/EG/terms-and-conditions/terms-and-conditions-en_EG-20221110.pdf" target="_blank">PURCHASE CONDITIONS</a>
+                </li>
+                
+              </ul>
+            </div>
+            <!--Grid column-->
+          </div>
+          <!--Grid row-->
+        </section>
+        <!-- Section: Links -->
+      </div>
+      <!-- Grid container -->
+    
+      <div class="container p-5">
+          <div class="row">
+              <div class="col text-start">
+                  <!-- EGYPT -->
+                  <div class="mb-3">
+                      <span class="text-uppercase">EGYPT</span>
+                  </div>
+              </div>
+              <div class="col text-end">
+                  <!-- Copyright -->
+                  <div class=" p-3">
+                      © ALL RIGHTS RESERVED
+                      <div class="man">
+                          <i class="fas fa-user"></i>
+                      </div>
+                      
+                  </div>
+              </div>
+          </div>
+      </div>
+      
+    </footer>
+    <!-- Footer -->
+    
+  
+   
+  
+
