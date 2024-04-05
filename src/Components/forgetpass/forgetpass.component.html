@@ -1,0 +1,23 @@
+
+<div class="container">
+    <div class="form">
+    <p class="reset">RESET PASSWORD</p>
+    <h4>We will send you an email with instructions on how to recover it</h4>
+    <form >
+        <div class="row g-3" >
+            <div class="col-md-6 ">
+                <input formControlName="email" type="email" id="email" name="email" class="form-control" placeholder="E-mail">
+                <div *ngIf="loginForm.get('email')?.errors && loginForm.get('email')?.touched" class="p-1 small">
+                    <div class="error-container">
+                        <img src="../../../assets/erroricon2.png" alt="Error Icon" class="error-icon">
+                    <p class="error" *ngIf="loginForm.get('email')?.getError('required')">Required field</p>
+                    <p class="error" *ngIf="loginForm.get('email')?.getError('email')">Enter a valid email address</p>
+                    </div>
+                </div>
+        <button type="button" class="conbtn">CONTINUE</button>
+            </div>
+        </div>
+    </form>
+    </div>
+</div>
+ 
