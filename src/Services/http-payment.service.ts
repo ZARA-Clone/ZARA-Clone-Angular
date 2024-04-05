@@ -11,4 +11,8 @@ export class HttpPaymentService {
   GetOrderDetails():Observable<any>{
     return this.http.get<any>('https://localhost:7248/api/Checkout/cartcontent');
   }
+  payload = { date: new Date() };
+  PayOnDelivery():Observable<any>{
+    return this.http.post<any>('https://localhost:7248/api/Checkout/Pay-On-Delivery',{ date: new Date() });
+  }
 }
