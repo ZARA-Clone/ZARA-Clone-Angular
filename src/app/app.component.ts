@@ -5,13 +5,13 @@ import { HeaderComponent } from '../Components/header/header.component';
 import { FooterComponent } from '../Components/footer/footer.component';
 import { LoginComponent } from '../Components/login/login.component';
 import { ProductsBrowseComponent } from '../Components/products-browse/products-browse.component';
-
+import { SearchComponent } from '../Components/search/search.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
- imports: [RouterOutlet,HeaderComponent,FooterComponent,HomeComponent,LoginComponent,ProductsBrowseComponent],
+ imports: [RouterOutlet,HeaderComponent,FooterComponent,HomeComponent,LoginComponent,ProductsBrowseComponent,SearchComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
