@@ -13,8 +13,7 @@ export class DataService {
     , private _response: ResponseService) { }
 
   get() {
-    // https://localhost:7248/dashborad/api/Data
-    let result = this._httpClient.get(`${environment.BASEURL}/dashborad/api/Data`)
+    let result = this._httpClient.get(`${environment.BASEURL}/dashboard/api/Data`)
     return result.pipe(
       catchError(this._response.handleError)
     )
