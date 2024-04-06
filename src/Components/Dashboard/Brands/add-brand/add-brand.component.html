@@ -5,6 +5,16 @@
             <label for="name">Name:</label>
             <input type="text" name="name" id="name" class="form-control" formControlName="name" />
         </div>
+        @if(((name?.touched) || name?.dirty )){
+        @if(name?.errors?.['required']){
+        <div class="alert alert-danger">Name is required.</div>
+        }
+        @if(name?.errors?.['minlength']){
+        <div class="alert alert-danger">
+            Name must be at least 3 characters long.
+        </div>
+        }
+        }
         <div class="row">
             <label>Category:</label>
             <select name="category" id="category" class="form-select" formControlName="categoryId" required>
@@ -14,9 +24,14 @@
                 <option value="3">Kids</option>
             </select>
         </div>
+        @if(categoryId?.invalid && categoryId?.touched){
+        <div class="alert alert-danger">
+            Category must be selected
+        </div>
+        }
         <div class="mt-3">
-            <button class="btn btn-secondary" type="reset">Cancel</button>
-            <button class="btn btn-primary mx-2" type="submit">Create</button>
+            <a class="btn btn-secondary" href="/dashboard/brands">Cancel</a>
+            <button class="btn btn-primary mx-2" type="submit" [disabled]="brandForm.invalid">Create</button>
         </div>
     </form>
 </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { EditImageComponent } from '../edit-image/edit-image.component';
@@ -46,11 +46,11 @@ export class EditProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.productForm = this._formBuilder.group({
-      name: ["", [Validators.required]],
+      name: ["", [Validators.required, Validators.minLength(3)]],
       description: ["", Validators.maxLength(500)],
       price: [0, [Validators.required]],
       discount: [0, [Validators.required]],
-      brandId: [this.selectedBrand, [Validators.required]],
+      brandId: [this.selectedBrand, [this.validateSelectedOption]],
       imageUrls: [[]],
       sizes: this._formBuilder.array([], Validators.required)
     })
@@ -68,6 +68,26 @@ export class EditProductComponent implements OnInit {
     this.showSizes()
   }
 
+  validateSelectedOption(control: AbstractControl) {
+    const selectedValue = control.value;
+    return selectedValue > 0 ? null : { invalidOption: true };
+  }
+
+  get name() {
+    return this.productForm.get('name')
+  }
+  get description() {
+    return this.productForm.get('description')
+  }
+  get price() {
+    return this.productForm.get('price')
+  }
+  get brandId() {
+    return this.productForm.get('brandId')
+  }
+  get discount() {
+    return this.productForm.get('discount')
+  }
   get sizes() {
     return this.productForm.get('sizes') as FormArray;
   }
