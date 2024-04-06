@@ -22,6 +22,7 @@ import { BrandListComponent } from '../Components/Dashboard/Brands/brand-list/br
 import { AddBrandComponent } from '../Components/Dashboard/Brands/add-brand/add-brand.component';
 import { EditBrandComponent } from '../Components/Dashboard/Brands/edit-brand/edit-brand.component';
 import { DataComponent } from '../Components/Dashboard/data/data.component';
+import { UserListComponent } from '../Components/Dashboard/Users/user-list/user-list.component';
 
 export const routes: Routes = [
     {
@@ -33,6 +34,7 @@ export const routes: Routes = [
             { path: 'addbrand', component: AddBrandComponent, title: 'Add Brand' },
             { path: 'brands/edit/:id', component: EditBrandComponent, title: 'Edit Brand' },
             { path: 'data', component: DataComponent, title: 'Data' },
+            { path: 'users', component: UserListComponent, title: 'Uers' },
         ]
     },
     { path: '', redirectTo: 'home', pathMatch: 'full' },

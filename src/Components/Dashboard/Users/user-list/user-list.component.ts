@@ -24,7 +24,6 @@ export class UserListComponent {
     currentPage: 1
   };
 
-
   getUsers(): void {
     this._userService.getAll().subscribe({
       next: (data) => {
