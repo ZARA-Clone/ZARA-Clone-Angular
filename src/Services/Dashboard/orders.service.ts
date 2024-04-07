@@ -5,21 +5,17 @@ import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class UsersService {
+export class OrdersService {
 
   constructor(private _httpClient: HttpClient) { }
-
-  private readonly URL = `${environment.BASEURL}/dashboard/api/users`
+  private URL = `${environment.BASEURL}/dashboard/api/orders`;
 
   getAll() {
     return this._httpClient.get(`${this.URL}`)
   }
 
-  get(id: string) {
-    return this._httpClient.get(`${this.URL}/${id}`)
+  getOrderDetails(orderId: number) {
+    return this._httpClient.get(`${this.URL}/${orderId}`)
+  }
 
-  }
-  delete(id: string) {
-    return this._httpClient.delete(`${this.URL}/${id}`)
-  }
 }

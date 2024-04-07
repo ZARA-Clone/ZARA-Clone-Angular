@@ -2,28 +2,23 @@
     <div class="row">
         @if(user){
         <div>
-            <h2 class="text-uppercase">{{user.userName}}</h2>
-            <span>{{user.email}}</span>
+            UserName:<h2 class="text-uppercase">{{user.userName}}</h2>
+            Email: <h4>{{user.email}}</h4>
         </div>
         <div class="p-3">
-            <table class="table">
-                <thead class="thead-dark">
+            <table class="table table-hover">
+                <thead>
                     <tr>
-                        <th scope="col">No.</th>
-                        <th scope="col">Order Date</th>
-                        <th scope="col">Order Status</th>
-                        <th scope="col">Deliverd Date</th>
-                        <th scope="col">Actions</th>
+                        <th>No.</th>
+                        <th>Order Date</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @for (item of user.orders; track $index) {
                     <tr>
+                        <td>{{item.id}}</td>
                         <td>{{item.orderDate}}</td>
-                        <td>{{item.orderStatus}}</td>
-                        <td>{{item.deliverdDate}}</td>
-                        <td><a class="btn btn-info" routerLink="/dashboard/orders/{{item.id}}">Details</a>
-                        </td>
                     </tr>
                     }
                 </tbody>

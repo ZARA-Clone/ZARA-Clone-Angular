@@ -18,14 +18,8 @@ export class UserDetailsComponent implements OnInit {
   ngOnInit(): void {
     this._route.paramMap.subscribe((param) => {
       this.id = param.get('id');
-      this._usersService.get(this.id).subscribe({
-        next: (user) => {
-          this.getUser(this.id)
-          console.log(user)
-        },
-        error: (error) => {
-          console.log(error);
-        }
+      this._usersService.get(this.id).subscribe((user) => {
+        this.getUser(this.id)
       });
     })
   }
@@ -33,6 +27,7 @@ export class UserDetailsComponent implements OnInit {
   getUser(id: string) {
     this._usersService.get(id).subscribe({
       next: (data) => {
+        console.log(data)
         this.user = data
       }
       , error: (error) => {

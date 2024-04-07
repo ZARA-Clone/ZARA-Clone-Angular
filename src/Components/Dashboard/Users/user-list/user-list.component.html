@@ -1,42 +1,35 @@
 <div class="container-fluid my-3">
     <div class="row">
-        <div>
-            <button class="btn btn-primary" routerLink="/dashboard/addProduct">Add User</button>
-        </div>
-        <div class="row">
-            <table class="table table-hover mt-4">
-                <caption>List of Users</caption>
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>User Name</th>
-                        <th>Country</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (user of users; track $index)
-                    {
-                    <tr>
-                        <td>{{user.id}}</td>
-                        <td>{{user.userName}}</td>
-                        <td>{{user.country}}</td>
-                        <td>{{user.email}}</td>
-                        <td>{{user.phoneNumber}}</td>
-                        <td>
-                            <button class="btn btn-info mx-2" routerLink="details/{{user.id}}">Details</button>
-                            <button class="btn btn-danger" (click)="deleteUser(user.id)">Delete</button>
-                        </td>
-                    </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+        <table class="table table-hover mt-4">
+            <caption>List of Users</caption>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Country</th>
+                    <th>Address</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (user of users; track $index)
+                {
+                <tr>
+                    <td>{{user.id}}</td>
+                    <td>{{user.userName}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.phoneNumber}}</td>
+                    <td>{{user.country}}</td>
+                    <td>{{user.address}}</td>
+                    <td>
+                        <button class="btn btn-info mx-2" routerLink="details/{{user.id}}">Details</button>
+                        <button class="btn btn-danger" (click)="deleteUser(user.id)">Delete</button>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>
-
-<!-- <pagination-controls [responsive]=" true" boundary-links="true" [autoHide]="true" (pageChange)="onPageChange($event)"
-    id="users-pagination" class="text-center" [maxSize]="9">
-</pagination-controls> -->
