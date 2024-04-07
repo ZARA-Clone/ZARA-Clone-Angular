@@ -15,7 +15,7 @@ export class UsersService {
     return this._httpClient.get(`${this.URL}`)
   }
 
-  get(id: string) {
+  get(id: string | null) {
     return this._httpClient.get(`${this.URL}/${id}`)
 
   }

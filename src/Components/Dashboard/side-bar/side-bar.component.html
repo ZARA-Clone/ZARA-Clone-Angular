@@ -4,7 +4,7 @@
                         <ul class="nav nav-tabs flex-column">
                                 @for (item of Routes; track $index) {
                                 <li class="nav-item">
-                                        <a class="nav-link p-3" [routerLink]="item.path" routerLinkActive="active">
+                                        <a class="nav-link p-3 fs-5" [routerLink]="item.path" routerLinkActive="active">
                                                 <div><i [class]="item.icon"></i><span> {{item.title}}</span></div>
                                         </a>
                                 </li>

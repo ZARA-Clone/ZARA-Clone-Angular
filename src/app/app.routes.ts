@@ -23,10 +23,12 @@ import { AddBrandComponent } from '../Components/Dashboard/Brands/add-brand/add-
 import { EditBrandComponent } from '../Components/Dashboard/Brands/edit-brand/edit-brand.component';
 import { DataComponent } from '../Components/Dashboard/data/data.component';
 import { UserListComponent } from '../Components/Dashboard/Users/user-list/user-list.component';
+import { UserDetailsComponent } from '../Components/Dashboard/Users/user-details/user-details.component';
+import { adminGuard } from '../Guards/admin.guard';
 
 export const routes: Routes = [
     {
-        path: "dashboard", component: MainDashbordComponent, children: [
+        path: "dashboard", canActivate: [adminGuard], component: MainDashbordComponent, children: [
             { path: 'products', component: ProductListComponent, title: 'Products' },
             { path: 'addProduct', component: AddProductComponent, title: 'Add Product' },
             { path: 'products/edit/:id', component: EditProductComponent, title: 'Edit Product' },
@@ -35,6 +37,7 @@ export const routes: Routes = [
             { path: 'brands/edit/:id', component: EditBrandComponent, title: 'Edit Brand' },
             { path: 'data', component: DataComponent, title: 'Data' },
             { path: 'users', component: UserListComponent, title: 'Uers' },
+            { path: 'users/details/:id', component: UserDetailsComponent, title: 'User Details' },
         ]
     },
     { path: '', redirectTo: 'home', pathMatch: 'full' },
