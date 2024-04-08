@@ -2,7 +2,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ContactUsService } from './../../Services/contact-us.service';
 import { Component } from '@angular/core';
 import { Iemail } from '../../Models/iemail';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
 
 
 @Component({
@@ -56,6 +56,22 @@ constructor(private ContactUsService:ContactUsService,private MatSnackBar:MatSna
     );
       
 }
+
+
+
+showErrorMessages(username: NgModel): boolean {
+  return !!username && !!username.invalid && !!username.dirty && !!username.touched;
+}
+
+showPatternErrorMessage(username: NgModel): boolean {
+  return !!username && !!username.errors && !!username.errors['pattern'];
+}
+
+showRequiredErrorMessage(username: NgModel): boolean {
+  return !!username && !!username.errors && !!username.errors['required'];
+}
+
+
 
 
 

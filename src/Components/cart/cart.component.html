@@ -83,9 +83,14 @@
                           @for(item of cartItems ;track item.id ) { 
                             <div class="cardProduct col-12">
                             <button class="btn close text-danger" (click)="removeItem(item)">x</button>
-                            <button class="mark" (click)="addToWishList(item)">
-                              <i class="fas fa-bookmark"></i> 
-                            </button>
+                            <div class="mark" (click)="toggleWishlist(item)">
+                              <i [class]="geticon(item)"></i>
+                          </div>
+                          
+                      
+                             
+
+                        
                           <!-- <button (click)="addToWishList(item)" class="btn close text-danger">fav</button>--> 
                             
                          <div class="w-100 d-flex justify-content-between gap-5" >
@@ -93,7 +98,7 @@
                            <div class="col-9"> <img class="img-fluid" style="width:100%; height: 230px;" [src]="item.image"></div>
                             <div class="col-1 pt-3">
                               <div class="text-muted prodtitle fs-4">{{ item.title }}</div>
-                              <div  class="text-secondary fs-5 ">{{ item.description }}</div>          
+                                   
                           </div>
                           </div>
                             
@@ -106,7 +111,7 @@
                               </div>
                               <div>Size: {{ sizes[item.size] }}</div>
                           </div>
-                            <div class="totalPrice text-light" style="font-weight: 500; font-size: 18px;">${{ item.price * item.quantity }}</div>
+                            <div class="totalPrice text-light" style="font-weight: 500; font-size: 18px;">{{ item.price * item.quantity }}EGP</div>
                           </div>
                          
                           </div>
@@ -121,24 +126,22 @@
         <hr>
         <div class='d-flex' >
             <div class="col" style="padding-left:0;">ITEMS {{ cartItems.length }}</div>
-            <div class="col text-right">${{ getTotalPrice()  }}</div>
+            <div class="col text-right">{{ getTotalPrice()  }}EGP</div>
+            
         </div>
         <form >
             <label>SHIPPING</label>
-            <select><option class="text-muted">Standard-Delivery- &euro;5.00</option></select>
+            <select><option class="text-muted">Standard-Delivery- EGP 100.00</option></select>
        <!--  <p>GIVE CODE</p>
             <input id="code" placeholder="Enter your code"> -->    
         </form>
         <div class='w-100' style="border-top: 1px solid rgba(0,0,0,.1);">
             <div class="col">TOTAL PRICE</div>
-            <div class="col text-right">${{ getTotalPrice() }}</div>
+            <div class="col text-right">{{ getTotalPrice() }}EGP</div>
         </div>
-        <button class="btn text-light bg-secondary w-100">CHECKOUT</button>
+        <button (click)="navigatetocheckout()" class="btn text-light bg-secondary w-100">CHECKOUT</button>
       </div>
     </div>
-
-
-
 
 
 

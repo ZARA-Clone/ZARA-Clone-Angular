@@ -1,6 +1,6 @@
 import { DecodingService } from './../../Services/decoding.service';
 import { Component, NgModule } from '@angular/core';
-import { FormControl, FormControlName, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormControlName, FormsModule, NgForm, NgModel, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { Router } from '@angular/router';
 // import { EmailJSResponseStatus } from '@emailjs/browser';
@@ -25,11 +25,6 @@ export class RegistrationFormComponent  {
     
 // Call the function to get the user ID
 
-
-
-
-
-    
   }
   SelectedCountryCode:string|undefined=""
   SelectedCountry:string=""
@@ -38,7 +33,7 @@ export class RegistrationFormComponent  {
   Password: string='';
   Email!: string;
    passwordPattern = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$';
-   namePattern = '[A-Za-z]{1,32}';
+   namePattern = '[A-Za-z]{3,32}';
    zipcode:string|undefined
     countryControl = new FormControl('', Validators.required);
     Address:string=""
@@ -103,17 +98,46 @@ console.log(signupform )
   this.uerservice.setuserdata(userData);
   console.log(userData);
  
+  
     
-      // If email is unique, register the user
-      this.uerservice.checkEmailExists(userData).subscribe((isUnique: boolean) => {
-        if (!isUnique) {
+
+
+
+
+    /*  // If email is unique, register the user
+      this.uerservice.checkEmailExists(userData).subscribe((exist: boolean) => {
+        if (!exist) {
+
+
             // If email is unique, register the user
             this.uerservice.sendVerificationEmail(this.Email, verificationCode); // Assuming this is the correct method call
             this.route.navigate(['/verification']); // Use 'router' instead of 'route'
         } else {
-            this.snackbar.open("This email or the username already exists", 'close', { duration: 3000 });
+            this.snackbar.open("This email is already exists", 'close', { duration: 3000 });
         }
-    });
+    });*/
+    this.uerservice.checkNameExists(userData).subscribe((nameExists: boolean) => {
+      if (!nameExists) {
+          // If username is unique, proceed to check email
+          this.uerservice.checkEmailExists(userData).subscribe((emailExists: boolean) => {
+              if (!emailExists) {
+                  // If both username and email are unique, register the user
+                  this.uerservice.sendVerificationEmail(this.Email, verificationCode);
+                  this.route.navigate(['/verification']);
+              } else {
+                  // Email already exists
+                  this.snackbar.open("This email is already registered", 'close', { duration: 3000 });
+              }
+          });
+      } else {
+          // Username already exists
+          this.snackbar.open("This username is already exist", 'close', { duration: 3000 });
+      }
+  });
+  
+
+
+    
 }// end of onsubmit
 
 
@@ -171,12 +195,24 @@ isCountrySelected(): boolean {
 
 
 
+showErrorMessages(username: NgModel): boolean {
+  return !!username && !!username.invalid && !!username.dirty && !!username.touched;
+}
+
+showPatternErrorMessage(username: NgModel): boolean {
+  return !!username && !!username.errors && !!username.errors['pattern'];
+}
+
+showRequiredErrorMessage(username: NgModel): boolean {
+  return !!username && !!username.errors && !!username.errors['required'];
+}
 
 
 
 
-
-
+gotohome(){
+  this.route.navigate(["home"])
+}
 
 
 
