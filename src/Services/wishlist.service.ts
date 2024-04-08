@@ -10,12 +10,6 @@ export class WishlistService {
 
   constructor(private _HttpClient:HttpClient) { }
 
-  // addtowishlist(prodId:number):Observable<any>{
-  //   return this._HttpClient.post('https://fakestoreapi.com/products',{
-  //     Id:prodId,
-  //   } )
-  
-  // }
 
 
   getwishlistproduct():Observable<IProduct[]>{
@@ -26,4 +20,5 @@ export class WishlistService {
     return this._HttpClient.delete(`https://localhost:7248/api/WishList/delete?productId=${prodId}`)
   }
 
+  
 }

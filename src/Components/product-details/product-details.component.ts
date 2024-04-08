@@ -75,7 +75,7 @@ export class ProductDetailsComponent implements OnInit {
         size = 2;
       else (this.selectedSize == 'XL')
       size = 3;
-      this.httpproduct.AddToCart(5, size).subscribe((p) => {
+      this.httpproduct.AddToCart(1, size).subscribe((p) => {
         Swal.fire({
           title: "Product Added Successfully",
           showClass: {

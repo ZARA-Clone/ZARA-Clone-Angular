@@ -22,6 +22,9 @@ import { BrandListComponent } from '../Components/Dashboard/Brands/brand-list/br
 import { AddBrandComponent } from '../Components/Dashboard/Brands/add-brand/add-brand.component';
 import { EditBrandComponent } from '../Components/Dashboard/Brands/edit-brand/edit-brand.component';
 import { DataComponent } from '../Components/Dashboard/data/data.component';
+import { ForgetpassComponent } from '../Components/forgetpass/forgetpass.component';
+import { ChangepassComponent } from '../Components/changepass/changepass.component';
+import { SearchComponent } from '../Components/search/search.component';
 
 export const routes: Routes = [
     {
@@ -54,6 +57,10 @@ export const routes: Routes = [
     { path: 'registration', component: RegistrationFormComponent },
     { path: 'verification', component: VerificationComponent },
     { path: 'cart', component: CartComponent },
-    { path: 'contactus', component: ConntactUsComponent }
+    { path: 'contactus', component: ConntactUsComponent },
+    {path:'forgetpass',component:ForgetpassComponent},
+    {path:'changepass',component:ChangepassComponent},
+    {path:'search',component:SearchComponent}
+
 ];
 
