@@ -1,160 +1,170 @@
 .layoutdesign{
-    font-size: 20px;
+  font-size: 20px;
 }.categories_btn{
-    margin-left: 180px;
+  margin-left: 180px;
 }.btn-css{
-    background-color:white;
-  color: black;
-  border: 1px solid black;
-  text-decoration: none;
+  background-color:white;
+color: black;
+border: 1px solid black;
+text-decoration: none;
+cursor: pointer;
 }.layout_container{
-    margin-right: 32px;
+  margin-right: 32px;
 }.products-container {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }.card {
-    width: calc(16.666vw - 20px); /* 16.666% of viewport width minus margins */
-    
+  width: calc(16.666vw - 20px); /* 16.666% of viewport width minus margins */
+  
 }.secondlayout{
-    display: none;
+  display: none;
 }.showundeline{
-    border-bottom: 1px solid black;
+  border-bottom: 1px solid black;
 }.iconstyle{
+cursor: pointer;
+}
+/* .disabled {
+  opacity: 0.3; 
+  pointer-events: none; 
+}
+
+.selected {
+background-color: black;
+color: white;
+} */
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(198px, 1fr)); /* Adjust minmax values as needed */
+  grid-gap: 1px; /* Add some gap between grid items */
+  list-style-type: none;
+  padding: 0;
+}
+
+.product-list li {
+  display: inline-block;
+  max-width: 400px;
+  width: 100%; /* Ensure each grid item takes full width */
+}.secondlayoutul{
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+ /* Adjust minmax values as needed */
+
+}
+
+.imgandadd img {
+  width: 100%; /* Make images responsive */
+  height: auto; /* Ensure aspect ratio is maintained */
+  border: 1px solid black;
+  border-bottom: none;
+}
+
+.image-container {
+  position: relative;
+}
+
+.sizing-container {
+  background-color: white;
+  border: 1px solid black;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  display: none;
+  z-index: 1;
+  overflow-x: hidden;
+}
+
+.sizing-container2 {
+  display: block;
+}
+
+.plus-icon {
+  position: absolute;
+  font-size: 17px;
+  right: 50%;
+  bottom: 20px;
+  background-color: white;
+  border-radius: 50%;
   cursor: pointer;
 }
-.product-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(198px, 1fr)); /* Adjust minmax values as needed */
-    grid-gap: 1px; /* Add some gap between grid items */
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .product-list li {
-    display: inline-block;
-    max-width: 400px;
-    width: 100%; /* Ensure each grid item takes full width */
-  }.secondlayoutul{
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-   /* Adjust minmax values as needed */
 
+.size-box2 {
+  background-color: white;
+  border: 1px solid black;
+  text-align: center;
+  padding: 2px;
+  margin-bottom: 2px;
+  cursor: pointer;
+}
+
+.size-box2:hover {
+  background-color: lightgrey;
+}
+
+.nameandprice {
+  position: relative;
+  width: 100%;
+  border: 1px solid black;
+
+}.nameandprice div{
+  font-size: 10px ;
+  font-family: Arial, Helvetica, sans-serif;
+}.productname:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.bookmarkalso {
+  display: inline-block;
+  position: absolute;
+  right: 10px;
+  top:15px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+/* Media Query for smaller screens */
+@media screen and (max-width: 768px) {
+  .product-list {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+
+
+
+@media screen and (max-width: 1030px) {
+  .product-details {
+    display: flex;
+    flex-direction: column; /* Change flex direction to column */
+    align-items: center; /* Center items horizontally */
+  }
+
+  .combineddiv {
+    display: flex;
+    justify-content: center;
+    order: 1; /* Change order to display product-img first */
+    margin-bottom: 20px; /* Add some spacing between product-img and product-action */
   }
   
-  .imgandadd img {
-    width: 100%; /* Make images responsive */
-    height: auto; /* Ensure aspect ratio is maintained */
-    border: 1px solid black;
-    border-bottom: none;
-  }
-  
-  .image-container {
-    position: relative;
-  }
-  
-  .sizing-container {
-    background-color: white;
-    border: 1px solid black;
-    position: absolute;
-    width: 100%;
-    bottom: 0;
+  .proimgs2{
+  width: 31px;
+  height: 50px;
+}
+.prosmulimgs2 button{
+  border: none;
+}
+  .product-img{
     display: none;
-    z-index: 1;
-    overflow-x: hidden;
   }
-  
-  .sizing-container2 {
-    display: block;
+  .prosmulimgs{
+    display: none;
   }
-  
-  .plus-icon {
-    position: absolute;
-    font-size: 17px;
-    right: 50%;
-    bottom: 20px;
-    background-color: white;
-    border-radius: 50%;
-    cursor: pointer;
-  }
-  
-  .size-box2 {
-    background-color: white;
-    border: 1px solid black;
-    text-align: center;
-    padding: 2px;
-    margin-bottom: 2px;
-    cursor: pointer;
-  }
-  
-  .size-box2:hover {
-    background-color: lightgrey;
-  }
-  
-  .nameandprice {
-    position: relative;
-    width: 100%;
-    border: 1px solid black;
 
-  }.nameandprice div{
-    font-size: 10px ;
-    font-family: Arial, Helvetica, sans-serif;
-  }.productname:hover{
-    cursor: pointer;
-    text-decoration: underline;
+  .product-action {
+    order: 2; /* Change order to display product-action second */
+    width: 100%; /* Make product-action full width */
   }
-  
-  .bookmarkalso {
-    display: inline-block;
-    position: absolute;
-    right: 10px;
-    top:15px;
-    font-size: 13px;
-    cursor: pointer;
+
+  .extra-info{
+    display: none;
   }
-  
-  /* Media Query for smaller screens */
-  @media screen and (max-width: 768px) {
-    .product-list {
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-  }
-  
-  
-  
-  
-  @media screen and (max-width: 1030px) {
-    .product-details {
-      display: flex;
-      flex-direction: column; /* Change flex direction to column */
-      align-items: center; /* Center items horizontally */
-    }
-  
-    .combineddiv {
-      display: flex;
-      justify-content: center;
-      order: 1; /* Change order to display product-img first */
-      margin-bottom: 20px; /* Add some spacing between product-img and product-action */
-    }
-    
-    .proimgs2{
-    width: 31px;
-    height: 50px;
-  }
-  .prosmulimgs2 button{
-    border: none;
-  }
-    .product-img{
-      display: none;
-    }
-    .prosmulimgs{
-      display: none;
-    }
-  
-    .product-action {
-      order: 2; /* Change order to display product-action second */
-      width: 100%; /* Make product-action full width */
-    }
-  
-    .extra-info{
-      display: none;
-    }
-  }
+}

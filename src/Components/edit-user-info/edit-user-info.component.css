@@ -10,6 +10,9 @@ cursor: pointer;
 }.usernamestyle{
   margin-left: 180px;
   margin-bottom: 20px;
+}.usernamestyle p {
+  text-transform: uppercase;
+  font-weight: bold;
 }.linkstyling{
   margin-left: 180px;
   margin-top: 50px;

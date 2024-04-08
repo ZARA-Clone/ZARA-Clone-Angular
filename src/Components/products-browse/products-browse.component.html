@@ -1,11 +1,15 @@
-
 <head>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
 
 <section class="d-flex justify-content-between mb-4">
     <div class="categories_btn mt-3">
-        <div><a href="#" class="btn-css p-1 m-1 ">dresses</a> <a href="#" class="btn-css p-1 m-1">blouses</a></div>
+        <div>
+          @for(button of buttonsarr ; track button){
+            <a (click)="ClickedButton(button.id)" class="btn-css p-1 m-1 ">{{button.name}}</a>
+          }
+        </div>
     </div>
     <div class="layout_container mt-3">
         <div class="layoutdesign ">
@@ -19,22 +23,22 @@
     <li  [ngClass]="{'secondlayoutli':!value}">
     <div class="imgandadd">
       <div class="image-container" [ngClass]="{'showundeline':!value}">
-        <img src="{{p.imgUrl}}">
+        <img (click)="RedirectToProductDetails(p.id);" style="cursor: pointer;" src="{{p.imgUrl}}">
         <div class="sizing-container" id="sizing-container" appClickOutside (clickOutside)="hideDiv(p)" [ngClass]="{'sizing-container2':p.showDetails}">
           <div class="row">
             <div class="col-sm-6">
-              <div class="size-box2">S</div>
+              <div class="size-box2" (click)="AddToCartDirect(p.id,0);" [ngClass]="{'selected': selectedSize === 'S', 'disabled': !isAvailable(p, 0)}" (click)="isAvailable(p, 0) ? selectSize('S') : null">S</div>
             </div>
             <div class="col-sm-6">
-              <div class="size-box2">M</div>
+              <div class="size-box2" (click)="AddToCartDirect(p.id,1);" [ngClass]="{'selected': selectedSize === 'M', 'disabled': !isAvailable(p, 1)}" (click)="isAvailable(p, 1) ? selectSize('M') : null">M</div>
             </div>
           </div>
           <div class="row">
             <div class="col-sm-6">
-              <div class="size-box2">L</div>
+              <div class="size-box2" (click)="AddToCartDirect(p.id,2);" [ngClass]="{'selected': selectedSize === 'L', 'disabled': !isAvailable(p, 2)}" (click)="isAvailable(p, 2) ? selectSize('L') : null">L</div>
             </div>
             <div class="col-sm-6">
-              <div class="size-box2">XL</div>
+              <div class="size-box2" (click)="AddToCartDirect(p.id,3);" [ngClass]="{'selected': selectedSize === 'XL', 'disabled': !isAvailable(p, 3)}" (click)="isAvailable(p, 3) ? selectSize('XL') : null">XL</div>
             </div>
           </div>
         </div>
@@ -42,23 +46,19 @@
       </div>
     </div>
     <div class="nameandprice  p-2" [ngClass]="{'secondlayout':!value}">
-      <div class="productname" style="display: inline-block;"><a>{{p.name}}</a></div>
+      <div class="productname" (click)="RedirectToProductDetails(p.id);" style="display: inline-block;"><a>{{p.name}}</a></div>
       <div class="bookmarkalso" (click)="ToggleWishList(p)">
         @if(p.wishlist){
-          <i class="fa-solid fa-bookmark"></i>
+          <div (click)="RemoveFromWishList(p.id)"><i class="fa-solid fa-bookmark"></i></div>
         }
         @else {
-          <i class="fa-regular fa-bookmark"></i>
+          <div (click)="AddToWishList(p.id);"><i class="fa-regular fa-bookmark"></i></div>
         }
         </div>
-      <div class="productprice">{{p.price}}</div>
+      <div class="productprice">{{p.price | egp}}</div>
     </div>
   </li>
 
   }
 
 </ul>
-
-  
-
-
