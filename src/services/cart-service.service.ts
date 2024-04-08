@@ -27,7 +27,7 @@ export class CartServiceService {
 
     getCartItems(userId: string): Observable<Icart[]> {
       console.log(userId)
-      return this.http.get<Icart[]>(`${this.apiUrl}/api/Cart/${userId}`);
+      return this.http.get<Icart[]>(`${environment.BASEURL}/api/Cart/${userId}`);
     }
     
 

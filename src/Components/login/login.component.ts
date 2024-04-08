@@ -35,7 +35,7 @@ export class LoginComponent {
           console.log(roles);
           if (roles[1] === 'Admin') {
             console.log("Welcome", roles[1])
-            this._Router.navigate(['/dashboard']);
+            this._Router.navigate(['/dashboard/data']);
           }
           else {
             this._Router.navigate(['/home']);

@@ -23,7 +23,7 @@ cursor: pointer;
 }.iconstyle{
 cursor: pointer;
 }
-/* .disabled {
+.disabled {
   opacity: 0.3; 
   pointer-events: none; 
 }
@@ -31,7 +31,7 @@ cursor: pointer;
 .selected {
 background-color: black;
 color: white;
-} */
+}
 .product-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(198px, 1fr)); /* Adjust minmax values as needed */

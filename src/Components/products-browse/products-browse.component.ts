@@ -65,8 +65,9 @@ ngOnInit(): void {
     this.httpproduct.GetProductByBrandId(id).subscribe((p) => {
       this.products2 = p;
       this.newlife = this.products2.map((p: any) => ({ ...p, showDetails: false, wishlist: false }));
-
-      this.httpproduct.GetAllWishList().subscribe((wishlistProducts) => {
+      const token = localStorage.getItem('token');
+      if(token){
+        this.httpproduct.GetAllWishList().subscribe((wishlistProducts) => {
         this.wishlistProducts = wishlistProducts;
         this.newlife.forEach((product: any) => {          
           if (this.wishlistProducts.some((wishlistProduct: IproductWishList) => wishlistProduct.id === product.id)) {
@@ -74,6 +75,7 @@ ngOnInit(): void {
           }
         });
       });
+      }
     });
   });
 }

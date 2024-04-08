@@ -34,8 +34,9 @@ export class PODCOFIRMComponent implements OnInit {
   
   const userId =this.auth.extractUserIdFromToken(); 
   this.cartService.getCartItems(userId).subscribe({
-    
     next: (cartItems) => {     
+      console.log(cartItems);
+      
       this.cartItems = cartItems;
      
     },

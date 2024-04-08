@@ -38,11 +38,11 @@ constructor(private router:Router, private httpheader:HttpHeaderService,private 
       const token = localStorage.getItem('token');
       if(token){
     this.checklogging = true;
-    this.ngOnInit();
+    //this.ngOnInit();
     }
     else{
     this.checklogging = false;
-    this.ngOnInit();
+    //this.ngOnInit();
     }
     }
   });

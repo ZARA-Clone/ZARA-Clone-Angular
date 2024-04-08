@@ -45,8 +45,9 @@ ngOnInit(): void {
         this.newlife = this.products.map((p: any) => ({ ...p, showDetails: false, wishlist: false }));
       
         
-        
-        this.httpproduct.GetAllWishList().subscribe((wishlistProducts) => {
+        const token = localStorage.getItem('token');
+        if(token){
+          this.httpproduct.GetAllWishList().subscribe((wishlistProducts) => {
           this.wishlistProducts = wishlistProducts;
           this.newlife.forEach((product: any) => {          
             if (this.wishlistProducts.some((wishlistProduct: IproductWishList) => wishlistProduct.id === product.id)) {
@@ -59,6 +60,7 @@ ngOnInit(): void {
           const isInWishlist = this.wishlistProducts.some((wishlistProduct: any) => wishlistProduct.id === this.product.id);
           this.product.wishlist = isInWishlist;
         });
+        }
       });
     });
   });

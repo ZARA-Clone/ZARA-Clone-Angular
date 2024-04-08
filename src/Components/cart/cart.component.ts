@@ -127,10 +127,6 @@ decreaseQuantity(item: Icart): void {
   });
 }
 
-
-
-
-
 removeItem(item: Icart): void {
   const index = this.cartItems.findIndex(i => i.id === item.id && i.size === item.size);
   if (index !== -1) {
@@ -161,9 +157,6 @@ removeItem(item: Icart): void {
   }
 }
 
-
-  
-
 getTotalPrice(): number {
   if (!this.cartItems || this.cartItems.length === 0) {
     return 0;
@@ -175,25 +168,20 @@ getTotalPrice(): number {
   }, 0);
 }
 
-
-
-
 //--------------------------WishList--------------------------//
 
 fetchWishlistStatusForAllItems(): void {
   this.cartItems.forEach(item => {
     // Fetch wishlist status for each item
-    this.isInWishlist(item).subscribe(isInWishlist => {
-      this.wishlistStatus[item.id] = isInWishlist; // Update wishlist status for the item
-    }, error => {
+    this.isInWishlist(item).subscribe({
+      next:(isInWishlist)=>{
+        this.wishlistStatus[item.id] = isInWishlist; // Update wishlist status for the item
+    }, error:(error) => {
       console.error('Error fetching wishlist status:', error);
+    }
     });
   });
 }
-
-
-
-
 
 addToWishList(item: Icart): void {
   const userId = this.auth.extractUserIdFromToken();
@@ -208,10 +196,6 @@ addToWishList(item: Icart): void {
     );
   
 }
-
-
-
-
 
 removefromwishList(item:Icart):void{
 
@@ -252,22 +236,15 @@ toggleWishlist(item: Icart): void {
   );
 }
 
-
-
-
 isInWishlist(item: Icart): Observable<boolean> {
   const userId = this.auth.extractUserIdFromToken();
   return this.cartService.checkwish(item.id, userId);
 }
 
-
 geticon(item:Icart){
 
   return this.wishlistStatus[item.id] ? 'fa fa-bookmark fa-solid' : 'fa fa-bookmark fa-regular';
 }
-
-
-
 
 navigatetocheckout(){
   this.route.navigate(['/choosepayment']); 
