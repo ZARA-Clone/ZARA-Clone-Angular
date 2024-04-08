@@ -1,11 +1,11 @@
 <div class="container-fluid my-3">
-    <div class="grid grid-cols-12 gap-6 mt-5 ">
-        <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
-            <button class="btn btn-primary shadow-md mr-2 lightcolor" routerLink="/dashboard/addbrand">
-                Add New Brand</button>
+    <div class="row">
+        <div>
+            <button class="btn btn-primary" routerLink="/dashboard/addbrand">Add Brand</button>
         </div>
-        <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
-            <table class="table table-hover table-report -mt-2">
+        <div class="row">
+            <table class="table table-hover mt-4">
+                <caption>List of Brands</caption>
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -26,7 +26,7 @@
                         <td>{{brand.name}}</td>
                         <td>{{brand.categoryName}}</td>
                         <td>
-                            <button class="btn btn-warning mx-2" routerLink="edit/{{brand.id}}">Edit</button>
+                            <button class="btn btn-info mx-2" routerLink="edit/{{brand.id}}">Edit</button>
                             <button class="btn btn-danger" (click)="delete(brand.id)">Delete</button>
                         </td>
                     </tr>

@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import {MatSnackBar }from '@angular/material/snack-bar'
 import { UserService } from '../../Services/user-service.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class VerificationComponent implements OnInit {
    validationcode:string='';
    enteredcode:string='';
    userData: any = {};
-  constructor(private ema:UserService,private snackbar:MatSnackBar){}
+  constructor(private ema:UserService,private snackbar:MatSnackBar,private route:Router){}
 
 
   ngOnInit(): void {
@@ -42,28 +43,18 @@ export class VerificationComponent implements OnInit {
    
     
  
-    resendcodee(): void {
-      const userData = this.ema.getuserdata();
-  
-      if (userData && userData.email) {
-        const verificationCode = this.ema.generateVerificationCode();
-        this.ema.setVerificationCode(userData.email, verificationCode);
-        this.ema.sendVerificationEmail(userData.email, verificationCode);
-        console.log('New Verification Code:', verificationCode);
-        this.validationcode = verificationCode;
-      } else {
-        console.error('No user data found or email is missing.');
-       
-      }}
+    
+      
+      
     
 
-      //iwant to handle this in case of success and in case of failure //ASKK
+      //iwant to handle 
 
 
         verifyCode(): void {
         
           if (this.validationcode.trim() === this.enteredcode.trim()) {
-            // Code matches, proceed with further actions
+            // Code matches
             console.log('Verification successful');
             console.log(this.ema.getuserdata());
           
@@ -77,7 +68,7 @@ export class VerificationComponent implements OnInit {
                   this.ema.saveToken(response.token);
                 
                   this.snackbar.open("Your Account Has Been Saved", 'close', { duration: 3000 });}}
-                
+                 
                 
          ,(error)=>{
           console.error("Registration failed", error);
@@ -85,14 +76,32 @@ export class VerificationComponent implements OnInit {
          }
 
               )
+              
              
           } else {
             // Code does not match, 
-            this.snackbar.open("Sorry, You Entered a Wrong Code",'close',{duration:3000});
+            this.snackbar.open(" You Entered a Wrong Code",'close',{duration:3000});
             
           }
+
+
         }
-        
+
+
+
+        resendcodee(): void {
+          const userData = this.ema.getuserdata();
+          if (userData && userData.email) {
+            // Generate and send the new verification code
+            const verificationCode = this.ema.generateVerificationCode();
+            this.ema.setVerificationCode(userData.email, verificationCode);
+            this.ema.sendVerificationEmail(userData.email, verificationCode);
+            console.log('New Verification Code:', verificationCode);
+            this.validationcode = verificationCode;
+          } else {
+            console.error('No user data found or email is missing.');
+          }
+        }
 
         
     }

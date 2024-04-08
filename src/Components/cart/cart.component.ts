@@ -1,14 +1,18 @@
+import { AuthService } from './../../Services/auth.service';
+import { Icart } from './../../Models/icart';
 
 import { ConfirmationDialogComponentComponent } from '../confirmation-dialog-component/confirmation-dialog-component.component';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Icart } from '../../Models/icart';
+import { Component, OnInit } from '@angular/core';
 import { CartServiceService } from '../../Services/cart-service.service';
 import { DecodingService } from '../../Services/decoding.service';
 import { MatDialog } from '@angular/material/dialog';
 
-
+import { Observable } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 
 
@@ -17,16 +21,17 @@ type Sizes = {
   [key: number]: string;
 };
 @Component({
-    selector: 'app-cart',
-    standalone: true,
-    templateUrl: './cart.component.html',
-    styleUrl: './cart.component.css',
-    imports: []
+  selector: 'app-cart',
+  standalone: true,
+  imports: [FormsModule,CommonModule],
+  templateUrl: './cart.component.html',
+  styleUrl: './cart.component.css'
 })
 export class CartComponent implements OnInit{
   cartItems:Icart[]=[]
   totalPrice!: number
      outofstock:boolean=false
+     wishlistStatus: { [itemId: string]: boolean } = {};
 
   sizes: Sizes = {
     0: 'Small',
@@ -39,13 +44,16 @@ export class CartComponent implements OnInit{
 
 ngOnInit(): void {
   this.FetchApi();
+  
 }
 
 
 
-constructor(private cartService:CartServiceService , private mat:MatSnackBar ,private auth:DecodingService,private dialog: MatDialog){}
+constructor(private cartService:CartServiceService , private mat:MatSnackBar ,private auth:DecodingService,private dialog: MatDialog,private route:Router){}
 
 FetchApi(): void {
+  
+  //law fl wishlist intialize it bkza
   
   const userId =this.auth.extractUserIdFromToken(); 
   this.cartService.getCartItems(userId).subscribe({
@@ -53,6 +61,7 @@ FetchApi(): void {
     next: (cartItems) => {
      
       this.cartItems = cartItems;
+      this.fetchWishlistStatusForAllItems(); 
      
     },
     error: (error) => {
@@ -169,14 +178,45 @@ getTotalPrice(): number {
 
 
 
+//--------------------------WishList--------------------------//
+
+fetchWishlistStatusForAllItems(): void {
+  this.cartItems.forEach(item => {
+    // Fetch wishlist status for each item
+    this.isInWishlist(item).subscribe(isInWishlist => {
+      this.wishlistStatus[item.id] = isInWishlist; // Update wishlist status for the item
+    }, error => {
+      console.error('Error fetching wishlist status:', error);
+    });
+  });
+}
 
 
 
-addToWishList(item:Icart): void {
-  // Create an object containing userId and productId
 
-  const userId =this.auth.extractUserIdFromToken();
-  this.cartService.addtowishlist(item.id,userId).subscribe(
+
+addToWishList(item: Icart): void {
+  const userId = this.auth.extractUserIdFromToken();
+
+    this.cartService.addtowishlist(item.id, userId).subscribe(
+      (response) => {
+        console.log('Item added to wishlist:', response);
+      },
+      (error) => {
+        console.error('Failed to add item to wishlist:', error);
+      }
+    );
+  
+}
+
+
+
+
+
+removefromwishList(item:Icart):void{
+
+  const userId=this.auth.extractUserIdFromToken();
+  this.cartService.removefromwishlist(item.id,userId).subscribe(
     (response) => {
     
       console.log('Item added to wishlist:', response);
@@ -190,8 +230,53 @@ addToWishList(item:Icart): void {
   );
 }
 
+toggleWishlist(item: Icart): void {
+ 
+  this.isInWishlist(item).subscribe(
+    (isInWishlist) => {
+      console.log(isInWishlist)
+      if (isInWishlist) {
+       //da m3nah eno mawgoud
+        this.removefromwishList(item);
+        this.wishlistStatus[item.id] = false;
+      } else {
+     
+        this.addToWishList(item); 
+        
+        this.wishlistStatus[item.id] = true;
+      }
+    },
+    (error) => {
+      console.error('Failed to check wishlist:', error);
+    }
+  );
+}
+
+
+
+
+isInWishlist(item: Icart): Observable<boolean> {
+  const userId = this.auth.extractUserIdFromToken();
+  return this.cartService.checkwish(item.id, userId);
+}
+
+
+geticon(item:Icart){
+
+  return this.wishlistStatus[item.id] ? 'fa fa-bookmark fa-solid' : 'fa fa-bookmark fa-regular';
+}
+
+
+
+
+navigatetocheckout(){
+  this.route.navigate(['/choosepayment']); 
+}
 
 }
+
+
+
 
 
 
