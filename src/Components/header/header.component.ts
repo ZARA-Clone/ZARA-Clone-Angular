@@ -13,23 +13,18 @@ import { UserInfoService } from '../../Services/user-info.service';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent implements OnInit , OnChanges {
+export class HeaderComponent implements OnInit{
   showDropdown: boolean = false;
   showMenu: boolean = false;
   stylingforHOME:boolean=false;
   Categories!: Icategory[] | any
   Brands!:Icategory[] | any
-  Bag!:number | any
   email!: string 
   phone!: string 
   username!:string
   checklogging:boolean = false;
 constructor(private router:Router, private httpheader:HttpHeaderService,private sharedservice: SharedValueService , private userinfo:UserInfoService){}
-  ngOnChanges(changes: SimpleChanges): void {
-    this.httpheader.GetCartLength().subscribe((d)=>{
-    this.Bag = d.cartLength;
-  })
-  }
+
   ngOnInit(): void {
     const token = localStorage.getItem('token');
     if(token){
@@ -43,15 +38,17 @@ constructor(private router:Router, private httpheader:HttpHeaderService,private 
       const token = localStorage.getItem('token');
       if(token){
     this.checklogging = true;
+    this.ngOnInit();
     }
     else{
     this.checklogging = false;
+    this.ngOnInit();
     }
     }
   });
     this.router.events.subscribe(event => {
     if (event instanceof NavigationEnd) {
-      console.log('Route changed:', event.url);
+      this.showDropdown = false ; 
       if(event.url=='/home' || event.url=='/'){
         this.stylingforHOME=true;
       }else{
@@ -59,10 +56,8 @@ constructor(private router:Router, private httpheader:HttpHeaderService,private 
       }
     }
   });
-  this.httpheader.GetCartLength().subscribe((d)=>{
-    this.Bag = d;
-  })
-  this.userinfo.getuserinfo().subscribe(userInfo => {
+  if(token){
+      this.userinfo.getuserinfo().subscribe(userInfo => {
       console.log('User Info:', userInfo);
       if (userInfo) {
         this.email = userInfo.email;
@@ -70,6 +65,7 @@ constructor(private router:Router, private httpheader:HttpHeaderService,private 
         this.username = userInfo.userName;
       }
     });
+  }
 }
 
 GetAllCat(){

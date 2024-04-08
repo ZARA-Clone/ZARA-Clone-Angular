@@ -78,10 +78,10 @@ ul{
     font-size: 12px;
     color: gray;
 }
- /* .disabled {
+ .disabled {
     opacity: 0.3; 
     pointer-events: none; 
-} */
+}
 
 .selected {
   background-color: black;
