@@ -1,24 +1,27 @@
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
+
+
 <div style="height: 50px;"></div>
 <h5 class="m-5">SHIPPING DETAILS</h5>
 <div class="mainwrrapper m-5">
     <div class="p-3">
-        <div>THURSDAY 04, APRIL</div>
-        <div class="p-1">ITEMS</div>
+        <div>{{currentDate | date:'mediumDate'}}</div>
+        <div class="p-1">{{products.length}} ITEMS</div>
     </div>
     <div class="orderimgs">
         @for(product of products ; track product){
-            <img class="shippingimg" src="product">
+        <img class="shippingimg" [src]="product.imgUrl">
         }
     </div>
 </div>
+
 <div class="footer">
     <div></div>
     <div></div>
-    <div class="p-4"><b>Total Price : 2900 EGP</b></div>
-    <div class="button-container" (click)="sendMail();">
+    <div class="total-price"><b>Total Price : {{ getTotalPrice() }} EGP</b></div>
+    <div class="button-container" (click)="ConfirmPayment();">
         <button type="button">CONFIRM PAYMENT</button>
     </div>
 </div>

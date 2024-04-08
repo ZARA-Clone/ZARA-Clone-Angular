@@ -18,7 +18,7 @@
     </div>
     <div class="orderimgs">
         @for(product of products ; track product){
-        <img class="shippingimg" src="product">
+        <img class="shippingimg" [src]="product.imgUrl">
         }
     </div>
 </div>
@@ -27,7 +27,7 @@
 <div class="footer">
     <div></div>
     <div></div>
-    <div class="total-price"><b>Total Price : 2900 EGP</b></div>
+    <div class="total-price"><b>Total Price : {{ getTotalPrice() }} EGP</b></div>
     <div class="button-container" (click)="ConfirmPayment();">
         <button type="button">CONFIRM PAYMENT</button>
     </div>

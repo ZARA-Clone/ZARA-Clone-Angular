@@ -22,6 +22,7 @@ import { BrandListComponent } from '../Components/Dashboard/Brands/brand-list/br
 import { AddBrandComponent } from '../Components/Dashboard/Brands/add-brand/add-brand.component';
 import { EditBrandComponent } from '../Components/Dashboard/Brands/edit-brand/edit-brand.component';
 import { DataComponent } from '../Components/Dashboard/data/data.component';
+import { SearchComponent } from '../Components/search/search.component';
 
 export const routes: Routes = [
     {
@@ -49,11 +50,12 @@ export const routes: Routes = [
     { path: 'Cart', component: CartComponent },
     { path: 'contactus', component: ConntactUsComponent },
     { path: 'userinfo', component: EditUserInfoComponent },
-    { path: 'productbrowse', component: ProductsBrowseComponent },
+    { path: 'productbrowse/:id', component: ProductsBrowseComponent },
     { path: 'signin', component: LoginComponent },
     { path: 'registration', component: RegistrationFormComponent },
     { path: 'verification', component: VerificationComponent },
     { path: 'cart', component: CartComponent },
-    { path: 'contactus', component: ConntactUsComponent }
+    { path: 'contactus', component: ConntactUsComponent },
+    { path:'search', component:SearchComponent}
 ];
 

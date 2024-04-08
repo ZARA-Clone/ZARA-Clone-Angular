@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { UserInfoService } from '../../Services/user-info.service';
 import Swal from 'sweetalert2';
 import { IuserInfo } from '../../Models/iuser-info';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-user-info',
@@ -17,7 +18,7 @@ export class EditUserInfoComponent {
 
   
   
-  constructor(private userinfoservice:UserInfoService){
+  constructor(private userinfoservice:UserInfoService,private router:Router){
 
   }
 
@@ -54,6 +55,10 @@ export class EditUserInfoComponent {
         confirmButtonText: 'OK'
       });
     }))
+  }
+  SignOut(){
+    localStorage.removeItem('token');
+    this.router.navigate(['/signin'])
   }
 
 }

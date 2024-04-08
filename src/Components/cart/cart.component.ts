@@ -2,7 +2,7 @@
 import { ConfirmationDialogComponentComponent } from '../confirmation-dialog-component/confirmation-dialog-component.component';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Icart } from '../../Models/icart';
 import { CartServiceService } from '../../Services/cart-service.service';
 import { DecodingService } from '../../Services/decoding.service';
@@ -13,21 +13,21 @@ import { MatDialog } from '@angular/material/dialog';
 
 
 
-
 type Sizes = {
   [key: number]: string;
 };
 @Component({
-  selector: 'app-cart',
-  standalone: true,
-  imports: [],
-  templateUrl: './cart.component.html',
-  styleUrl: './cart.component.css'
+    selector: 'app-cart',
+    standalone: true,
+    templateUrl: './cart.component.html',
+    styleUrl: './cart.component.css',
+    imports: []
 })
 export class CartComponent implements OnInit{
   cartItems:Icart[]=[]
+  totalPrice!: number
      outofstock:boolean=false
-  
+
   sizes: Sizes = {
     0: 'Small',
     1: 'Medium',
@@ -161,7 +161,8 @@ getTotalPrice(): number {
   }
   return this.cartItems.reduce((total, item) => {
     // Adjust the calculation according to your actual data structure
-    return total + (item.price * item.quantity);
+    this.totalPrice = total + (item.price * item.quantity)
+    return this.totalPrice ;
   }, 0);
 }
 
