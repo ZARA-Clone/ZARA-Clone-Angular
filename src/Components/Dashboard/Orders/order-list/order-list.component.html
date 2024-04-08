@@ -1,0 +1,31 @@
+<div class="container-fluid my-3">
+    <div class="row">
+        <table class="table table-hover mt-4">
+            <caption>List of Orders</caption>
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>User Name</th>
+                    <th>Order Date</th>
+                    <th>Products Count</th>
+                    <th>Total Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (order of orders; track $index) {
+                <tr>
+                    <td>{{order.id}}</td>
+                    <td>{{order.userName}}</td>
+                    <td>{{order.orderDate}}</td>
+                    <td>{{order.productCount}}</td>
+                    <td>{{order.totalPrice}}</td>
+                    <td>
+                        <button class="btn btn-info mx-2" routerLink="details/{{order.id}}">Details</button>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

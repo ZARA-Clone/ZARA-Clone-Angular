@@ -9,15 +9,17 @@ export class UsersService {
 
   constructor(private _httpClient: HttpClient) { }
 
+  private readonly URL = `${environment.BASEURL}/dashboard/api/users`
+
   getAll() {
-    return this._httpClient.get(`${environment.BASEURL}`)
+    return this._httpClient.get(`${this.URL}`)
   }
 
   get(id: string) {
-    return this._httpClient.get(`${environment.BASEURL}`)
+    return this._httpClient.get(`${this.URL}/${id}`)
 
   }
   delete(id: string) {
-    return this._httpClient.delete(`${environment.BASEURL}`)
+    return this._httpClient.delete(`${this.URL}/${id}`)
   }
 }

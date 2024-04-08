@@ -8,4 +8,5 @@ export interface IProductReadDto {
     brandId: number,
     brandName: string,
     imageUrls: string[],
+    sizes: string[]
 }
