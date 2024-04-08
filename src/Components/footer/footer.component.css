@@ -11,6 +11,12 @@
     color: inherit; /* Inherit color from parent */
     text-decoration: none; /* Remove underline */
     cursor: pointer; /* Change cursor on hover */
+  }.invalid-msg{
+    color: red;
+    font-size: 12px;
+    display: flex; /* Use flexbox */
+    justify-content: flex-start; /* Align content to the start (left) */
+    align-items: center; /* Align items vertically */
   }
 
   .custom-link:hover {

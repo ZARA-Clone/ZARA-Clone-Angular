@@ -145,8 +145,7 @@ hideDiv(p:any){
       });
     })
       }
-
-  }
+    }
   AddToWishList(id: number) {
     this.httpproduct.AddToWishList(id).subscribe((p) => {
       console.log(p);

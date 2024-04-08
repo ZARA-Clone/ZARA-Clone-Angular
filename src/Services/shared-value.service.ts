@@ -5,13 +5,13 @@ import { BehaviorSubject} from 'rxjs';
   providedIn: 'root'
 })
 export class SharedValueService {
- private dataSubject = new BehaviorSubject<any>(null);
+  private dataSubject = new BehaviorSubject<any>(null);
   public data$ = this.dataSubject.asObservable();
 
   constructor() { }
 
   sendData(data: any) {
-    this.dataSubject.next(data);    
+    this.dataSubject.next(data);
   }
 
   getData() {
