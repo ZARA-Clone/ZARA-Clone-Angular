@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { EditImageComponent } from '../edit-image/edit-image.component';
@@ -46,11 +46,11 @@ export class EditProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.productForm = this._formBuilder.group({
-      name: ["", [Validators.required]],
+      name: ["", [Validators.required, Validators.minLength(3)]],
       description: ["", Validators.maxLength(500)],
       price: [0, [Validators.required]],
       discount: [0, [Validators.required]],
-      brandId: [this.selectedBrand, [Validators.required]],
+      brandId: [, [this.validateSelectedOption]],
       imageUrls: [[]],
       sizes: this._formBuilder.array([], Validators.required)
     })
@@ -65,9 +65,28 @@ export class EditProductComponent implements OnInit {
     })
     this.getAllBrands();
     this.sizes;
-    this.showSizes()
   }
 
+  validateSelectedOption(control: AbstractControl) {
+    const selectedValue = control.value;
+    return selectedValue > 0 ? null : { invalidOption: true };
+  }
+
+  get name() {
+    return this.productForm.get('name')
+  }
+  get description() {
+    return this.productForm.get('description')
+  }
+  get price() {
+    return this.productForm.get('price')
+  }
+  get brandId() {
+    return this.productForm.get('brandId')
+  }
+  get discount() {
+    return this.productForm.get('discount')
+  }
   get sizes() {
     return this.productForm.get('sizes') as FormArray;
   }
@@ -100,6 +119,7 @@ export class EditProductComponent implements OnInit {
       console.log(product)
       let selectedBrand = this.brands.find((b) => b.id == this.product.brandId)
       if (selectedBrand) {
+        console.log(selectedBrand)
         this.selectedBrand = selectedBrand.id
       }
       this.productForm.patchValue({
@@ -107,7 +127,7 @@ export class EditProductComponent implements OnInit {
         description: product.description,
         discount: product.discount,
         price: product.price,
-        brandID: product.brandId,
+        brandId: product.brandId,
         imageUrls: product.imageUrls,
         sizes: product.sizes
           .map((size: any) => ({
@@ -127,13 +147,14 @@ export class EditProductComponent implements OnInit {
       price: this.productForm.value.price,
       discount: this.productForm.value.discount,
       imageUrls: this.newUrls.concat(this.product.imageUrls),
-      brandId: this.selectedBrand,
+      brandId: this.productForm.value.brandId,
       sizes: this.productForm.value.sizes
         .map((size: any) => ({
           key: size.size,
           value: size.quantity
         })),
     }
+    console.log(this.productForm.value)
     console.log(this.newProduct)
     this._productsService.edit(this.product.id, this.newProduct).subscribe({
       next: () => {

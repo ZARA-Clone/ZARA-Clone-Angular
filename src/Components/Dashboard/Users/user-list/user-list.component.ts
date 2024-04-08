@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { RouterLink } from '@angular/router';
-import { PaginationInstance } from 'ngx-pagination/lib/ngx-pagination.module';
 import { UsersService } from '../../../../Services/Dashboard/users.service';
 
 @Component({
@@ -18,16 +17,10 @@ export class UserListComponent {
     this.getUsers()
   }
 
-  config: PaginationInstance = {
-    id: 'usersPagination',
-    itemsPerPage: 4,
-    currentPage: 1
-  };
-
-
   getUsers(): void {
     this._userService.getAll().subscribe({
       next: (data) => {
+        console.log(data)
         this.users = data;
       },
       error(error) {

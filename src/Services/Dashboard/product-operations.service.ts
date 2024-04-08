@@ -2,42 +2,38 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { AddProductDto } from '../../Models/Dashboard/Products/IAddProductDto.interface';
 import { environment } from '../../environments/environment';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable, catchError, min, throwError } from 'rxjs';
 import { IEditProductDto } from '../../Models/Dashboard/Products/IEditProductDto.interface';
 import { IProductsListDto } from '../../Models/Dashboard/Products/IProductsList.interface';
+import { ResponseService } from '../Shared/response.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductOperationsService {
-  constructor(private _httpClient: HttpClient) { }
+
+  private readonly url = `${environment.BASEURL}/dashboard/api/products`
+
+  constructor(private _httpClient: HttpClient
+    , private _response: ResponseService) { }
   httpHeaders: HttpHeaders = new HttpHeaders({
     'content-type': 'application/json'
   });
 
   add(product: AddProductDto): Observable<AddProductDto> {
-    let result = this._httpClient.post<AddProductDto>(`${environment.BASEURL}/api/Dashboard`
+    let result = this._httpClient.post<AddProductDto>(`${this.url}`
       , product, { headers: this.httpHeaders });
     return result.pipe(
-      catchError(this.handleError)
+      catchError(this._response.handleError)
     );
   }
 
   edit(id: number, product: IEditProductDto) {
-    return this._httpClient.put<IEditProductDto>(`${environment.BASEURL}/api/Dashboard/${id}`, product)
+    return this._httpClient.put<IEditProductDto>(`${this.url}/${id}`, product)
   }
 
   delete(id: number) {
-    return this._httpClient.delete<AddProductDto>(`${environment.BASEURL}/api/Dashboard/${id}`)
-  }
-
-  private handleError(error: HttpErrorResponse): Observable<never> {
-    if (error.status === 0)
-      console.error('An error occurred:', error.error);
-    else
-      console.error(
-        `Backend returned code ${error.status}, body was: `, error.error);
-    return throwError(() => 'Something bad happened; please try again later.');
+    return this._httpClient.delete<AddProductDto>(`${this.url}/${id}`)
   }
 
   upload(files: File[]): any {
@@ -45,19 +41,20 @@ export class ProductOperationsService {
     files.forEach(file => {
       form.append("files", file, file.name);
     })
-    return this._httpClient.post(`${environment.BASEURL}/api/Dashboard/upload`, form);
+    return this._httpClient.post(`${this.url}/upload`, form);
   }
 
   getAll() {
-    return this._httpClient.get(`${environment.BASEURL}/api/Dashboard`);
+    return this._httpClient.get(`${this.url}`);
   }
 
   getById(id: number): Observable<IEditProductDto> {
-    return this._httpClient.get<IEditProductDto>(`${environment.BASEURL}/api/Dashboard/${id}`);
+    return this._httpClient.get<IEditProductDto>(`${this.url}/${id}`);
   }
 
-  getAllInPagination(pageIndex: number, pageSize: number): Observable<IProductsListDto> {
-    return this._httpClient.get<IProductsListDto>(`${environment.BASEURL}/api/Dashboard?pageIndex=${pageIndex}&pageSize=${pageSize}`)
+  getWithPagination(pageIndex: number, pageSize: number, name: string = '', brandId: number = 0, minPrice: number = 0
+    , maxPrice: number = 0): Observable<IProductsListDto> {
+    return this._httpClient.get<IProductsListDto>(`${this.url}?name=${name}&brandId=${brandId}
+    &minPrice=${minPrice}&maxPrice=${maxPrice}&pageIndex=${pageIndex}&pageSize=${pageSize}`)
   }
-
 }

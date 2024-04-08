@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgFor } from '@angular/common';
 import { AddProductDto, ProductSize, Size } from '../../../../Models/Dashboard/Products/IAddProductDto.interface';
@@ -38,16 +38,37 @@ export class AddProductComponent implements OnInit {
   ngOnInit(): void {
     this.getAllBrands()
     this.productForm = this._formBuilder.group({
-      name: ["", [Validators.required]],
+      name: ["", [Validators.required, Validators.minLength(3)]],
       description: ["", Validators.maxLength(500)],
       price: [0, [Validators.required]],
       discount: [0, [Validators.required]],
-      brandId: [0, [Validators.required]],
+      brandId: [0, [this.validateSelectedOption]],
       imageUrls: [[]],
-      sizes: this._formBuilder.array([], Validators.required)
+      sizes: this._formBuilder.array([])
     })
     this.sizes;
     this.showSizes()
+  }
+
+  validateSelectedOption(control: AbstractControl) {
+    const selectedValue = control.value;
+    return selectedValue > 0 ? null : { invalidOption: true };
+  }
+
+  get name() {
+    return this.productForm.get('name')
+  }
+  get description() {
+    return this.productForm.get('description')
+  }
+  get price() {
+    return this.productForm.get('price')
+  }
+  get brandId() {
+    return this.productForm.get('brandId')
+  }
+  get discount() {
+    return this.productForm.get('discount')
   }
 
   get sizes() {
@@ -61,7 +82,7 @@ export class AddProductComponent implements OnInit {
       console.log(s)
       this.sizes.push(this._formBuilder.group({
         size: [q, Validators.required],
-        quantity: [0, [Validators.required, Validators.min(1)]]
+        quantity: [0, [Validators.required]]
       }));
     }
   }

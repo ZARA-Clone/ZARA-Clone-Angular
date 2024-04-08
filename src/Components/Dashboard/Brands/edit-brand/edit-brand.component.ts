@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { IBrandEditDto } from '../../../../Models/Dashboard/Brands/Ibrand-edit-dto';
@@ -32,8 +32,8 @@ export class EditBrandComponent {
 
   ngOnInit(): void {
     this.brandForm = this._formBuilder.group({
-      name: ["", [Validators.required]],
-      categoryId: [0, [Validators.required]],
+      name: ["", [Validators.required, Validators.minLength(3)]],
+      categoryId: [, [Validators.required, this.validateSelectedOption]],
     })
     this._activatedRoute.paramMap.subscribe((param) => {
       let idAsString = param.get('id');
@@ -43,6 +43,17 @@ export class EditBrandComponent {
           this.getBrand(brand.id)
         })
     })
+  }
+
+  validateSelectedOption(control: AbstractControl) {
+    const selectedValue = control.value;
+    return selectedValue > 0 ? null : { invalidOption: true };
+  }
+  get name() {
+    return this.brandForm.get('name')
+  }
+  get categoryId() {
+    return this.brandForm.get('categoryId')
   }
 
   onSubmit() {

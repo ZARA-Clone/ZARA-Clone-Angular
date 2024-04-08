@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BrandsService } from '../../../../Services/Dashboard/brands.service';
@@ -23,9 +23,21 @@ export class AddBrandComponent implements OnInit {
 
   ngOnInit(): void {
     this.brandForm = this._formBuilder.group({
-      name: ["", [Validators.required]],
-      categoryId: [0, [Validators.required]],
+      name: ["", [Validators.required, Validators.minLength(3)]],
+      categoryId: [0, [Validators.required, this.validateSelectedOption]],
     })
+  }
+
+  validateSelectedOption(control: AbstractControl) {
+    const selectedValue = control.value;
+    return selectedValue > 0 ? null : { invalidOption: true };
+  }
+
+  get name() {
+    return this.brandForm.get('name')
+  }
+  get categoryId() {
+    return this.brandForm.get('categoryId')
   }
 
   onSubmit() {
