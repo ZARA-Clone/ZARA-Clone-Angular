@@ -8,5 +8,6 @@ export interface IproductDetails{
     discount?:number,
     sizes:SizeQuantity[],
     images:string[],
-    brandId:number
+    brandId:number,
+    wishlist:boolean
 }

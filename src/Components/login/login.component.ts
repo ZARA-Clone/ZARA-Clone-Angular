@@ -26,35 +26,12 @@ export class LoginComponent {
 constructor(private _AuthService:AuthService,private _Router:Router){}
   handleForm(): void {
     const userData = this.loginForm.value;
-  
-  
-  
-
     if (this.loginForm.valid) {
-  
-      this._AuthService.login(userData).subscribe({
-       
-        
-        next: (response) => {
-          console.log(response)
-          const token = (localStorage.setItem("token",response.token));
-          // if (response.message === 'success') {
-
-          //   // this._Router.navigate(['/home']);
-          //   console.log(response);
-          
-          // }
-        },
-        // error: (err) => {
-        //   console.log(err);
-        //   this.errMsg = err.error.message;
-
-        // }
-      });
+      this._AuthService.login(userData).subscribe((response)=>{        
+      const token = (localStorage.setItem("token",response.token));
+      this._Router.navigate(['/home']);
+      })
     }
   }
-
-
   }
 
-  // Validators.pattern('^(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$')

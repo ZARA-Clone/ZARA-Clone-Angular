@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { IuserInfo } from '../../Models/iuser-info';
 import { Router, RouterModule } from '@angular/router';
 
+
 @Component({
   selector: 'app-edit-user-info',
   standalone: true,
@@ -19,6 +20,7 @@ export class EditUserInfoComponent implements OnInit{
   
   
   constructor(private userinfoservice:UserInfoService , private router: Router){
+
 
   }
  ngOnInit(): void {
@@ -85,23 +87,4 @@ export class EditUserInfoComponent implements OnInit{
 
   this.router.navigate(['/signin']);
   }
-  // deleteAccount(): void {
-  //   if (confirm('Are you sure you want to delete your account?')) {
-  //     this.userinfoservice.deleteAccount().subscribe(
-  //     //   {
-  //     //   next: response => {
-  //     //     // Handle successful sign-out response, if needed
-  //     //     console.log('Sign-out successful:', response.message);
-  //     //     // Clear token or perform any other cleanup tasks
-  //     //   },
-  //     //   error: error => {
-  //     //     // Handle error response, if any
-  //     //     console.error('Error signing out:', error);
-  //     //   }
-  //     // }
-  //     p=>{console.log(p);}
-  //   );
-  //   }
-  // }
-
 }

@@ -10,6 +10,7 @@ import { IproductBrowse } from '../../Models/IproductBrowse';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { WarningComponent } from '../warning/warning.component';
 import Swal from 'sweetalert2';
+import { IproductWishList } from '../../Models/IproductWishList';
 
 
 @Component({
@@ -30,23 +31,39 @@ export class ProductDetailsComponent implements OnInit {
   selectedimg!: string;
   products!: IproductBrowse[] | any
   newlife: any = [];
+  wishlistProducts!: IproductWishList[] | any
   constructor(private httpproduct: HttpProductService, private activatedroute: ActivatedRoute, private elementRef: ElementRef, private dialog: MatDialog, private router: Router) { }
-  ngOnInit(): void {
-    this.activatedroute.paramMap.subscribe((p) => {
-      const snapid = p.get('id');
-      const id = snapid ? +snapid : undefined;
-      this.httpproduct.GetProductById(1).subscribe((p) => {
-        this.product = p;
-        this.selectedimg = this.product.images[0]
-      });
-      this.httpproduct.GetProductByBrandId(1).subscribe((p) => {
+ngOnInit(): void {
+  this.activatedroute.paramMap.subscribe((p) => {
+    const snapid = p.get('id');
+    const id = snapid ? +snapid : undefined;
+    this.httpproduct.GetProductById(id).subscribe((p) => {
+      this.product = p;
+      this.selectedimg = this.product.images[0];
+      this.httpproduct.GetProductByBrandId(this.product.brandId).subscribe((p) => { 
         this.products = p;
         this.newlife = this.products.map((p: any) => ({ ...p, showDetails: false, wishlist: false }));
-        this.newlife = this.newlife.filter((product: IproductDetails) => product.id !== 1)
-      });
+      
+        
+        
+        this.httpproduct.GetAllWishList().subscribe((wishlistProducts) => {
+          this.wishlistProducts = wishlistProducts;
+          this.newlife.forEach((product: any) => {          
+            if (this.wishlistProducts.some((wishlistProduct: IproductWishList) => wishlistProduct.id === product.id)) {
+              product.wishlist = true;        
+            }
+          });      
+          this.newlife = this.newlife.filter((product: IproductDetails) => product.id !== id);
 
-    })
-  }
+          
+          const isInWishlist = this.wishlistProducts.some((wishlistProduct: any) => wishlistProduct.id === this.product.id);
+          this.product.wishlist = isInWishlist;
+        });
+      });
+    });
+  });
+}
+
 
   isSizeAvailable(sizeIndex: number): boolean | undefined {
     // Search for the size object with the given size index
@@ -61,7 +78,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
 
-  AddToCart() {
+  AddToCart(id:number) {
     if (this.selectedSize == '') {
       this.dialog.open(WarningComponent);
     }
@@ -73,9 +90,13 @@ export class ProductDetailsComponent implements OnInit {
         size = 1;
       else if (this.selectedSize == 'L')
         size = 2;
-      else (this.selectedSize == 'XL')
+      else if (this.selectedSize == 'XL')
       size = 3;
-      this.httpproduct.AddToCart(5, size).subscribe((p) => {
+    const token = localStorage.getItem('token');
+    if(token == null){
+        this.router.navigate(['/signin']);
+      }else {
+          this.httpproduct.AddToCart(id, size).subscribe((p) => {
         Swal.fire({
           title: "Product Added Successfully",
           showClass: {
@@ -92,10 +113,15 @@ export class ProductDetailsComponent implements OnInit {
           }
         });
       })
+      }
     }
   }
-  AddToCartDirect(size: number) {
-    this.httpproduct.AddToCart(5, size).subscribe((p) => {
+  AddToCartDirect(id:number,size: number) {
+    const token = localStorage.getItem('token');
+      if(token == null){
+        this.router.navigate(['/signin']);
+      }else{
+            this.httpproduct.AddToCart(id, size).subscribe((p) => {
       Swal.fire({
         title: "Product Added Successfully",
         showClass: {
@@ -112,16 +138,19 @@ export class ProductDetailsComponent implements OnInit {
         }
       });
     })
+      }
   }
 
   AddToWishList(id: number) {
     this.httpproduct.AddToWishList(id).subscribe((p) => {
+      console.log(p);
       Swal.fire({
         position: "center",
         title: "Added To Wishlist",
         showConfirmButton: false,
         timer: 1500
       });
+      this.RecallWishList();
     })
 
 
@@ -134,11 +163,19 @@ export class ProductDetailsComponent implements OnInit {
         showConfirmButton: false,
         timer: 1500
       });
+      this.RecallWishList();
     })
   }
-
+  RecallWishList(){
+    this.httpproduct.GetAllWishList().subscribe((p)=>{
+      this.wishlistProducts = p;
+    })
+  }
   RedirectToProductDetails(id: number) {
     this.router.navigate(['/product', id]);
+  }
+  Contact(){
+    this.router.navigate(['/contactus']);
   }
 
   toggleContent(event: Event): void {
@@ -176,6 +213,9 @@ export class ProductDetailsComponent implements OnInit {
   }
   hideDiv(p: any) {
     this.toggle(p);
+  }
+  JustToggle(){
+    this.product.wishlist = !this.product.wishlist;
   }
 
 }

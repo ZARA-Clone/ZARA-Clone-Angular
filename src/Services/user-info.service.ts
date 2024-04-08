@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { environment } from '../environments/environment';
 import { Router } from '@angular/router';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +12,7 @@ export class UserInfoService {
   constructor(private httpclient:HttpClient , private router:Router) {
     
    }
- 
+  
   changePass(form: any): Observable<any> {
     const { Currentpassword, Newpassword } = form;
     const requestData = {

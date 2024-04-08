@@ -20,3 +20,4 @@ export class HttpHeaderService {
     return this.http.get<Icartlength>('https://localhost:7248/api/Header/getcartlength');
   }
 }
+

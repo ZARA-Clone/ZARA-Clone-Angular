@@ -5,7 +5,6 @@ import { BehaviorSubject} from 'rxjs';
   providedIn: 'root'
 })
 export class SharedValueService {
-
   private dataSubject = new BehaviorSubject<any>(null);
   public data$ = this.dataSubject.asObservable();
 

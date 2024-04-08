@@ -123,7 +123,11 @@ hideDiv(p:any){
     this.router.navigate(['/product', id]);
   }
     AddToCartDirect(id:number,size: number) {
-    this.httpproduct.AddToCart(id, size).subscribe((p) => {
+      const token = localStorage.getItem('token');
+      if(token == null){
+        this.router.navigate(['/signin']);
+      }else{
+            this.httpproduct.AddToCart(id, size).subscribe((p) => {
       Swal.fire({
         title: "Product Added Successfully",
         showClass: {
@@ -140,7 +144,8 @@ hideDiv(p:any){
         }
       });
     })
-  }
+      }
+    }
   AddToWishList(id: number) {
     this.httpproduct.AddToWishList(id).subscribe((p) => {
       console.log(p);

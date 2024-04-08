@@ -6,7 +6,6 @@ import { IproductBrowse } from '../Models/IproductBrowse';
 import { environment } from '../environments/environment';
 import { IproductWishList } from '../Models/IproductWishList';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -21,15 +20,15 @@ export class HttpProductService {
   GetProductById(id: number | undefined): Observable<IproductDetails> {
     return this.http.get<IproductDetails>(`${environment.BASEURL}/api/Products/${id}`);
   }
-  
-  AddToCart(productId: number, size: number): Observable<any> {
-    return this.http.post<any>(`${environment.BASEURL}/api/Cart/AddToCart`,{productId:productId,size:size});
+
+  AddToCart(productId: number, size: number | undefined): Observable<any> {
+    return this.http.get<any>(`https://localhost:7248/api/Cart/AddToCart?productId=${productId}&size=${size}`);
   }
   AddToWishList(productId: number):Observable<any> {
-    return this.http.post<any>(`${environment.BASEURL}/api/WishList/add`,productId);
+    return this.http.get<any>(`https://localhost:7248/api/WishList/add?productId=${productId}`);
   }
   removeFromWishList(productId: number):Observable<any>{
-    return this.http.post<any>(`${environment.BASEURL}/api/WishList/delete`,productId);
+    return this.http.delete<any>(`https://localhost:7248/api/WishList/delete?productId=${productId}`);
   }
   GetAllWishList():Observable<IproductWishList>{
     return this.http.get<IproductWishList>('https://localhost:7248/api/WishList');
