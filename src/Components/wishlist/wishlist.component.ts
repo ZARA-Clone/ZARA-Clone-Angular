@@ -38,5 +38,8 @@ deleteFromHtml(product: IProduct): void {
   }
 }
 
+onclick(id: number) {
+  this.router.navigate(['/product', id]);
+}
 
 }

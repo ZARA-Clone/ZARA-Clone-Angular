@@ -15,9 +15,9 @@
 <div class="wishheader">
   <p class="wishheader-p">YOUR WISHLIST</p>
 </div>
-<div class="parent">
+<div class="parent" >
   @for(product of productswishlist ; track product.id) {
-    <div class="wishlist">
+    <div class="wishlist" (click)="onclick(product.id)">
       <img class="wishlistimg" [src]="product.imgUrl">
       <div class="container" style="border: 1px solid black;">
         <div class="row" style="height: 63px;">
@@ -31,5 +31,6 @@
         </div>
       </div>
     </div>
+    
   }
 </div>

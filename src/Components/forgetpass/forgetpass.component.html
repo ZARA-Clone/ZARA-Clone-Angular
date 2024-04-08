@@ -9,7 +9,7 @@
                 <input formControlName="email" type="email" id="email" name="email" class="form-control" placeholder="E-MAIL">
                 <div *ngIf=" myform.get('email')?.errors &&  myform.get('email')?.touched" class="p-1 small">
                     <div class="error-container">
-                        <img src="../../../assets/erroricon2.png" alt="Error Icon" class="error-icon">
+                       
                     <p class="error" *ngIf=" myform.get('email')?.getError('required')">Required field</p>
                     <p class="error" *ngIf=" myform.get('email')?.getError('email')">Enter a valid email address</p>
                     </div>

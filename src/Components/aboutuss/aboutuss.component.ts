@@ -79,7 +79,7 @@ ToogleTerms() {
     this.isButtonClicked = true;
   }
 
-  printSelectedItems(): void {
+  printSelectedItems(): void { 
     this.selectedItemList = Object.keys(this.selectedItems).filter(key => this.selectedItems[key]);
     this.printClicked = true;
   }

@@ -23,7 +23,6 @@ export class SearchService {
         } else {
           return products.filter((product)=>{
             let titlematch= product.name&& product.name.toLowerCase().includes(term.toLowerCase());
-            // let categorymatch= product.category&&product.category.toLowerCase().includes(term.toLowerCase());
             return titlematch;
           })
         
