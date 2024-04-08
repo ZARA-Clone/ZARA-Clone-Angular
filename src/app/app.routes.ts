@@ -26,6 +26,7 @@ import { UserListComponent } from '../Components/Dashboard/Users/user-list/user-
 import { UserDetailsComponent } from '../Components/Dashboard/Users/user-details/user-details.component';
 import { adminGuard } from '../Guards/admin.guard';
 import { OrderListComponent } from '../Components/Dashboard/Orders/order-list/order-list.component';
+import { OrderDetailsComponent } from '../Components/Dashboard/Orders/order-details/order-details.component';
 
 export const routes: Routes = [
     {
@@ -40,6 +41,7 @@ export const routes: Routes = [
             { path: 'users', component: UserListComponent, title: 'Uers' },
             { path: 'users/details/:id', component: UserDetailsComponent, title: 'User Details' },
             { path: 'orders', component: OrderListComponent, title: 'Orders' },
+            { path: 'orders/details/:id', component: OrderDetailsComponent, title: 'Order Details' },
         ]
     },
     { path: '', redirectTo: 'home', pathMatch: 'full' },

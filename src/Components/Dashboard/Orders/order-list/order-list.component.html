@@ -7,13 +7,13 @@
                     <th>No.</th>
                     <th>User Name</th>
                     <th>Order Date</th>
-                    <th>Products</th>
+                    <th>Products Count</th>
                     <th>Total Price</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @for (order of orders; track order.id; let i = $index) {
+                @for (order of orders; track $index) {
                 <tr>
                     <td>{{order.id}}</td>
                     <td>{{order.userName}}</td>
@@ -21,7 +21,7 @@
                     <td>{{order.productCount}}</td>
                     <td>{{order.totalPrice}}</td>
                     <td>
-                        <button class="btn btn-info mx-2" routerLink="/details/{{order.id}}">Details</button>
+                        <button class="btn btn-info mx-2" routerLink="details/{{order.id}}">Details</button>
                     </td>
                 </tr>
                 }
