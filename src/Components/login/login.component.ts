@@ -49,4 +49,3 @@ export class LoginComponent {
   }
 }
 
-// Validators.pattern('^(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$')

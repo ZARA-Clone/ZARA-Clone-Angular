@@ -13,7 +13,7 @@
       <div class="container p-5">
   <!-- Section: Form -->
   <section class="">
-      <form action="">
+      <form action="" #emailform="ngForm">
         <!--Grid row for JOIN OUR NEWSLETTER label-->
         <div class="row">
           <!--Grid column for label-->
@@ -33,8 +33,13 @@
             <div data-mdb-input-init class="mb-4">
               <!-- Add custom CSS classes to style the input -->
               <div class="form-floating">
-                <input type="email"(keyup)="viewButton()" id="form5Example24" class="form-control custom-input" placeholder=" " />
+                <input  type="email"(keyup)="viewButton()" id="form5Example24" class="form-control custom-input" placeholder=" "
+                name="email" #email="ngModel" [(ngModel)]="footeremail.email" pattern="[a-zA-Z0-9.-]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{3,}" required />
                 <label for="form5Example24" class="custom-label">ENTER YOUR EMAIL ADDRESS HERE</label>
+                <div class="invalid-msg" *ngIf="email.invalid &&(email.touched||email.dirty)">
+                  <span *ngIf="email.errors?.['required']">Email is required</span>
+                  <span *ngIf="email.errors?.['pattern']">Invalid email</span>
+              </div>
               </div>
             </div>
           </div>
@@ -47,7 +52,8 @@
           <!--Grid column for button-->
           <div class="col-5">
             <!-- Submit button -->
-            <button id="submitButton" (click)="sendMail()" data-mdb-ripple-init type="button" class="malek p-2 mb-4" [ngClass]="{'malektwo': value}">
+            <button id="submitButton" (click)="sendMail()" data-mdb-ripple-init type="button" class="malek p-2 mb-4" [ngClass]="{'malektwo': value}"
+            [disabled]="!emailform.form.valid">
               SUBSCRIBE                   
             </button>
           </div>
@@ -87,11 +93,7 @@
     
               <ul class="list-unstyled mb-0">
                 <li>
-                  <a class="text-body" href="#!">CONTACT US</a>
-                </li>
-                
-                <li>
-                  <a class="text-body" href="#!">SHIPPING</a>
+                  <a class="text-body" routerLink="/contactus">CONTACT US</a>
                 </li>
               </ul>
             </div>
@@ -119,7 +121,7 @@
     
               <ul class="list-unstyled mb-0">
                 <li>
-                  <a class="text-body" href="#!">ABOUT US
+                  <a class="text-body"  routerLink="/aboutus" >ABOUT US
                       
                       
                       </a>

@@ -8,6 +8,9 @@ import { HttpClient } from '@angular/common/http';
 import { HttpPaymentService } from '../../Services/http-payment.service';
 import Swal from 'sweetalert2';
 import emailjs, { type EmailJSResponseStatus } from '@emailjs/browser';
+import { DecodingService } from '../../Services/decoding.service';
+import { CartServiceService } from '../../Services/cart-service.service';
+import { Icart } from '../../Models/icart';
 @Component({
   selector: 'app-card-details',
   standalone: true,
@@ -29,7 +32,9 @@ stripePromise = loadStripe('pk_test_51OzU9vP6V1Tz8l55LKIXs6RPxoFVcstmUR4SKiWV1p1
   card!: StripeCardElement | StripeCardNumberElement;
   currentDate: Date = new Date();
   products:any[]=[];
-  constructor(private fb: FormBuilder,private matdia:MatDialog, private http:HttpClient,private httppayment:HttpPaymentService) {
+  totalPrice!:number
+  cartItems:Icart[]=[]
+  constructor(private fb: FormBuilder,private matdia:MatDialog, private http:HttpClient,private httppayment:HttpPaymentService,private auth:DecodingService , private cartService:CartServiceService) {
     emailjs.init("Cga4GFBNn2Hqi1d9h");
      this.httppayment.GetOrderDetails().subscribe((p)=>{
       this.products=p;
@@ -58,7 +63,35 @@ stripePromise = loadStripe('pk_test_51OzU9vP6V1Tz8l55LKIXs6RPxoFVcstmUR4SKiWV1p1
       this.card = elements.create('card');
     }
     this.card?.mount(this.cardElement.nativeElement);
+    this.FetchApi();
   }
+
+   FetchApi(): void {
+  
+  const userId =this.auth.extractUserIdFromToken(); 
+  this.cartService.getCartItems(userId).subscribe({
+    
+    next: (cartItems) => {     
+      this.cartItems = cartItems;
+     
+    },
+    error: (error) => {
+      console.error('Error fetching cart items:', error);
+      
+      alert('An error occurred while fetching cart items. Please try again later.');
+    }
+  });
+}
+getTotalPrice(): number {
+  if (!this.cartItems || this.cartItems.length === 0) {    
+    return 0;
+  }
+  return this.cartItems.reduce((total, item) => {
+    // Adjust the calculation according to your actual data structure
+    this.totalPrice = total + (item.price * item.quantity)
+    return this.totalPrice ;
+  }, 0);
+}
 
 async ConfirmPayment() {
   try {
@@ -75,11 +108,17 @@ async ConfirmPayment() {
     } else {
       this.sendMail()
       const additionalData = {
-        orderdate: new Date(), // Use new Date() to create a Date object
+        orderDate: new Date().toISOString(), // Use new Date() to create a Date object
       };
-
+      const Data ={
+        token: token ,
+        additionalData : additionalData,
+      }
+      console.log(Data);
+      
+      
       // Send the token and additional data to your backend for processing
-      this.http.post('https://localhost:7248/api/Checkout/process-payment', { token, additionalData })
+      this.http.post('https://localhost:7248/api/Checkout/process-payment', {Data})
       .subscribe(response => {
           Swal.fire({
           title:`Thanks For Dealing With ZARA`,

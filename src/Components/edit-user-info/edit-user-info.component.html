@@ -1,12 +1,12 @@
 <section class="d-flex justify-content-between mb-4">
     <div class="categories_btn ">
-        <div><a href="#" class="btn-css p-1 m-1 ">PURCHASES</a> <a href="#" class="btn-css p-1 m-1">FAVOURITES</a>
-            <a href="#" class="btn-css p-1 m-1">PROFILE</a></div>
+        <div> <a href="#" class="btn-css p-1 m-1" routerLink="/wishlist" routerLinkActive="active-route">FAVOURITES</a>
+            <a href="#" class="btn-css p-1 m-1" routerLink="/userinfo" routerLinkActive="active-route">PROFILE</a></div>
     </div>
 </section>
  <section>
     <div class="usernamestyle">
-        <p>menna deyaa</p>
+        <p>{{username}}</p>
     </div>
  </section>
 <section class="containerstyle">
@@ -15,7 +15,7 @@
             <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                     <b class="pb-3">EMAIL</b><br>
-                    <span class="data">mennadeyaam&#64;gmail.com</span>
+                    <span class="data" >{{email}}</span>
                 </button>
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
@@ -23,18 +23,9 @@
                     <form (ngSubmit)="onemailSubmit(changeemailform)" #changeemailform="ngForm">
                         <div class="mb-2">
                             <p  style="margin-bottom: 1px;"><strong>CHANGE E-MAIL</strong></p>
-                            <p >Your current email address is: <strong>mennadeyaam&#64;gmail.com</strong></p>
+                            <p >Your current email address is: <strong>{{email}}</strong></p>
                         </div>
-                          <div class="form-floating mb-3">
-                            <input type="password" id="formPassword" class="form-control custom-input" placeholder=" "  
-                             name="password" #password="ngModel" [(ngModel)]="user.password" required>
-                            <label for="formPassword" class="custom-label">PASSWORD</label>
-                            <div class="invalid-msg" *ngIf="password.invalid && (password.touched || password.dirty)">
-                                <!-- {{password.errors|json}} -->  <!-- name of hashing -->
-                                <span *ngIf="password.errors?.['required'] ">Password is required</span>
-                                <span *ngIf="password.errors?.['minlength'] ">min character 6 is needed</span>
-                            </div>
-                        </div>
+                          
                           <div class="form-floating mb-3">
                             <input type="email" id="form5Example24" class="form-control custom-input" placeholder=" "
                              name="newemail" #newemail="ngModel" [(ngModel)]="user.newemail" pattern="[a-zA-Z0-9.-]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{3,}" required/>
@@ -59,7 +50,7 @@
             <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button"  data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                     <b class="pb-3">PHONE</b><br>
-                    <span class="PHONEDATA">01008989719</span>
+                    <span class="PHONEDATA">{{phone}}</span>
                 </button>
             </h2>
             <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
@@ -78,7 +69,7 @@
                         </div>
                         <div class="col form-floating">
                             <input type="text"  id="phoneNum" pattern="^(11|12|10|15)[0-9]{8}$"  class="form-control form-control-sm custom-input" placeholder=" "
-                             name="phoneNum" [(ngModel)]="user.phoneNum" #phoneNumm="ngModel" required >
+                             name="newphonenum" [(ngModel)]="user.phoneNum" #phoneNumm="ngModel" required >
                             <label for="phoneNum" class="custom-label">New Phone Number</label>
                             <div class="invalid-msg" *ngIf="phoneNumm.invalid && (phoneNumm.touched || phoneNumm.dirty) ">
                                 <span *ngIf="phoneNumm.errors?.['required']">phonenumber is required</span>
@@ -111,7 +102,7 @@
                         <div class="form-floating mb-3">
                             <input type="password" id="oldpass" class="form-control custom-input"
                              placeholder=" "  
-                             name="oldpassword" #oldpassword="ngModel"
+                             name="Currentpassword" #oldpassword="ngModel"
                             [(ngModel)]="user.password" required />
                             <label for="oldpass" class="custom-label">CURRENT PASSWORD</label>
                            <div class="invalid-msg" *ngIf="oldpassword.invalid && (oldpassword.touched || oldpassword.dirty)">
@@ -120,7 +111,7 @@
                           </div>
                           <div class="form-floating mb-3">
                             <input type="password" id="passtwo" class="form-control custom-input" placeholder=" " 
-                              name="newpassword" #newpassword="ngModel" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{6,}$"
+                              name="Newpassword" #newpassword="ngModel" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{6,}$"
                             [(ngModel)]="user.newpassword" required />
                             <label for="passtwo" class="custom-label">NEW PASSWORD</label>
                             <div class="invalid-msg" *ngIf="newpassword.invalid && (newpassword.touched || newpassword.dirty)">
@@ -142,10 +133,9 @@
     </div>
 </section>
 <section>
-        <a class="linkstyling">Sign Out</a>
- </section>
- <section>
-        <a class="linkstyling pb-4">Delete your account</a>
+        <a class="linkstyling" (click)="onSignOut()">Sign Out</a>
  </section>
  
-
+ <!-- <section>
+        <a class="linkstyling pb-4" (click)="deleteAccount()">Delete your account</a>
+ </section> -->

@@ -5,7 +5,6 @@ import { ConfirmationDialogComponentComponent } from '../confirmation-dialog-com
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Component, OnInit } from '@angular/core';
-
 import { CartServiceService } from '../../Services/cart-service.service';
 import { DecodingService } from '../../Services/decoding.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -14,7 +13,6 @@ import { Observable } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-
 
 
 
@@ -31,8 +29,10 @@ type Sizes = {
 })
 export class CartComponent implements OnInit{
   cartItems:Icart[]=[]
+  totalPrice!: number
      outofstock:boolean=false
      wishlistStatus: { [itemId: string]: boolean } = {};
+
   sizes: Sizes = {
     0: 'Small',
     1: 'Medium',
@@ -170,7 +170,8 @@ getTotalPrice(): number {
   }
   return this.cartItems.reduce((total, item) => {
     // Adjust the calculation according to your actual data structure
-    return total + (item.price * item.quantity);
+    this.totalPrice = total + (item.price * item.quantity)
+    return this.totalPrice ;
   }, 0);
 }
 

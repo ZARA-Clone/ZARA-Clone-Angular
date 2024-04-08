@@ -12,13 +12,14 @@ import { WarningComponent } from '../Components/warning/warning.component';
 import { EditUserInfoComponent } from '../Components/edit-user-info/edit-user-info.component';
 import { ChoosePaymentMethodComponent } from '../Components/choose-payment-method/choose-payment-method.component';
 import { CardDetailsComponent } from '../Components/card-details/card-details.component';
+import { CartComponent } from "../Components/cart/cart.component";
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, HeaderComponent, FooterComponent, HomeComponent, LoginComponent, ProductsBrowseComponent, SearchComponent, AboutussComponent, ProductDetailsComponent, WarningComponent, EditUserInfoComponent, ChoosePaymentMethodComponent, CardDetailsComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+    selector: 'app-root',
+    standalone: true,
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css',
+    imports: [RouterOutlet, HeaderComponent, FooterComponent, HomeComponent, LoginComponent, ProductsBrowseComponent, SearchComponent, AboutussComponent, ProductDetailsComponent, WarningComponent, EditUserInfoComponent, ChoosePaymentMethodComponent, CardDetailsComponent, CartComponent]
 })
 export class AppComponent {
   @Input() acceptingvaluefromhome!: boolean //hatst2bl feha value ayhaga

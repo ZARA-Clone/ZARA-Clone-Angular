@@ -26,6 +26,7 @@ import { UserListComponent } from '../Components/Dashboard/Users/user-list/user-
 import { UserDetailsComponent } from '../Components/Dashboard/Users/user-details/user-details.component';
 import { adminGuard } from '../Guards/admin.guard';
 import { OrderListComponent } from '../Components/Dashboard/Orders/order-list/order-list.component';
+import { SearchComponent } from '../Components/search/search.component';
 
 export const routes: Routes = [
     {
@@ -56,11 +57,12 @@ export const routes: Routes = [
     { path: 'Cart', component: CartComponent },
     { path: 'contactus', component: ConntactUsComponent },
     { path: 'userinfo', component: EditUserInfoComponent },
-    { path: 'productbrowse', component: ProductsBrowseComponent },
+    { path: 'productbrowse/:id', component: ProductsBrowseComponent },
     { path: 'signin', component: LoginComponent },
     { path: 'registration', component: RegistrationFormComponent },
     { path: 'verification', component: VerificationComponent },
     { path: 'cart', component: CartComponent },
-    { path: 'contactus', component: ConntactUsComponent }
+    { path: 'contactus', component: ConntactUsComponent },
+    { path:'search', component:SearchComponent}
 ];
 
