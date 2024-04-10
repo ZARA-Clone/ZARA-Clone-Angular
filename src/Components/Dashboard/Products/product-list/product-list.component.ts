@@ -23,7 +23,7 @@ export class ProductListComponent {
     this.getData(this.pageIndex - 1, this.pageSize)
   }
   getData(pageIndex: number, pageSize: number) {
-    this._prodductsService.getAllInPagination(pageIndex, pageSize)
+    this._prodductsService.getWithPagination(pageIndex, pageSize)
       .subscribe({
         next: (data) => {
           (this.totalCount = data.totalCount);

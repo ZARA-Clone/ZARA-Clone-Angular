@@ -7,35 +7,31 @@
   <header class=" p-3 text-dark " [ngClass]="{'stylingforHome': stylingforHOME }" >
   
     <div class="d-flex flex-wrap align-items-start justify-content-between">
-      <div class="bar" (click)="toggleDropdown()">
+      <div class="bar" (click)="GetAllCat();" (click)="toggleDropdown()">
         @if(!showDropdown){
           <i class="fa-solid fa-bars"></i>
         }
         @else {<i class="fa-solid fa-xmark"></i>}
       </div>
-      <div (click)="HomePage()">
+      <div>
           <img
             class="logo"
             src="https://www.logo.wine/a/logo/Zara_(retailer)/Zara_(retailer)-Logo.wine.svg"
-            [ngStyle]="{ 'border': showDropdown ? '1px solid black' : 'none', 'background-color': showDropdown ? 'white' : 'transparent' }"
+            [ngStyle]="{ 'border': showDropdown ? '1px solid black' : 'none', 'background-color': showDropdown ? 'white' : 'transparent' }"  (click)="HomePage()"
             />
             @if(showDropdown){
                 <div class="dropdown-content">
   
-                  <div class="headers p-3"><span class="m-3" routerLinkActive="active-route">WOMAN</span><span routerLinkActive="active-route">MAN</span><span class="m-3" routerLinkActive="active-route">KIDS</span></div>
+                  <div class="headers p-3">
+                    @for(cat of Categories; track cat){
+                      <span class="CatName m-3" (click)="GetAllBrands(cat.id)" routerLinkActive="active-route">{{cat.name}}</span>
+                    }
+                  </div>
                   <div>
                     <ul class="bg-white">
-                      <li>BESTSELLER</li>
-                      <li>TROUSERS</li>
-                      <li>JEANS</li>
-                      <li>SHIRTS</li>
-                      <li>LINEN</li>
-                      <li>T-SHIRTS</li>
-                      <li>HOODIES</li>
-                      <li>CARGO</li>
-                      <li>POLO SHIRTS</li>
-                      <li>SHORTS</li>
-                      <li>JACKETS</li>
+                      @for(brand of Brands; track brand){
+                        <li class="BrandName mt-3" (click)="RedirectToProductBrowse(brand)">{{brand.name}}</li>
+                      }
                     </ul>
                   </div>
                 </div>
@@ -46,7 +42,7 @@
       <div class="col-sm-3">
         <form class="d-flex">
           <input
-            type="search"
+            type="search" (click)="Search()"
             class="form-control form-control-dark me-2"
             placeholder="Search"
             id="searching"
@@ -55,26 +51,40 @@
       </div>
       <div class="burger" data-bs-toggle="dropdown"><i class="fa-solid fa-bars"></i></div>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">LOGIN</a>
-          <a class="dropdown-item" href="#">HELP</a>
-          <a class="dropdown-item" href="#">SHOPPING BAG(0)</a>
+          <a class="dropdown-item" (click)="GoToLogIn()">LOGIN</a>
+          <a class="dropdown-item" (click)="GoToContact()">HELP</a>
+          <a class="dropdown-item" (click)="GotoCart()">SHOPPING BAG</a>
       </div>
       <div class="tags">
         <ul
           class="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-row"
           style="list-style: none; margin-top: 0"
         >
+        @if(checklogging == false){
           <li class="nav-item mx-2">
-            <a class="nav-link active" aria-current="page" href="#">LOGIN</a>
+            <a class="nav-link active" aria-current="page"(click)="GoToLogIn()">LOGIN</a>
           </li>
+        }
+        @if(checklogging == true){
           <li class="nav-item mx-2">
-            <a class="nav-link active" aria-current="page" href="#">HELP</a>
+            <a class="nav-link active" aria-current="page" (click)="GoToUserInfo()">{{username}}</a>
           </li>
+        }
           <li class="nav-item mx-2">
-            <a class="nav-link active" aria-current="page" href="#"
-              >SHOPPING BAG(0)</a
-            >
+            <a class="nav-link active" aria-current="page" (click)="GoToContact()">HELP</a>
           </li>
+          @if(checklogging == false){
+            <li class="nav-item mx-2">
+            <a class="nav-link active" aria-current="page" (click)="GoToLogIn()">SHOPPING BAG</a>
+            </li>
+          }
+          @if(checklogging == true){
+            <li class="nav-item mx-2">
+            <a class="nav-link active" aria-current="page" (click)="GotoCart()">SHOPPING BAG</a>
+            </li>
+          }
+
+          
         </ul>
       </div>
     </div>

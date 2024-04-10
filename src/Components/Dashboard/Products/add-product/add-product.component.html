@@ -5,11 +5,26 @@
             <label for="name">Name:</label>
             <input formControlName="name" name="name" id="name" class="form-control" />
         </div>
+        @if(((name?.touched) || name?.dirty )){
+        @if(name?.errors?.['required']){
+        <div class="alert alert-danger">Name is required.</div>
+        }
+        @if(name?.errors?.['minlength']){
+        <div class="alert alert-danger">
+            Name must be at least 3 characters long.
+        </div>
+        }
+        }
         <div class="row">
             <label for="description">Description:</label>
             <input type="text" name="description" id="description" class="form-control" formControlName="description"
                 required />
         </div>
+        @if(description?.errors?.['maxlength']){
+        <div class="alert alert-danger">
+            Description must be at most 500 characters long.
+        </div>
+        }
         <div class="row">
             <label for="discount">Discount:</label>
             <input type="number" name="discount" id="discount" class="form-control" formControlName="discount" />
@@ -27,6 +42,11 @@
                 }
             </select>
         </div>
+        @if(brandId?.invalid && brandId?.touched){
+        <div class="alert alert-danger">
+            Brand must be selected
+        </div>
+        }
         <div formArrayName="sizes">
             <div *ngFor="let size of sizes.controls; let i = index">
                 <div [formGroupName]="i">
@@ -51,17 +71,12 @@
                 <div>
                     <input type="file" name="file" id="file" multiple accept="image/*" max="5"
                         (change)="onFileSelected($event)" />
-                    <label for="file">
-                        <div>
-                            <span class="text-info"> Browse </span>
-                        </div>
-                    </label>
                 </div>
             </div>
         </div>
         <div class="text-end mt-3">
             <a class="btn btn-secondary" href="/dashboard/products">Cancel</a>
-            <button class="btn btn-primary mx-2" type="submit">Create</button>
+            <button class="btn btn-primary mx-2" type="submit" [disabled]="productForm.invalid">Create</button>
         </div>
     </form>
 </div>

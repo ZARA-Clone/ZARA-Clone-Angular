@@ -1,86 +1,85 @@
 form {
-    display: flex;
-    border-radius: 4px;
-    padding: 50px;
-    background-color: transparent;
-    flex-direction: column;
-    box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.1);
-    color: #0b0b0b;
-  }
-  
-  .form-group {
-    margin: 6px;
-  }
-  
-  .btncolor {
-    background-color: white;
-    margin-top: 11px;
-    padding: 5px;
-    width: 98%;
-    margin-left: 5px;
-    border: 1px solid;
-    border-radius: 3px;
-  }
-  
-  .btncolor:hover {
-    color: rgba(48, 44, 44, 0.343);
-  }
-  
-  .container {
-  
-    gap: 190px;
-    flex-wrap: wrap;
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 50px 100px;
-  }
-  
-  .registerText {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-  }
-  
-  .invalid-msg {
-    color: rgb(163, 70, 70);
-    font-size: 12px;
-  }
-  
- 
-  .title {
-    font-size: 42px;
-    font-weight: 700;
-    line-height: 50px;
-  }
-  
-  .subtitle {
-    font-size: 18px;
-    font-weight: 400;
-    color: rgba(8, 7, 7, 0.716);
-  }
-  
-  .shopbutton {
-    margin-top: 15px;
-    padding: 10px;
-    border-radius: 12px;
-    background-color: black !important;
-    color: #fff;
-    border: 0px !important;
-  }
-  
-  label {
-    font-size: 17px;
-    font-weight: 500;
-  }
-  
-  .formtitle {
-    font-weight: 700;
-    font-size: 25px;
-    text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
-  }
-  
+  display: flex;
+  border-radius: 4px;
+  padding: 50px;
+  background-color: transparent;
+  flex-direction: column;
+  box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.1);
+  color: #0b0b0b;
+}
+
+.form-group {
+  margin: 6px;
+}
+
+.btncolor {
+  background-color: white;
+  margin-top: 11px;
+  padding: 5px;
+  width: 98%;
+  margin-left: 5px;
+  border: 1px solid;
+  border-radius: 3px;
+}
+
+.btncolor:hover {
+  color: rgba(48, 44, 44, 0.343);
+}
+
+.container {
+
+  gap: 190px;
+  flex-wrap: wrap;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 100px;
+}
+
+.registerText {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.invalid-msg {
+  color: rgb(163, 70, 70);
+  font-size: 12px;
+}
+
+
+.title {
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 50px;
+}
+
+.subtitle {
+  font-size: 18px;
+  font-weight: 400;
+  color: rgba(8, 7, 7, 0.716);
+}
+
+.shopbutton {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 12px;
+  background-color: black !important;
+  color: #fff;
+  border: 0px !important;
+}
+
+label {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.formtitle {
+  font-weight: 700;
+  font-size: 25px;
+  text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+}

@@ -1,0 +1,35 @@
+<div class="container-fluid ">
+    <div class="row">
+        @if(user){
+        <div>
+            UserName:<h2 class="text-uppercase">{{user.userName}}</h2>
+            Email: <h4>{{user.email}}</h4>
+        </div>
+        <div class="p-3 mt-3">
+            <h3 class="fs-3">User Orders</h3>
+            <table class="table table-hover">
+
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Order Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (item of user.orders; track $index) {
+                    <tr>
+                        <td>{{item.id}}</td>
+                        <td>{{item.orderDate}}</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        }
+        <div class="row">
+            <div class="text-end">
+                <a class="btn btn-secondary" routerLink="/dashboard/users">cancel</a>
+            </div>
+        </div>
+    </div>
+</div>

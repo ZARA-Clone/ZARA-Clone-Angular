@@ -1,5 +1,5 @@
 
-  body{
+body{
     background: #ddd;
     min-height: 100vh;
     vertical-align: middle;
@@ -144,7 +144,7 @@ input:focus::-webkit-input-placeholder
 }
 .mark {
     background-color: white; 
-    color: black; 
+    
     padding: 5px 10px; 
     cursor: pointer; 
     border: none; 

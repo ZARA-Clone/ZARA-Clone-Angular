@@ -1,22 +1,38 @@
-import { NgClass } from '@angular/common';
-import { Component } from '@angular/core';
+import { CommonModule, NgClass } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import * as emailjs from 'emailjs-com';
 import Swal from 'sweetalert2';
+import { FormsModule } from '@angular/forms';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
+import { ConntactUsComponent } from '../conntact-us/conntact-us.component';
+import { AboutussComponent } from '../aboutuss/aboutuss.component';
+import { filter } from 'rxjs';
+import { Ifooter } from '../../Models/ifooter';
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [NgClass],
+  imports: [NgClass,CommonModule,FormsModule,RouterModule,ConntactUsComponent,AboutussComponent],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.css'
 })
-export class FooterComponent {
+export class FooterComponent implements OnInit {
+footeremail:Ifooter={email:''}
   value:boolean=false;
 viewButton(){
     this.value=true;
 }
-constructor(){
+
+constructor(private router:Router){
   emailjs.init("Cga4GFBNn2Hqi1d9h");
 }
+ngOnInit(): void {
+  this.router.events.pipe(
+    filter(event => event instanceof NavigationEnd)
+  ).subscribe(() => {
+    window.scrollTo(0, 0);
+  });
+}
+
 
 sendMail() {
   var menna = (document.getElementById("form5Example24") as HTMLInputElement)

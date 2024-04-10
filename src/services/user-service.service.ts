@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Iuserdata } from '../Models/iuserdata';
 import emailjs from '@emailjs/browser';
-
+import { environment } from '../environments/environment';
 // import emailjs from '@emailjs/browser';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -13,7 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class UserService {
  
-
+  url:string=environment.BASEURL
  private verificationCode :string='';
  private userdata:Iuserdata|null=null;
 
@@ -61,10 +61,17 @@ export class UserService {
 
 
 constructor(private http: HttpClient) { }
-apiUrl = 'http://localhost:5098/api/Signup'; 
+apiUrl = this.url+'/api/Signup'; 
   checkEmailExists(userData: any): Observable<boolean> {
     return this.http.post<boolean>(`${this.apiUrl}/checkEmailExists`, userData);
   }
+
+
+  checkNameExists(userData: any): Observable<boolean> {
+    return this.http.post<boolean>(`${this.apiUrl}/checkNameExists`, userData);
+  }
+
+
 
   registerUser(userData: any): Observable<any> {
     
@@ -92,11 +99,11 @@ generateVerificationCode(): string {
 
 
 sendVerificationEmail(email: string, verificationCode: string):void{
-emailjs.init("Z_MssLH-KOlb91jQ_")
-    emailjs.send("service_01w94yh","template_mi4ydj5",{
-   store: "dddd",
+emailjs.init("gV5dueFjZf9GsfB1b")
+    emailjs.send("service_zvq24uc","template_bciuln6",{
+   store: "zara store",
    to_name: "you",
-   from_name: "store",
+   from_name: " zara store",
    from_email: "nadinenabilkhalil192@gmail.com",
    subject: "gh",
    message: `Your verification code is: ${verificationCode}`,

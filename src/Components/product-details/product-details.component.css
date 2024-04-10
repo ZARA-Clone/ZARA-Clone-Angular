@@ -78,15 +78,15 @@ ul{
     font-size: 12px;
     color: gray;
 }
-.disabled {
-    opacity: 0.3; /* Lower opacity */
-    pointer-events: none; /* Disable click events */
+ .disabled {
+    opacity: 0.3; 
+    pointer-events: none; 
 }
 
 .selected {
   background-color: black;
   color: white;
-}
+} 
 .addbutton{
   height: 10%;
   border: 1px solid black;
@@ -200,6 +200,7 @@ ul{
 .nameandprice div{
     font-size: 10px ;
     font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
   }
   .productname:hover{
     cursor: pointer;

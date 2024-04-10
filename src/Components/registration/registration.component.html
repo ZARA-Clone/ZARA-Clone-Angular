@@ -3,7 +3,7 @@
   <div class="registerText col-sm-12 col-md">
    <div class="title"> Register To our  Fashion Store </div>
    <div class="subtitle">We Have Been Working to create the new version of our fashion store. it comes with alot of features check it out now</div>
-    <button class="btn btn-secondary col-5 shopbutton">Go To Shop</button>
+    <button  class="btn btn-secondary col-5 shopbutton" (click)="gotohome()">Go To HomePage</button>
   
   </div>
   <form class="col-sm-12 col-md" (ngSubmit)="onSubmit(signupform)" #signupform="ngForm"  >
@@ -13,16 +13,23 @@
           <input type="text" class="form-control" id="Name" [(ngModel)]="Name"  name="name" placeholder="enter your name" required #username="ngModel"  pattern="{{ namePattern }}"  >
         </div>
 
-        @if(username.invalid&&username.dirty&&username.touched){
-          <span class="invalid-msg"> username is required</span>
+       
+        @if(showErrorMessages(username)) {
+          @if(showPatternErrorMessage(username)) {
+            <span class="invalid-msg">Username should not contain numbers or special characters or less than 3 characters</span>
+          }
+          @if(showRequiredErrorMessage(username) && !showPatternErrorMessage(username)) {
+            <span class="invalid-msg">Username is required</span>
+          }
         }
+        
         
         <div class="form-group">
          <label for="password">Password:</label>
          <input type="password" class="form-control" id="Password" [(ngModel)]="Password"  name="password" placeholder="enter password" required #password="ngModel"   pattern="{{ passwordPattern }}">
         </div>
   
-  @if(password.invalid&&password.dirty&&password.touched){ <span class="invalid-msg"> Password is required</span>}
+  @if(password.invalid&&password.dirty&&password.touched){ <span class="invalid-msg"> Password must contain special character,capital letter,number</span>}
        
   
   
@@ -49,9 +56,9 @@
 
          <div class="form-group">
           <label for="name">Address:</label>
-          <input type="text" class="form-control" id="Address" [(ngModel)]="Address"  name="Address" placeholder="enter your full address " required  pattern="{{ namePattern }}"  >
+          <input type="text" class="form-control" id="Address" [(ngModel)]="Address"  name="Address" placeholder="enter your full address " #address="ngModel"     required  pattern="[A-Za-z0-9\s\-,\.]{10,100}"  >
         </div>
-
+        @if(address.invalid&& address.dirty&& address.touched){<span class="invalid-msg">Please Enter  a valid Address must contain spaces ,at least 4 characters</span>}
 
 
          <div class="form-group">
@@ -61,7 +68,7 @@
               <span class="input-group-text" style="min-width: 80px; min-height: 50px; border-radius: 8px 0px 0px 8px;" >{{SelectedCountryCode}}</span >
   
             </div>
-            <input type="text" class="form-control" id="telephone" [(ngModel)]="phone"  name="telephone" placeholder="Enter your telephone number"   #telephone="ngModel" [pattern]="getTelephonePattern()">
+            <input type="text" class="form-control" id="telephone" [(ngModel)]="phone"  name="telephone" placeholder="Enter your telephone number" required  #telephone="ngModel" [pattern]="getTelephonePattern()">
           </div>
          </div>
          @if(telephone.invalid&&telephone.dirty &&telephone.touched){ <span class="invalid-msg"> Please Enter a valid Telephone Number</span>}
