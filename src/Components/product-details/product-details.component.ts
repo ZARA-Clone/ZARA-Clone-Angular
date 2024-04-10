@@ -43,7 +43,7 @@ ngOnInit(): void {
       this.httpproduct.GetProductByBrandId(this.product.brandId).subscribe((p) => { 
         this.products = p;
         this.newlife = this.products.map((p: any) => ({ ...p, showDetails: false, wishlist: false }));
-      
+        this.newlife = this.newlife.filter((prod: any) => prod.id !== this.product.id);
         
         const token = localStorage.getItem('token');
         if(token){

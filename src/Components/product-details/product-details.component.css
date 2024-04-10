@@ -196,6 +196,14 @@ ul{
   position: relative;
   width: 100%;
   border: 1px solid black;
+  overflow: hidden;
+}
+.productname {
+  display: inline-block;
+  max-width: calc(100% - 40px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .nameandprice div{
     font-size: 10px ;
