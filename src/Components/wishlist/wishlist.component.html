@@ -1,26 +1,36 @@
 <div class="container">
-    <div class="row w-25 d1">
-      <p>Favourite</p>
-    </div>
-    <div class="row w-25 d2">
-      <p> Favourite <button  style="background-color: white; border:0px ;"> <i class="fa-regular fa-bookmark"></i></button></p>
-    </div>
-    <div class="row">
-    </div>
-     <div class="row">
-    </div>
-    </div>
-    <div class="wishheader">
-      <p class="wishheader-p">bashira</p>
-    </div>
-    <div class="parent">
-        @for(product of productswishlist ; track product.id){
-      <div  class="wishlist">
-        <img class="wishlistimg" [src]="product.image">
-        <div class="container" style="border: 1px solid black;"> <div class="row " style="height: 50px;"> <p class="paragraph">Lorem, ipsum dolor sit amet consectetur adipisicing dolores</p></div>
-        <div class="row"><button style="background-color: white; border:0px ;" (click)="removeproduct(product)"><i class="fa-solid fa-bookmark"></i></button></div>
+  <div class="head row w-25 d1">
+    <a href="../cart" style="text-decoration: none; color:black">
+      <p>SHOPPING BAG</p>
+    </a>
+  </div>
+  <div class="head row w-25 d2">
+    <a href="../wishlist" style="text-decoration: none; color:black">
+      <p>FAVOURITES <button style="background-color: white; border:0px;"> <i class="fa-regular fa-bookmark"></i></button></p>
+    </a>
+  </div>
+  <div class="row"></div>
+  <div class="row"></div>
+</div>
+<div class="wishheader">
+  <p class="wishheader-p">YOUR WISHLIST</p>
+</div>
+<div class="parent" >
+  @for(product of productswishlist ; track product.id) {
+    <div class="wishlist" (click)="onclick(product.id)">
+      <img class="wishlistimg" [src]="product.imgUrl">
+      <div class="container" style="border: 1px solid black;">
+        <div class="row" style="height: 63px;">
+          <p class="paragraph">
+            <p>{{ product.name }}</p><br><p>{{product.price}}</p>
+        </div>
+        <div class="row">
+          <button style="background-color: white; border:0px;" (click)="removeproduct(product)">
+            <i class="fa-solid fa-bookmark"></i>
+          </button>
+        </div>
       </div>
-            <button class="addbtn">ADD</button>
-      </div>
-    }
     </div>
+    
+  }
+</div>

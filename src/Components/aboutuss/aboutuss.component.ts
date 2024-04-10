@@ -4,13 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DialogModule } from 'primeng/dialog';
 
-// @Component({
-//   selector: 'app-aboutuss',
-//   standalone: true,
-//   imports: [FormsModule,CommonModule,DialogModule],
-//   templateUrl: './cart.component.html',
-//   styleUrl: './cart.component.css'
-// })
 
 @Component({
   selector: 'app-aboutuss',
@@ -51,7 +44,7 @@ export class AboutussComponent {
 
   getFilteredItems(email: string): string[] {
 
-    return ['Woman', 'Man', 'Kids' , 'Beauty'];
+    return ['Woman', 'Man', 'Kids' ];
   }
 
   acceptTerms: boolean = false;
@@ -65,20 +58,7 @@ ToogleTerms() {
     this.acceptTerms = !this.acceptTerms;
     console.log(this.acceptTerms);
   }
-  // checkInputs() {
-     
-  //      if (!this.acceptTerms) {
-  //       this.showTermsDialog = true;
-  //       return;
-  //     }
-  //     else if (!this.isSelected) {
-  //       this.showErrorDialog = true;
-  //       return;
-  //     }
-  //     else {
-  //       this.router.navigate(['/confirmfemail'], { queryParams: { data: this.inputData } });
-  //      }
-  //   }
+
   checkInputs() {
     if (!this.acceptTerms) {
       this.showTermsDialog = true;
@@ -90,10 +70,7 @@ ToogleTerms() {
   }
   
   
-    printInputData() {
-      this.router.navigate(['/confirmfemail'], { queryParams: { data: this.inputData } });
-    }
-
+   
   selectItem(item: string): void {
     this.selectedItems[item] = !this.selectedItems[item];
   }
@@ -102,7 +79,7 @@ ToogleTerms() {
     this.isButtonClicked = true;
   }
 
-  printSelectedItems(): void {
+  printSelectedItems(): void { 
     this.selectedItemList = Object.keys(this.selectedItems).filter(key => this.selectedItems[key]);
     this.printClicked = true;
   }

@@ -1,41 +1,46 @@
 <div class="container">
-    <div class="form">
-    <p class="change">CHANGE PASSWORD</p>
+  <div class="form">
+<form class="flex flex-col text-sm justify-evenly" (ngSubmit)="resetPassword()" #resetForm="ngForm">
+  <div class="flex flex-col my-1">
+   
+    <input  class="form-control " type="password" id="password" name="password" required [(ngModel)]="password" placeholder="NEW PASSWORD" ><br>
 
-    <form >
-        <div class="row g-3" >
-            <div class="col-md-6 ">
-                <input formControlName="password" type="password" id="password" name="password" class="form-control" placeholder=" New Password">
-                <div *ngIf="loginForm.get('password')?.errors && loginForm.get('password')?.touched" class="p-1 small">
-                    <div class="error-container">
-                        <img src="../../../assets/erroricon2.png" alt="Error Icon" class="error-icon">
-                    <p class="error" *ngIf="loginForm.get('password')?.getError('required')">Required field</p>
-                    </div>
-                    <p class="error" *ngIf="loginForm.get('password')?.getError('pattern')"></p>
-                </div>
-     
-            </div>
-        </div>
-    </form>
-    </div>
-</div>
-<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">SUCCESS BASHIRAA</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus odit deserunt corporis fugit numquam
-          vitae ut eligendi eius consequatur? Commodi corporis perspiciatis eos explicabo, laudantium labore amet quam
-          quisquam dignissimos!</p>
-          <div style="text-align: center;margin: 5px;">      
-            <button class="btn btn-primary" data-bs-dismiss="modal">OK</button>
-          </div>
-      </div>
+
+    <div *ngIf="resetForm.controls['password'].invalid && resetForm.controls['password'].touched" class="text-red-500 mt-1 text-xs">
+      New Password is required
     </div>
   </div>
-</div>
+  <div class="flex flex-col my-1">
+  
+    <input class="form-control " type="password" id="confirmPassword" name="confirmPassword" required [(ngModel)]="confirmPassword" placeholder="CONFIRM NEW PASSWORD"><br>
 
-<button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Open Modal</button>
+    <div *ngIf="resetForm.controls['confirmPassword'].invalid && resetForm.controls['confirmPassword'].touched" class="text-red-500 mt-1 text-xs">
+      Confirmation is required
+    </div>
+  </div>
+  <button [disabled]="resetForm.invalid" class="bg-yellow-300 rounded-lg mx-1 hover:bg-yellow-400 p-2 mt-5" type="submit"  (click)="ShowDialog()" >SAVE</button>
+</form>
+
+
+<p-dialog header="Success" [(visible)]="showConfirmDialog" [modal]="true" [style]="{ width: '50vw' }">
+  <p>
+    Password has been successfully reset.
+  </p>
+  <button type="button" class="subbtn w-100" (click)="CloseAllDialogs()">ACCEPT</button>
+</p-dialog>
+<p-dialog header="Error" [(visible)]="showErrorDialog" [modal]="true" [style]="{ width: '50vw' }">
+  <p>
+    Passwords do not match.
+  </p>
+  <button type="button" class="subbtn w-100" (click)="CloseAllDialogs()">ACCEPT</button>
+</p-dialog>
+<!-- validate password dialog -->
+<p-dialog header="Error" [(visible)]="showPassErrorDialog" [modal]="true" [style]="{ width: '50vw' }">
+  <p>
+    Passwords Must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number and one special character.
+  </p>
+  <button type="button" class="logbtn w-100" (click)="CloseAllDialogs()">ACCEPT</button>
+</p-dialog>
+
+</div>
+</div>

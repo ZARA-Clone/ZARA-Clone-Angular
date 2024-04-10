@@ -1,0 +1,125 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+
+.container {
+    width: 60%;
+    height: 100%;
+    padding: 20px;
+    margin-left: 130px;
+    position: relative;
+}
+
+h1 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.need-account {
+    font-size: 14px;
+    margin-bottom: 10px ;
+    text-transform: uppercase;
+    color: #666;
+    margin-left: 6px;
+}
+.logbtn{
+    margin: 25px 2px;
+    color: #666;
+     
+}
+
+a {
+    color:rgb(122, 122, 122) ;
+    text-decoration: underline;
+    display: block;
+    margin: 2px 2px ;
+    font-size: 13px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+.conbtn{
+    display: block;
+    margin:50px 0px 0px 0px;
+}
+
+
+
+input[type="email"],
+input[type="password"] {
+    width: 70%;
+    padding: 10px;
+   margin-left: 5px;
+   padding-left: 5px;
+    margin-bottom: 15px;
+   border: none;
+   border-bottom: 1px solid #666;
+   display: block;
+
+}
+
+
+button {
+    background-color: white;
+    color:rgb(122, 122, 122);
+    width: 70%;
+    padding: 5px 20px;
+    border: 1px solid rgb(122, 122, 122) ;
+    border-radius: 3px;
+    cursor: pointer;
+    margin: 5px;
+    text-transform: uppercase;
+}
+button:hover {
+    color:lightgray;
+}
+/* #logo{
+    width: 300px;
+    margin-left: -14px;
+}
+#logo img{
+    width:100% !important ;
+} */
+input::placeholder{
+    transition: all 0.6s;
+    color: rgb(201, 195, 195);
+}
+input:focus::placeholder{
+    opacity: 0;
+
+}
+
+.register{
+    position: absolute;
+    top: 17px;
+    left: 50%;
+}
+@media(max-width:767px){
+    .register{
+        position: static;
+    }
+}
+.error-border {
+    border-color: red !important;
+}
+.error{
+    color: red;
+    margin: -9px 0px;
+    font-size:10px;
+  
+}
+.error-container {
+    display: flex;
+    align-items: center;
+}
+
+
+
+.error-icon {
+    width: 10px; 
+    margin-right: 5px; 
+}

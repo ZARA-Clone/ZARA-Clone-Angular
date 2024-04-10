@@ -3,18 +3,34 @@
     <div class="form">
     <p class="reset">RESET PASSWORD</p>
     <h4>We will send you an email with instructions on how to recover it</h4>
-    <form >
+    <form [formGroup]="myform" class="flex flex-col text-sm" (ngSubmit)="onclick()">
         <div class="row g-3" >
             <div class="col-md-6 ">
-                <input formControlName="email" type="email" id="email" name="email" class="form-control" placeholder="E-mail">
-                <div *ngIf="loginForm.get('email')?.errors && loginForm.get('email')?.touched" class="p-1 small">
+                <input formControlName="email" type="email" id="email" name="email" class="form-control" placeholder="E-MAIL">
+                <div *ngIf=" myform.get('email')?.errors &&  myform.get('email')?.touched" class="p-1 small">
                     <div class="error-container">
-                        <img src="../../../assets/erroricon2.png" alt="Error Icon" class="error-icon">
-                    <p class="error" *ngIf="loginForm.get('email')?.getError('required')">Required field</p>
-                    <p class="error" *ngIf="loginForm.get('email')?.getError('email')">Enter a valid email address</p>
+                       
+                    <p class="error" *ngIf=" myform.get('email')?.getError('required')">Required field</p>
+                    <p class="error" *ngIf=" myform.get('email')?.getError('email')">Enter a valid email address</p>
                     </div>
                 </div>
-        <button type="button" class="conbtn">CONTINUE</button>
+       <!-- <button type="submit" class="conbtn" [routerLink]="['/changepass']">CONTINUE</button> -->
+       <button type="submit" class="conbtn" (click)="ShowDialog()">CONTINUE</button>
+
+      <p-dialog header="Success" [(visible)]="showConfirmDialog" [modal]="true" [style]="{ width: '50vw' }">
+        <p>
+          Email has been sent to your email address. Please check your email and follow the instructions to reset your password.
+        </p>
+        <button type="button" class="subbtn w-100" (click)="[CloseAllDialogs(),redirecttochngepass()]">ACCEPT</button>
+      </p-dialog>
+      <!-- Invalid Password Dialog -->
+        <p-dialog header="Error" [(visible)]="showErrorDialog" [modal]="true" [style]="{ width: '50vw' }">
+            <p>
+              Please enter a valid email address.
+            </p>
+        <button type="button" class="subbtn w-100" (click)="CloseAllDialogs()">ACCEPT</button>
+        </p-dialog>
+
             </div>
         </div>
     </form>

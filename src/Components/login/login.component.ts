@@ -3,23 +3,27 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
+import { DialogModule } from 'primeng/dialog';
 import { DecodingService } from '../../Services/decoding.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [CommonModule,ReactiveFormsModule,RouterModule,DialogModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
 
-  loginForm: FormGroup = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required])
-  });
-
-
+  showErrorDialog: boolean = false;
+  loginForm:FormGroup=new FormGroup({
+    email:new FormControl('',
+    [Validators.required,
+      Validators.email] ),
+    password: new FormControl('', [
+      Validators.required,
+     ])
+    });
   constructor(private _AuthService: AuthService, private _Router: Router
     , private decodingService: DecodingService) { }
   handleForm(): void {
@@ -42,10 +46,23 @@ export class LoginComponent {
           }
         },
         error: (err) => {
-          console.log(err);
+          this.showErrorDialog=true;
         }
       });
     }
   }
 }
 
+onclick(){
+
+  this.router.navigate(['/registration']);
+}
+
+CloseAllDialogs() {
+
+ 
+  this.showErrorDialog = false;
+  
+}
+
+  }

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IProduct } from '../Models/iproduct';
 import { Observable, map } from 'rxjs';
+import { IproductBrowse } from '../Models/IproductBrowse';
 
 @Injectable({
   providedIn: 'root'
@@ -9,21 +10,20 @@ import { Observable, map } from 'rxjs';
 export class SearchService {
 
   constructor(private http:HttpClient) { }
-  getallproduct():Observable<IProduct[]>{
-    return this.http.get<IProduct[]>('https://fakestoreapi.com/products')
+  getallproduct():Observable<IproductBrowse[]>{
+    return this.http.get<IproductBrowse[]>('https://localhost:7248/api/Products/getallproducts')
   }
-  searchProduct(term:string):Observable <IProduct[]>{
+  searchProduct(term:string):Observable <IproductBrowse[]>{
     return this.http
-    .get<IProduct[]>(`https://fakestoreapi.com/products`)
+    .get<IproductBrowse[]>(`https://localhost:7248/api/Products/getallproducts`)
     .pipe(
       map((products) => {
         if (!term) {
           return products;
         } else {
           return products.filter((product)=>{
-            let titlematch= product.title&& product.title.toLowerCase().includes(term.toLowerCase());
-            let categorymatch= product.category&&product.category.toLowerCase().includes(term.toLowerCase());
-            return titlematch || categorymatch;
+            let titlematch= product.name&& product.name.toLowerCase().includes(term.toLowerCase());
+            return titlematch;
           })
         
         }
