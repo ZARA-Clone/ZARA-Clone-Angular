@@ -149,6 +149,10 @@ hideDiv(p:any){
       }
     }
   AddToWishList(id: number) {
+    const token = localStorage.getItem('token');
+    if(token == null){
+        this.router.navigate(['/signin']);
+      }else{
     this.httpproduct.AddToWishList(id).subscribe((p) => {
       console.log(p);
       Swal.fire({
@@ -159,6 +163,7 @@ hideDiv(p:any){
       });
       this.RecallWishList();
     })
+  }
 
 
   }
