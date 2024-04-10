@@ -51,18 +51,16 @@ export class LoginComponent {
       });
     }
   }
-}
+  onclick(){
 
-onclick(){
-
-  this.router.navigate(['/registration']);
+  this._Router.navigate(['/registration']);
 }
 
 CloseAllDialogs() {
-
- 
   this.showErrorDialog = false;
-  
+}
 }
 
-  }
+
+
+
