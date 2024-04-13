@@ -13,7 +13,12 @@
                 </tr>
             </thead>
             <tbody>
-                @for (order of orders; track $index) {
+                @for (order of orders | paginate:{
+                id:"orders-pagination",
+                itemsPerPage:pageSize,
+                currentPage:pageIndex,
+                totalItems:totalCount
+                } ; track order.id; let i = $index) {
                 <tr>
                     <td>{{order.id}}</td>
                     <td>{{order.userName}}</td>
@@ -29,3 +34,6 @@
         </table>
     </div>
 </div>
+<pagination-controls [responsive]=" true" boundary-links="true" (pageChange)="onPageChange($event)"
+    id="orders-pagination" class="text-center" [maxSize]="10">
+</pagination-controls>
