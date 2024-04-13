@@ -4,21 +4,23 @@
             <thead>
                 <tr>
                     <th>No.</th>
+                    <th>Order Date</th>
                     <th>User Id</th>
                     <th>User Name</th>
-                    <th>Order Date</th>
-                    <th>Total Price</th>
+                    <th>User Address</th>
                     <th>Phone </th>
+                    <th>Total Price</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>{{order.id}}</td>
+                    <td>{{order.orderDate}}</td>
                     <td>{{order.userId}}</td>
                     <td>{{order.userName}}</td>
-                    <td>{{order.orderDate}}</td>
-                    <td>{{order.totalPrice}}</td>
+                    <td>{{order.address}}</td>
                     <td>{{order.phone}}</td>
+                    <td>{{order.totalPrice}}</td>
                 </tr>
             </tbody>
         </table>
@@ -30,18 +32,24 @@
                     <th>Id</th>
                     <th>Name</th>
                     <th>Brand</th>
+                    <th>Quantity</th>
                     <th>Price</th>
+                    <th>Discount</th>
+                    <th>Image</th>
                 </tr>
             </thead>
             <tbody>
+                @for (product of order.orderProducts; track $index) {
                 <tr>
-                    @for (product of order.orderProducts; track $index) {
-                    <td>{{product.id}}</td>
+                    <td>{{product.productId}}</td>
                     <td>{{product.name}}</td>
                     <td>{{product.brandName}}</td>
+                    <td>{{product.quantity}}</td>
                     <td>{{product.price}}</td>
-                    }
+                    <td>{{product.discount}}</td>
+                    <td><img src={{product.imageUrl}} style="width: 50px; height: 50px;"></td>
                 </tr>
+                }
                 <tr></tr>
             </tbody>
         </table>

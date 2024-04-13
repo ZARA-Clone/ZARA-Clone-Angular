@@ -27,6 +27,7 @@
                     <td>{{order.totalPrice}}</td>
                     <td>
                         <button class="btn btn-info mx-2" routerLink="details/{{order.id}}">Details</button>
+                        <button class="btn btn-danger" (click)="delete(order.id)">Delete</button>
                     </td>
                 </tr>
                 }
@@ -35,5 +36,5 @@
     </div>
 </div>
 <pagination-controls [responsive]=" true" boundary-links="true" (pageChange)="onPageChange($event)"
-    id="orders-pagination" class="text-center" [maxSize]="10">
+    id="orders-pagination" class="text-center" [maxSize]="5">
 </pagination-controls>

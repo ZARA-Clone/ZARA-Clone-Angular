@@ -15,7 +15,7 @@ export class UserListComponent {
   users: any
   totalCount: number = 0
   pageIndex: number = 1
-  pageSize: number = 2
+  pageSize: number = 10
   currentPage: number = 0;
   constructor(private _userService: UsersService) {
     this.getUsers(this.pageIndex - 1, this.pageSize)

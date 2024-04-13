@@ -25,4 +25,7 @@ export class OrdersService {
     return this._httpClient.get<IOrderListDto>(`${this.URL}?pageIndex=${pageIndex}&pageSize=${pageSize}`)
   }
 
+  delete(id: number) {
+    return this._httpClient.delete(`${this.URL}/${id}`);
+  }
 }

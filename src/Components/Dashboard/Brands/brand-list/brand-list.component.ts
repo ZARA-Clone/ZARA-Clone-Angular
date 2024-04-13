@@ -15,7 +15,7 @@ export class BrandListComponent {
   brands: any[] = []
   totalCount: number = 0
   pageIndex: number = 1
-  pageSize: number = 2
+  pageSize: number = 10
   currentPage: any;
 
   constructor(

@@ -15,7 +15,7 @@ export class OrderListComponent {
   orders: any
   totalCount: number = 0
   pageIndex: number = 1
-  pageSize: number = 2
+  pageSize: number = 10
   currentPage: number = 0;
   constructor(private _orderService: OrdersService) {
     this.getOrders(this.pageIndex - 1, this.pageSize)
@@ -38,5 +38,18 @@ export class OrderListComponent {
   onPageChange(event: any) {
     this.pageIndex = event
     this.getOrders(this.pageIndex - 1, this.pageSize)
+  }
+
+  delete(id: number) {
+    if (confirm("Are you sure you want to delete this Order?")) {
+      this._orderService.delete(id).subscribe({
+        next: () => {
+          this.getOrders(this.pageIndex - 1, this.pageSize);
+        },
+        error: (error) => {
+          console.log(error)
+        }
+      })
+    }
   }
 }
