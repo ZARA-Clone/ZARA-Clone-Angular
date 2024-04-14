@@ -15,22 +15,21 @@
 <div class="wishheader">
   <p class="wishheader-p">YOUR WISHLIST</p>
 </div>
-<div class="parent" >
+<ul class="product-list">
   @for(product of productswishlist ; track product.id) {
-    <div class="wishlist" (click)="onclick(product.id)">
-      <img class="wishlistimg" [src]="product.imgUrl">
-      <div class="container" style="border: 1px solid black;">
-        <div class="row" style="height: 63px;">
-          <p class="paragraph">
-            <p>{{ product.name }}</p><br><p>{{product.price}}</p>
-        </div>
-        <div class="row">
-          <button style="background-color: white; border:0px;" (click)="removeproduct(product)">
-            <i class="fa-solid fa-bookmark"></i>
-          </button>
-        </div>
+          <li>
+    <div class="imgandadd">
+      <div class="image-container">
+        <img (click)="RedirectToProductDetails(product.id);" style="cursor: pointer;" src="{{product.imgUrl}}">
       </div>
     </div>
-    
-  }
-</div>
+    <div class="nameandprice  p-2">
+      <div class="productname" (click)="RedirectToProductDetails(product.id);" style="display: inline-block;"><a>{{product.name}}</a></div>
+      <div class="bookmarkalso">
+          <div (click)="removeproduct(product)"><i class="fa-solid fa-bookmark"></i></div>
+        </div>
+      <div class="productprice">{{product.price | egp}}</div>
+    </div>
+  </li>
+}
+</ul>

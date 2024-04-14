@@ -5,11 +5,12 @@ import { WishlistService } from '../../Services/wishlist.service';
 import { IProduct } from '../../Models/iproduct';
 import { Router } from '@angular/router';
 import { Size } from '../../Enums/Size';
+import { EgpPipe } from '../../Pipes/egp.pipe';
 
 @Component({
   selector: 'app-wishlist',
   standalone: true,
-  imports: [],
+  imports: [EgpPipe],
   templateUrl: './wishlist.component.html',
   styleUrl: './wishlist.component.css'
 })
@@ -37,7 +38,9 @@ deleteFromHtml(product: IProduct): void {
     this.productswishlist.splice(index, 1);
   }
 }
-
+ RedirectToProductDetails(id: number) {
+    this.router.navigate(['/product', id]);
+  }
 onclick(id: number) {
   this.router.navigate(['/product', id]);
 }

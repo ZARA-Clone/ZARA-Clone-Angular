@@ -1,22 +1,19 @@
-<input class="form-control mb-4" placeholder="Search" [(ngModel)]="term" (ngModelChange)="search()" />
-<div class="container" >
-  <div class="product-container">
-    @if (products.length === 0){
+<input class="form-control mb-4" placeholder="Search" [(ngModel)]="term" (ngModelChange)="search()" autofocus/>
+    <ul class="product-list">
+      @if (products.length === 0){
     <h3>No products match your search criteria</h3>
     }
     @for (product of products ;track product.id){
-    <div class="card text-center m-3" style="width: 23rem;" (click)="RedirectToProductDetails(product.id)">
-      <img src="{{ product.imgUrl }}" class="card-img-top" alt="..." style="width: 200px; height: 200px; margin: auto;">
-      <div class="card-body">
-        <h5 class="card-title" [innerHTML]="product.name"></h5>
-        <p>Price {{ product.price }}</p>
-        
+           <li>
+    <div class="imgandadd">
+      <div class="image-container">
+        <img (click)="RedirectToProductDetails(product.id);" style="cursor: pointer;" src="{{product.imgUrl}}">
       </div>
     </div>
+    <div class="nameandprice  p-2">
+      <div class="productname" (click)="RedirectToProductDetails(product.id);" style="display: inline-block;"><a>{{product.name}}</a></div>
+      <div class="productprice">{{product.price | egp}}</div>
+    </div>
+  </li>
   }
-   
-  </div>
-</div>
-
-
-
+</ul>

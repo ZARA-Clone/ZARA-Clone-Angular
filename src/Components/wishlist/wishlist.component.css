@@ -60,3 +60,51 @@
     .price{
       text-align: center;
     }
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjust minmax values as needed */
+  grid-gap: 1px; /* Add some gap between grid items */
+  list-style-type: none;
+  padding: 0;
+}
+.product-list li {
+  display: inline-block;
+  max-width: 400px;
+  width: 100%;
+}
+.imgandadd img {
+  width: 100%; /* Make images responsive */
+  height: auto; /* Ensure aspect ratio is maintained */
+  border: 1px solid black;
+  border-bottom: none;
+}
+.image-container {
+  position: relative;
+}
+.nameandprice {
+  position: relative;
+  width: 100%;
+  border: 1px solid black;
+  overflow: hidden;
+}
+.productname {
+  display: inline-block;
+  max-width: calc(100% - 40px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.nameandprice div{
+  font-size: 10px ;
+  font-family: Arial, Helvetica, sans-serif;
+}.productname:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.bookmarkalso {
+  display: inline-block;
+  float: right;
+  font-size: 13px;
+  cursor: pointer;
+}
