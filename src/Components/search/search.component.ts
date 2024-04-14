@@ -5,11 +5,12 @@ import { IProduct } from '../../Models/iproduct';
 import { SearchService } from '../../Services/search.service';
 import { Router } from '@angular/router';
 import { IproductBrowse } from '../../Models/IproductBrowse';
+import { EgpPipe } from '../../Pipes/egp.pipe';
 
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule,EgpPipe],
   templateUrl: './search.component.html',
   styleUrl: './search.component.css'
 })
