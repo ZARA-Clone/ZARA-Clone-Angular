@@ -4,11 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { IBrandEditDto } from '../../../../Models/Dashboard/Brands/Ibrand-edit-dto';
 import { BrandsService } from '../../../../Services/Dashboard/brands.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-edit-brand',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule],
+  imports: [ReactiveFormsModule, FormsModule, CommonModule],
   templateUrl: './edit-brand.component.html',
   styleUrl: './edit-brand.component.css'
 })
@@ -22,6 +23,7 @@ export class EditBrandComponent {
     { id: 2, name: "Woman" },
     { id: 3, name: "Kids" }
   ]
+  errorMessages: any[] = []
 
   constructor(private _router: Router,
     private _brandsService: BrandsService,
@@ -32,7 +34,7 @@ export class EditBrandComponent {
 
   ngOnInit(): void {
     this.brandForm = this._formBuilder.group({
-      name: ["", [Validators.required, Validators.minLength(3)]],
+      name: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       categoryId: [, [Validators.required, this.validateSelectedOption]],
     })
     this._activatedRoute.paramMap.subscribe((param) => {
@@ -62,7 +64,15 @@ export class EditBrandComponent {
       next: () => {
         this._snackBar.open("Brand has been updated successfully", "Okay")
         this._router.navigate(['/dashboard/brands'])
-      }
+      },
+      error: (e) => {
+        console.log(e);
+        for (let index = 0; index < e.error.messages.length; index++) {
+          const element = e.error.messages[index];
+          this.errorMessages.push(element)
+        }
+        this._snackBar.open('Error occurred when update data', 'Ok')
+      },
     })
   }
 

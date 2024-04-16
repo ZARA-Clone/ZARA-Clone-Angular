@@ -1,30 +1,55 @@
 import { Component } from '@angular/core';
 import { OrdersService } from '../../../../Services/Dashboard/orders.service';
 import { RouterLink } from '@angular/router';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-order-list',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, NgxPaginationModule],
   templateUrl: './order-list.component.html',
   styleUrl: './order-list.component.css'
 })
 export class OrderListComponent {
 
   orders: any
+  totalCount: number = 0
+  pageIndex: number = 1
+  pageSize: number = 10
+  currentPage: number = 0;
   constructor(private _orderService: OrdersService) {
-    this.getOrders()
+    this.getOrders(this.pageIndex - 1, this.pageSize)
   }
 
-  getOrders() {
-    this._orderService.getAll().subscribe({
-      next: (data) => {
-        this.orders = data
-        console.log(this.orders)
-      },
-      error: (error) => {
-        console.log(error);
-      }
-    })
+  getOrders(pageIndex: number, pageSize: number) {
+    this._orderService.getWithPagination(pageIndex, pageSize)
+      .subscribe({
+        next: (data) => {
+          console.log(this.orders)
+          this.orders = data.items
+          this.totalCount = data.totalCount
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      })
+  }
+
+  onPageChange(event: any) {
+    this.pageIndex = event
+    this.getOrders(this.pageIndex - 1, this.pageSize)
+  }
+
+  delete(id: number) {
+    if (confirm("Are you sure you want to delete this Order?")) {
+      this._orderService.delete(id).subscribe({
+        next: () => {
+          this.getOrders(this.pageIndex - 1, this.pageSize);
+        },
+        error: (error) => {
+          console.log(error)
+        }
+      })
+    }
   }
 }

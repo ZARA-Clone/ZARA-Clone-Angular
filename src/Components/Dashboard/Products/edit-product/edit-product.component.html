@@ -1,6 +1,11 @@
 <div class="container">
     <h3 class="title text-center mt-3">Edit Product</h3>
     <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+        <div *ngIf="errorMessages.length > 0" class="alert alert-danger">
+            <ul>
+                <li *ngFor="let errorMessage of errorMessages">{{ errorMessage }}</li>
+            </ul>
+        </div>
         <div class="row">
             <label for="name">Name:</label>
             <input type="text" name="name" id="name" class="form-control" formControlName="name" />
@@ -14,6 +19,11 @@
             Name must be at least 3 characters long.
         </div>
         }
+        @if(name?.errors?.['maxlength']){
+        <div class="alert alert-danger">
+            Name must be at most 50 characters long.
+        </div>
+        }
         }
         <div class="row">
             <label>Description:</label>
@@ -21,10 +31,10 @@
                 required />
         </div>
         @if(description?.errors?.['maxlength']){
-            <div class="alert alert-danger">
-                Description must be at most 500 characters long.
-            </div>
-            }
+        <div class="alert alert-danger">
+            Description must be at most 500 characters long.
+        </div>
+        }
         <div class="row">
             <label>Discount:</label>
             <input type="number" name="discount" id="discount" class="form-control" formControlName="discount" />
@@ -32,6 +42,18 @@
         <div class="row">
             <label>Price:</label>
             <input type="number" name="price" id="price" class="form-control" formControlName="price" />
+        </div>
+        <div *ngIf="price?.invalid && (price?.dirty || price?.touched)" class="text-danger">
+            @if(price?.errors?.['required']){
+            <div class="alert alert-danger">
+                Price is required.
+            </div>
+            }
+            @if(price?.errors?.['min']){
+            <div class="alert alert-danger">
+                Price must be more than 100.
+            </div>
+            }
         </div>
         <div class="row">
             <label>Brand:</label>
@@ -43,10 +65,10 @@
             </select>
         </div>
         @if(brandId?.invalid && brandId?.touched){
-            <div class="alert alert-danger">
-                Brand must be selected
-            </div>
-            }
+        <div class="alert alert-danger">
+            Brand must be selected
+        </div>
+        }
         <div formArrayName="sizes">
             <div *ngFor="let size of sizes.controls; let i = index">
                 <div [formGroupName]="i">

@@ -1,6 +1,11 @@
 <div class="container">
     <h3 class="title text-center mt-3">Add Product</h3>
     <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+        <div *ngIf="errorMessages.length > 0" class="alert alert-danger">
+            <ul>
+                <li *ngFor="let errorMessage of errorMessages">{{ errorMessage }}</li>
+            </ul>
+        </div>
         <div class="row">
             <label for="name">Name:</label>
             <input formControlName="name" name="name" id="name" class="form-control" />
@@ -12,6 +17,11 @@
         @if(name?.errors?.['minlength']){
         <div class="alert alert-danger">
             Name must be at least 3 characters long.
+        </div>
+        }
+        @if(name?.errors?.['maxlength']){
+        <div class="alert alert-danger">
+            Name must be at most 100 characters long.
         </div>
         }
         }
@@ -32,6 +42,18 @@
         <div class="row">
             <label for="price">Price:</label>
             <input type="number" name="price" id="price" class="form-control" formControlName="price" />
+        </div>
+        <div *ngIf="price?.invalid && (price?.dirty || price?.touched)" class="text-danger">
+            @if(price?.errors?.['required']){
+            <div class="alert alert-danger">
+                Price is required.
+            </div>
+            }
+            @if(price?.errors?.['min']){
+            <div class="alert alert-danger">
+                Price must be more than 100.
+            </div>
+            }
         </div>
         <div class="row">
             <label for="brand">Brand:</label>

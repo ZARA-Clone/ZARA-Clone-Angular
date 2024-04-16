@@ -1,11 +1,10 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AddProductDto } from '../../Models/Dashboard/Products/IAddProductDto.interface';
 import { environment } from '../../environments/environment';
-import { Observable, catchError, min, throwError } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { IEditProductDto } from '../../Models/Dashboard/Products/IEditProductDto.interface';
 import { IProductsListDto } from '../../Models/Dashboard/Products/IProductsList.interface';
-import { ResponseService } from '../Shared/response.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +13,7 @@ export class ProductOperationsService {
 
   private readonly url = `${environment.BASEURL}/dashboard/api/products`
 
-  constructor(private _httpClient: HttpClient
-    , private _response: ResponseService) { }
+  constructor(private _httpClient: HttpClient) { }
   httpHeaders: HttpHeaders = new HttpHeaders({
     'content-type': 'application/json'
   });
@@ -24,16 +22,28 @@ export class ProductOperationsService {
     let result = this._httpClient.post<AddProductDto>(`${this.url}`
       , product, { headers: this.httpHeaders });
     return result.pipe(
-      catchError(this._response.handleError)
+      catchError((error) => {
+        return throwError(() => error)
+      })
     );
   }
 
   edit(id: number, product: IEditProductDto) {
-    return this._httpClient.put<IEditProductDto>(`${this.url}/${id}`, product)
+    let result = this._httpClient.put<IEditProductDto>(`${this.url}/${id}`, product)
+    return result.pipe(
+      catchError((error) => {
+        return throwError(() => error)
+      })
+    );
   }
 
   delete(id: number) {
-    return this._httpClient.delete<AddProductDto>(`${this.url}/${id}`)
+    let result = this._httpClient.delete<AddProductDto>(`${this.url}/${id}`)
+    return result.pipe(
+      catchError((error) => {
+        return throwError(() => error)
+      })
+    );
   }
 
   upload(files: File[]): any {
@@ -41,7 +51,12 @@ export class ProductOperationsService {
     files.forEach(file => {
       form.append("files", file, file.name);
     })
-    return this._httpClient.post(`${this.url}/upload`, form);
+    let result = this._httpClient.post(`${this.url}/upload`, form);
+    return result.pipe(
+      catchError((error) => {
+        return throwError(() => error)
+      })
+    );
   }
 
   getAll() {

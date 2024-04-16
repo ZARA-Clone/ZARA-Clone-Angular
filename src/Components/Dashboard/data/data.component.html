@@ -1,22 +1,24 @@
-@if(data){
-<div class="container-fluid pt-4 px-4">
-    <div class="row gap-3 text-white fs-3">
-        <div class="col box">
-            <p>Total Sells</p><br>
-            <p>${{data.totalSells}}</p>
-        </div>
-        <div class="col box">
-            <p>Total Orders</p><br>
-            <p>{{data.totalOrders}}</p>
-        </div>
-        <div class="col box">
-            <p>Total Products</p><br>
-            <p>{{data.totalProducts}}</p>
-        </div>
-        <div class="col box">
-            <p>Total Users</p><br>
-            <p>{{data.totalUsers}}</p>
+<div class="container-fluid my-3">
+    @if(data){
+    <div class="row">
+        <div class="row gap-3 text-white fs-3">
+            <div class="col box">
+                <p>Total Sells</p><br>
+                <p>${{data.totalSells}}</p>
+            </div>
+            <div class="col box">
+                <p>Total Orders</p><br>
+                <p>{{data.totalOrders}}</p>
+            </div>
+            <div class="col box">
+                <p>Total Products</p><br>
+                <p>{{data.totalProducts}}</p>
+            </div>
+            <div class="col box">
+                <p>Total Users</p><br>
+                <p>{{data.totalUsers}}</p>
+            </div>
         </div>
     </div>
+    }
 </div>
-}

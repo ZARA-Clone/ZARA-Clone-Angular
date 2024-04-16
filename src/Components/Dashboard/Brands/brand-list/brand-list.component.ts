@@ -15,7 +15,7 @@ export class BrandListComponent {
   brands: any[] = []
   totalCount: number = 0
   pageIndex: number = 1
-  pageSize: number = 2
+  pageSize: number = 10
   currentPage: any;
 
   constructor(
@@ -46,7 +46,7 @@ export class BrandListComponent {
     if (confirm("Are you sure you want to delete this brand?")) {
       this._brandsService.delete(id).subscribe({
         next: () => {
-          this.getData(0, this.pageSize)
+          this.getData(this.pageIndex - 1, this.pageSize)
         },
         error: (error) => {
           console.log(error);

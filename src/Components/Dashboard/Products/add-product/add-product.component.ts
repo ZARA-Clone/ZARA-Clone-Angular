@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NgFor } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { AddProductDto, ProductSize, Size } from '../../../../Models/Dashboard/Products/IAddProductDto.interface';
 import { ProductOperationsService } from '../../../../Services/Dashboard/product-operations.service';
 import { BrandsService } from '../../../../Services/Dashboard/brands.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-product',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, NgFor],
+  imports: [ReactiveFormsModule, FormsModule, NgFor, CommonModule],
   templateUrl: './add-product.component.html',
   styleUrl: './add-product.component.css'
 })
@@ -23,12 +24,14 @@ export class AddProductComponent implements OnInit {
   productSizes: ProductSize[] = []
   sizeArray: { key: string, value: number }[];
   productForm!: FormGroup
+  errorMessages: any[] = []
 
   constructor(
     private _productsService: ProductOperationsService,
     private router: Router,
     private _brandsService: BrandsService,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private _snackBar: MatSnackBar
   ) {
     this.sizeArray = Object.entries(Size)
       .filter(([key, value]) => !isNaN(Number(Size[value as number])))
@@ -38,10 +41,10 @@ export class AddProductComponent implements OnInit {
   ngOnInit(): void {
     this.getAllBrands()
     this.productForm = this._formBuilder.group({
-      name: ["", [Validators.required, Validators.minLength(3)]],
+      name: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       description: ["", Validators.maxLength(500)],
-      price: [0, [Validators.required]],
-      discount: [0, [Validators.required]],
+      price: [0, [Validators.required, Validators.min(100), Validators.max(10000)]],
+      discount: [0, [Validators.required, Validators.min(0), Validators.max(80)]],
       brandId: [0, [this.validateSelectedOption]],
       imageUrls: [[]],
       sizes: this._formBuilder.array([])
@@ -118,8 +121,18 @@ export class AddProductComponent implements OnInit {
         this.product.imageUrls = this.imageUrls;
         console.log(this.product)
         this._productsService.add(this.product).subscribe({
-          next: (data) => { console.log(data); this.router.navigate(["/dashboard/products"]) },
-          error: (err) => { console.log(err) },
+          next: (data) => {
+            this._snackBar.open("Product has been added successfully", 'Ok')
+            console.log(data); this.router.navigate(["/dashboard/products"])
+          },
+          error: (e) => {
+            console.log(e);
+            for (let index = 0; index < e.error.messages.length; index++) {
+              const element = e.error.messages[index];
+              this.errorMessages.push(element)
+            }
+            this._snackBar.open('Error occurred when add data', 'Ok')
+          },
           complete: () => {
             console.log("Product has been added successfully")
           }

@@ -1,9 +1,10 @@
-<div></div>
-<div class="row p-4">
-    <div class="col-lg-2">
-        <app-side-bar></app-side-bar>
-    </div>
-    <div class="col-lg-10">
-        <router-outlet></router-outlet>
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-3">
+            <app-side-bar></app-side-bar>
+        </div>
+        <main class="col-9">
+            <router-outlet></router-outlet>
+        </main>
     </div>
 </div>
