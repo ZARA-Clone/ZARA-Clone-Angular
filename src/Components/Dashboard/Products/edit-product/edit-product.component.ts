@@ -4,7 +4,7 @@ import { AbstractControl, FormArray, FormBuilder, FormGroup, FormsModule, Reacti
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { EditImageComponent } from '../edit-image/edit-image.component';
-import { NgFor } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { IEditProductDto } from '../../../../Models/Dashboard/Products/IEditProductDto.interface';
 import { ProductOperationsService } from '../../../../Services/Dashboard/product-operations.service';
 import { BrandsService } from '../../../../Services/Dashboard/brands.service';
@@ -13,7 +13,7 @@ import { Size } from '../../../../Enums/Size';
 @Component({
   selector: 'app-edit-product',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, NgFor],
+  imports: [ReactiveFormsModule, FormsModule, NgFor, CommonModule],
   templateUrl: './edit-product.component.html',
   styleUrl: './edit-product.component.css'
 })
@@ -30,6 +30,8 @@ export class EditProductComponent implements OnInit {
   selectedSizes: any[] = []
   selectedSize: string = ''
   sizeArray: { key: string, value: number }[];
+  errorMessages: any[] = []
+  errorMessage!: string | null
 
   constructor(private _productsService: ProductOperationsService
     , private _brandsService: BrandsService
@@ -46,10 +48,10 @@ export class EditProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.productForm = this._formBuilder.group({
-      name: ["", [Validators.required, Validators.minLength(3)]],
+      name: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       description: ["", Validators.maxLength(500)],
-      price: [0, [Validators.required]],
-      discount: [0, [Validators.required]],
+      price: [0, [Validators.required, Validators.min(100), Validators.max(10000)]],
+      discount: [0, [Validators.required, Validators.min(0), Validators.max(80)]],
       brandId: [, [this.validateSelectedOption]],
       imageUrls: [[]],
       sizes: this._formBuilder.array([], Validators.required)
@@ -161,7 +163,12 @@ export class EditProductComponent implements OnInit {
         this._snackBar.open('Data has been updated Successfully', 'Okay')
         this._router.navigate(['/dashboard/products'])
       },
-      error: () => {
+      error: (e) => {
+        console.log(e);
+        for (let index = 0; index < e.error.messages.length; index++) {
+          const element = e.error.messages[index];
+          this.errorMessages.push(element)
+        }
         this._snackBar.open('Error occurred when update data', 'Okay')
       }
     })

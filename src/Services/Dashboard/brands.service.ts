@@ -29,16 +29,26 @@ export class BrandsService {
     let result =
       this._httpClient.post<IBrandDto>(`${this.url}`, brand);
     return result.pipe(
-      catchError(this._response.handleError)
+      catchError((error) => {
+        return throwError(() => error)
+      })
     );
   }
 
   edit(id: number, brand: IBrandEditDto) {
-    return this._httpClient.put<IBrandEditDto>(`${this.url}/${id}`, brand)
+    let result = this._httpClient.put<IBrandEditDto>(`${this.url}/${id}`, brand)
+    return result.pipe(
+      catchError((error) => {
+        return throwError(() => error)
+      }));
   }
 
   delete(id: number) {
-    return this._httpClient.delete<IBrandDto>(`${this.url}/${id}`)
+    let result = this._httpClient.delete<IBrandDto>(`${this.url}/${id}`)
+    return result.pipe(
+      catchError((error) => {
+        return throwError(() => error)
+      }));
   }
 
   getWithPagination(name: string, categoryId: number, pageIndex: number = 0

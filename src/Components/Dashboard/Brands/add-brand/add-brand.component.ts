@@ -4,17 +4,21 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BrandsService } from '../../../../Services/Dashboard/brands.service';
 import { IBrandDto } from '../../../../Models/Dashboard/Brands/IBrandDto.interface';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-brand',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './add-brand.component.html',
   styleUrl: './add-brand.component.css'
 })
 export class AddBrandComponent implements OnInit {
   brand!: IBrandDto;
   brandForm!: FormGroup
+  errorMessages: any[] = []
+  errorMessage!: string | null
+
   constructor(private _router: Router,
     private _brandsService: BrandsService,
     private _snackBar: MatSnackBar,
@@ -23,7 +27,7 @@ export class AddBrandComponent implements OnInit {
 
   ngOnInit(): void {
     this.brandForm = this._formBuilder.group({
-      name: ["", [Validators.required, Validators.minLength(3)]],
+      name: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       categoryId: [0, [Validators.required, this.validateSelectedOption]],
     })
   }
@@ -46,6 +50,14 @@ export class AddBrandComponent implements OnInit {
       next: () => {
         this._snackBar.open("Brand has been added successfully", "Okay")
         this._router.navigate(['/dashboard/brands'])
+      },
+      error: (e) => {
+        console.log(e);
+        for (let index = 0; index < e.error.messages.length; index++) {
+          const element = e.error.messages[index];
+          this.errorMessages.push(element)
+        }
+        this._snackBar.open('Error occurred when add data', 'Ok')
       }
     })
   }
