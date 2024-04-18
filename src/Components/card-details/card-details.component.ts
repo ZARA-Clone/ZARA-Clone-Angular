@@ -11,6 +11,9 @@ import emailjs, { type EmailJSResponseStatus } from '@emailjs/browser';
 import { DecodingService } from '../../Services/decoding.service';
 import { CartServiceService } from '../../Services/cart-service.service';
 import { Icart } from '../../Models/icart';
+import { Router } from '@angular/router';
+import { RefreshHeaderService } from '../../Services/refresh-header.service';
+import { async } from 'rxjs';
 @Component({
   selector: 'app-card-details',
   standalone: true,
@@ -34,7 +37,7 @@ stripePromise = loadStripe('pk_test_51OzU9vP6V1Tz8l55LKIXs6RPxoFVcstmUR4SKiWV1p1
   products:any[]=[];
   totalPrice!:number
   cartItems:Icart[]=[]
-  constructor(private fb: FormBuilder,private matdia:MatDialog, private http:HttpClient,private httppayment:HttpPaymentService,private auth:DecodingService , private cartService:CartServiceService) {
+  constructor(private fb: FormBuilder,private matdia:MatDialog, private http:HttpClient,private httppayment:HttpPaymentService,private auth:DecodingService , private cartService:CartServiceService, private router: Router,private refresh:RefreshHeaderService) {
     emailjs.init("Cga4GFBNn2Hqi1d9h");
      this.httppayment.GetOrderDetails().subscribe((p)=>{
       this.products=p;
@@ -106,20 +109,18 @@ async ConfirmPayment() {
     if (error) {
       this.matdia.open(CheckoutWarningComponent);
     } else {
-      this.sendMail()
-      const additionalData = {
-        orderDate: new Date().toISOString(), // Use new Date() to create a Date object
-      };
       const Data ={
         token: token ,
-        additionalData : additionalData,
       }
       console.log(Data);
       
       
       // Send the token and additional data to your backend for processing
-      this.http.post('https://localhost:7248/api/Checkout/process-payment', {Data})
+      this.http.get('https://localhost:7248/api/Checkout/Pay-On-Delivery')
       .subscribe(response => {
+        this.ngOnInit();
+        this.refresh.triggerRefresh();
+        this.sendMail()
           Swal.fire({
           title:`Thanks For Dealing With ZARA`,
           text:`You Will Receive Email With The Details Soon`,

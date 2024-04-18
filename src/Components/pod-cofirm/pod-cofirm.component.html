@@ -22,6 +22,6 @@
     <div></div>
     <div class="total-price"><b>Total Price : {{ getTotalPrice() }} EGP</b></div>
     <div class="button-container" (click)="ConfirmPayment();">
-        <button type="button">CONFIRM PAYMENT</button>
+        <button type="button" [disabled]="getTotalPrice() === 0">CONFIRM PAYMENT</button>
     </div>
 </div>

@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { RefreshHeaderService } from '../../Services/refresh-header.service';
 
 
 
@@ -49,7 +50,7 @@ ngOnInit(): void {
 
 
 
-constructor(private cartService:CartServiceService , private mat:MatSnackBar ,private auth:DecodingService,private dialog: MatDialog,private route:Router){}
+constructor(private cartService:CartServiceService , private mat:MatSnackBar ,private auth:DecodingService,private dialog: MatDialog,private route:Router,private refresh:RefreshHeaderService){}
 
 FetchApi(): void {
   
@@ -142,6 +143,7 @@ removeItem(item: Icart): void {
         this.cartService.deleteItem(userId, item.id, item.size).subscribe(
           () => {
             // Handle successful deletion
+            this.refresh.triggerRefresh();
             this.mat.open("Item deleted successfully", 'close', { duration: 2000 });
           
             this.cartItems.splice(index, 1);

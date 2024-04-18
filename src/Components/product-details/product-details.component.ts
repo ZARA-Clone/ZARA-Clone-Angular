@@ -11,6 +11,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { WarningComponent } from '../warning/warning.component';
 import Swal from 'sweetalert2';
 import { IproductWishList } from '../../Models/IproductWishList';
+import { RefreshHeaderService } from '../../Services/refresh-header.service';
 
 
 @Component({
@@ -32,7 +33,7 @@ export class ProductDetailsComponent implements OnInit {
   products!: IproductBrowse[] | any
   newlife: any = [];
   wishlistProducts!: IproductWishList[] | any
-  constructor(private httpproduct: HttpProductService, private activatedroute: ActivatedRoute, private elementRef: ElementRef, private dialog: MatDialog, private router: Router) { }
+  constructor(private httpproduct: HttpProductService, private activatedroute: ActivatedRoute, private elementRef: ElementRef, private dialog: MatDialog, private router: Router,private refresh:RefreshHeaderService) { }
 ngOnInit(): void {
   this.activatedroute.paramMap.subscribe((p) => {
     const snapid = p.get('id');
@@ -99,6 +100,7 @@ ngOnInit(): void {
         this.router.navigate(['/signin']);
       }else {
           this.httpproduct.AddToCart(id, size).subscribe((p) => {
+            this.refresh.triggerRefresh();
         Swal.fire({
           title: "Product Added Successfully",
           showClass: {
@@ -124,6 +126,7 @@ ngOnInit(): void {
         this.router.navigate(['/signin']);
       }else{
             this.httpproduct.AddToCart(id, size).subscribe((p) => {
+              this.refresh.triggerRefresh();
       Swal.fire({
         title: "Product Added Successfully",
         showClass: {

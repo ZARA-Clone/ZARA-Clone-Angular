@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { HttpPaymentService } from '../../Services/http-payment.service';
 import Swal from 'sweetalert2';
 import emailjs, { type EmailJSResponseStatus } from '@emailjs/browser';
-import { DatePipe } from '@angular/common';
+import { DatePipe, NgStyle } from '@angular/common';
 import { Icart } from '../../Models/icart';
 import { DecodingService } from '../../Services/decoding.service';
 import { CartServiceService } from '../../Services/cart-service.service';
+import { Router } from '@angular/router';
+import { RefreshHeaderService } from '../../Services/refresh-header.service';
 
 @Component({
   selector: 'app-pod-cofirm',
@@ -15,7 +17,7 @@ import { CartServiceService } from '../../Services/cart-service.service';
   styleUrl: './pod-cofirm.component.css'
 })
 export class PODCOFIRMComponent implements OnInit {
-  constructor(private httppayment:HttpPaymentService,private auth:DecodingService , private cartService:CartServiceService){
+  constructor(private httppayment:HttpPaymentService,private auth:DecodingService , private cartService:CartServiceService,private router: Router,private refresh:RefreshHeaderService){
     emailjs.init("Cga4GFBNn2Hqi1d9h");
   }
   ngOnInit(): void {
@@ -61,6 +63,8 @@ getTotalPrice(): number {
 
 ConfirmPayment() {
   this.httppayment.PayOnDelivery().subscribe((p)=>{
+    this.ngOnInit();
+    this.refresh.triggerRefresh();
     console.log(p);
       var params = {
     sendername: "Zara",

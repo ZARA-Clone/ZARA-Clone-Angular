@@ -1,7 +1,7 @@
 .layoutdesign{
   font-size: 20px;
 }.categories_btn{
-  margin-left: 180px;
+  display: flex;
 }.btn-css{
   background-color:white;
 color: black;

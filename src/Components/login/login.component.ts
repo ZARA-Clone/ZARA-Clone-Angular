@@ -5,6 +5,7 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
 import { DialogModule } from 'primeng/dialog';
 import { DecodingService } from '../../Services/decoding.service';
+import { RefreshHeaderService } from '../../Services/refresh-header.service';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,7 @@ export class LoginComponent {
      ])
     });
   constructor(private _AuthService: AuthService, private _Router: Router
-    , private decodingService: DecodingService) { }
+    , private decodingService: DecodingService , private refresh:RefreshHeaderService) { }
   handleForm(): void {
     const userData = this.loginForm.value;
 
@@ -42,6 +43,7 @@ export class LoginComponent {
             this._Router.navigate(['/dashboard/data']);
           }
           else {
+            this.refresh.triggerRefresh();
             this._Router.navigate(['/home']);
           }
         },

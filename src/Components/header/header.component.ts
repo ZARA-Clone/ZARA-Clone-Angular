@@ -5,6 +5,10 @@ import { HttpHeaderService } from '../../Services/http-header.service';
 import { Icategory } from '../../Models/ICategory';
 import { SharedValueService } from '../../Services/shared-value.service';
 import { UserInfoService } from '../../Services/user-info.service';
+import { DecodingService } from '../../Services/decoding.service';
+import { CartServiceService } from '../../Services/cart-service.service';
+import { Icart } from '../../Models/icart';
+import { RefreshHeaderService } from '../../Services/refresh-header.service';
 
 @Component({
   selector: 'app-header',
@@ -23,26 +27,62 @@ export class HeaderComponent implements OnInit{
   phone!: string 
   username!:string
   checklogging:boolean = false;
-constructor(private router:Router, private httpheader:HttpHeaderService,private sharedservice: SharedValueService , private userinfo:UserInfoService){}
+  cartItems:Icart[]=[]
+  Bag:number = 0
+constructor(private router:Router, private httpheader:HttpHeaderService,private sharedservice: SharedValueService , private userinfo:UserInfoService , private auth:DecodingService , private cartService:CartServiceService , private refresh:RefreshHeaderService){}
 
   ngOnInit(): void {
     const token = localStorage.getItem('token');
     if(token){
+      this.FetchApi();
+      this.refresh.onRefreshNeeded().subscribe((p)=>{
+        const token = localStorage.getItem('token');
+        if(token){
+        this.FetchApi();
+        }else{
+          this.Bag = 0;
+        }
+      })
     this.checklogging = true;
     }
     else{
     this.checklogging = false;
     }
+    this.refresh.onRefreshNeeded().subscribe((p)=>{
+      const token = localStorage.getItem('token');
+      if(token){
+      this.userinfo.getuserinfo().subscribe(userInfo => {
+      console.log('User Info:', userInfo);
+      if (userInfo) {
+        this.email = userInfo.email;
+        this.phone = userInfo.phoneNumber;
+        this.username = userInfo.userName;
+        this.checklogging = true;
+      }
+    });
+    
+    }
+    else{
+    this.checklogging = false;
+    }
+    })
     this.router.events.subscribe(p => {
     if (p instanceof NavigationEnd) {
       const token = localStorage.getItem('token');
       if(token){
-    this.checklogging = true;
-    //this.ngOnInit();
+      this.userinfo.getuserinfo().subscribe(userInfo => {
+      console.log('User Info:', userInfo);
+      if (userInfo) {
+        this.email = userInfo.email;
+        this.phone = userInfo.phoneNumber;
+        this.username = userInfo.userName;
+        this.checklogging = true;
+      }
+    });
+    
     }
     else{
     this.checklogging = false;
-    //this.ngOnInit();
     }
     }
   });
@@ -57,14 +97,7 @@ constructor(private router:Router, private httpheader:HttpHeaderService,private 
     }
   });
   if(token){
-      this.userinfo.getuserinfo().subscribe(userInfo => {
-      console.log('User Info:', userInfo);
-      if (userInfo) {
-        this.email = userInfo.email;
-        this.phone = userInfo.phoneNumber;
-        this.username = userInfo.userName;
-      }
-    });
+     
   }
 }
 
@@ -121,5 +154,23 @@ RedirectToProductBrowse(brand:Icategory){
 }
 GoToContact(){
   this.router.navigate(['/contactus']);
+}
+  FetchApi(): void {
+  
+  const userId =this.auth.extractUserIdFromToken(); 
+  this.cartService.getCartItems(userId).subscribe({
+    
+    next: (cartItems) => {     
+      this.cartItems = cartItems;
+      this.Bag = this.cartItems.length
+      console.log(this.Bag);
+      
+    },
+    error: (error) => {
+      console.error('Error fetching cart items:', error);
+      
+      alert('An error occurred while fetching cart items. Please try again later.');
+    }
+  });
 }
 }

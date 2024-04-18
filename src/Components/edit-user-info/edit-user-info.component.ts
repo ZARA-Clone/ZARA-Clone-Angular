@@ -5,6 +5,7 @@ import { UserInfoService } from '../../Services/user-info.service';
 import Swal from 'sweetalert2';
 import { IuserInfo } from '../../Models/iuser-info';
 import { Router, RouterModule } from '@angular/router';
+import { RefreshHeaderService } from '../../Services/refresh-header.service';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class EditUserInfoComponent implements OnInit{
  
   
   
-  constructor(private userinfoservice:UserInfoService , private router: Router){
+  constructor(private userinfoservice:UserInfoService , private router: Router,private refresh:RefreshHeaderService){
 
 
   }
@@ -84,7 +85,7 @@ export class EditUserInfoComponent implements OnInit{
   }
   onSignOut(): void {
     this.userinfoservice.signOut()
-
+    this.refresh.triggerRefresh();
   this.router.navigate(['/signin']);
   }
 }

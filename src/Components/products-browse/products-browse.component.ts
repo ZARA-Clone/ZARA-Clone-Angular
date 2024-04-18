@@ -12,6 +12,7 @@ import { EgpPipe } from '../../Pipes/egp.pipe';
 import { IproductWishList } from '../../Models/IproductWishList';
 import Swal from 'sweetalert2';
 import { IproductDetails } from '../../Models/IproductDetails';
+import { RefreshHeaderService } from '../../Services/refresh-header.service';
 
 @Component({
   selector: 'app-product-browse',
@@ -32,7 +33,7 @@ private previousValue: any;
 receivedData: any;
 wishlistProducts!: IproductWishList[] | any
 selectedSize: string = '';
-constructor(private httpproduct:HttpProductService, private activatedroute:ActivatedRoute, private elementRef : ElementRef,private sharedservice:SharedValueService,private httpheader:HttpHeaderService,private router :Router){}
+constructor(private httpproduct:HttpProductService, private activatedroute:ActivatedRoute, private elementRef : ElementRef,private sharedservice:SharedValueService,private httpheader:HttpHeaderService,private router :Router,private refresh:RefreshHeaderService){}
 
 ngOnInit(): void {
   const previousValue = localStorage.getItem('previousValue');
@@ -91,7 +92,6 @@ secondlayout(){
 }
 toggleSizes(event:Event,p:any): void {
   event.stopPropagation();
-  //this.showSizes = !this.showSizes;
   p.showDetails = !p.showDetails;
    for (let index = 0; index < this.newlife.length; index++) {
     if(this.newlife[index].id!=p.id){
@@ -119,7 +119,18 @@ hideDiv(p:any){
     this.httpproduct.GetProductByBrandId(id).subscribe((p)=>{
       this.products2=p;
       this.newlife= this.products2.map((p: any)=> ({ ...p, showDetails: false ,wishlist:false}));
-    })
+      const token = localStorage.getItem('token');
+      if(token){
+        this.httpproduct.GetAllWishList().subscribe((wishlistProducts) => {
+        this.wishlistProducts = wishlistProducts;
+        this.newlife.forEach((product: any) => {          
+          if (this.wishlistProducts.some((wishlistProduct: IproductWishList) => wishlistProduct.id === product.id)) {
+            product.wishlist = true;        
+          }
+        });
+      });
+    }
+  });
   }
     RedirectToProductDetails(id: number) {
     this.router.navigate(['/product', id]);
@@ -130,6 +141,7 @@ hideDiv(p:any){
         this.router.navigate(['/signin']);
       }else{
             this.httpproduct.AddToCart(id, size).subscribe((p) => {
+              this.refresh.triggerRefresh();
       Swal.fire({
         title: "Product Added Successfully",
         showClass: {
